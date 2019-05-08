@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Browser_RPG_Game.DAL;
+using Browser_RPG_Game.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +12,8 @@ namespace Browser_RPG_Game.Controllers
     {
         public ActionResult Index()
         {
+            //GameContext db = new GameContext();
+            //Profile profile = db.Profiles.Single(p => p.Login == User.Identity.Name);
             return View();
         }
 

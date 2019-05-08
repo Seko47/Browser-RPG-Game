@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Browser_RPG_Game.Models;
+using Browser_RPG_Game.DAL;
 
 namespace Browser_RPG_Game.Controllers
 {
@@ -156,7 +157,12 @@ namespace Browser_RPG_Game.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    Profile profile = new Profile { Login = model.Email };
+                    GameContext db = new GameContext();
+                    db.Profiles.Add(profile);
+                    db.SaveChanges();
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
