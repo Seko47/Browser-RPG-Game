@@ -27,7 +27,6 @@ namespace Browser_RPG_Game.DAL
         public DbSet<Property> Properties { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Material> Materials { get; set; }
-        public DbSet<Property> BuildingProperties { get; set; }
         public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -54,27 +53,21 @@ namespace Browser_RPG_Game.DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Character>()
-                .HasOptional<Item>(c => c.Legs)
-                .WithMany(i => i.CharactersLegs)
-                .HasForeignKey(c => c.LegsID)
+                .HasOptional<Item>(c => c.Boots)
+                .WithMany(i => i.CharactersBoots)
+                .HasForeignKey(c => c.BootsID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Character>()
-                .HasOptional<Item>(c => c.Feet)
-                .WithMany(i => i.CharactersFeet)
-                .HasForeignKey(c => c.FeetID)
+                .HasOptional<Item>(c => c.Weapon)
+                .WithMany(i => i.CharactersWeapons)
+                .HasForeignKey(c => c.WeaponID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Character>()
-                .HasOptional<Item>(c => c.MainHand)
-                .WithMany(i => i.CharactersMainHand)
-                .HasForeignKey(c => c.MainHandID)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Character>()
-                .HasOptional<Item>(c => c.OffHand)
-                .WithMany(i => i.CharactersOffHand)
-                .HasForeignKey(c => c.OffHandID)
+                .HasOptional<Item>(c => c.Shield)
+                .WithMany(i => i.CharactersShields)
+                .HasForeignKey(c => c.ShieldID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Message>()

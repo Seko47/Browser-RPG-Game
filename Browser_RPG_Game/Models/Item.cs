@@ -10,6 +10,7 @@ namespace Browser_RPG_Game.Models
         public int ID { get; set; }
         public int ItemTypeID { get; set; }
         public string Name { get; set; }
+        public int Level { get; set; }
         public int Damage { get; set; }
         public int Defense { get; set; }
         public int Value { get; set; }
@@ -18,9 +19,8 @@ namespace Browser_RPG_Game.Models
         public virtual ICollection<Character> CharactersArmors { get; set; }
         public virtual ICollection<Character> CharactersHelmets { get; set; }
         public virtual ICollection<Character> CharactersGloves { get; set; }
-        public virtual ICollection<Character> CharactersLegs { get; set; }
-        public virtual ICollection<Character> CharactersFeet { get; set; }
-        public virtual ICollection<Character> CharactersMainHand { get; set; }
-        public virtual ICollection<Character> CharactersOffHand { get; set; }
+        public virtual ICollection<Character> CharactersBoots { get; set; }
+        public virtual ICollection<Character> CharactersWeapons { get; set; }
+        public virtual ICollection<Character> CharactersShields { get; set; }
     }
 }

@@ -24,10 +24,9 @@ namespace Browser_RPG_Game.Models
         public int? HelmetID { get; set; }
         public int? ArmorID { get; set; }
         public int? GlovesID { get; set; }
-        public int? LegsID { get; set; }
-        public int? FeetID { get; set; }
-        public int? MainHandID { get; set; }
-        public int? OffHandID { get; set; }
+        public int? BootsID { get; set; }
+        public int? WeaponID { get; set; }
+        public int? ShieldID { get; set; }
 
         public int Damage
         {
@@ -47,9 +46,8 @@ namespace Browser_RPG_Game.Models
         public virtual Item Helmet { get; set; }
         public virtual Item Armor { get; set; }
         public virtual Item Gloves { get; set; }
-        public virtual Item Legs { get; set; }
-        public virtual Item Feet { get; set; }
-        public virtual Item MainHand { get; set; }
-        public virtual Item OffHand { get; set; }
+        public virtual Item Boots { get; set; }
+        public virtual Item Weapon { get; set; }
+        public virtual Item Shield { get; set; }
     }
 }
