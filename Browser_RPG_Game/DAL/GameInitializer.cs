@@ -1,4 +1,6 @@
 ﻿using Browser_RPG_Game.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +15,27 @@ namespace Browser_RPG_Game.DAL
         {
             base.Seed(context);
 
+            var config = new List<Config>
+            {
+                new Config{Name="EXPERIENCE_MULTIPLIER", Value="1"},
+                new Config{Name="LOOT_GOLD_DIFFERENCES", Value="5"}// lootgold = lootgold +- LOOT_GOLD_DIFFERENCES %
+            };
+
+            config.ForEach(c => context.Configs.Add(c));
+            context.SaveChanges();
+
+            var roleAdmin = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var userAdmin = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            roleAdmin.Create(new IdentityRole("Admin"));
+            var user = new ApplicationUser { UserName = "admin@game.com" };
+            string password = "admin";
+
+            userAdmin.Create(user, password);
+            userAdmin.AddToRole(user.Id, "Admin");
+
             var profileTypes = new List<ProfileType>
             {
                 new ProfileType{Name="admin"},
@@ -20,6 +43,11 @@ namespace Browser_RPG_Game.DAL
             };
 
             profileTypes.ForEach(p => context.ProfileTypes.Add(p));
+            context.SaveChanges();
+
+            Profile profileAdmin = new Profile { Login = user.UserName, ProfileType = profileTypes[0] };
+
+            context.Profiles.Add(profileAdmin);
             context.SaveChanges();
 
             var materials = new List<Material>
@@ -40,15 +68,6 @@ namespace Browser_RPG_Game.DAL
             };
 
             buildings.ForEach(b => context.Buildings.Add(b));
-            context.SaveChanges();
-
-            var config = new List<Config>
-            {
-                new Config{Name="EXPERIENCE_MULTIPLIER", Value="1"},
-                new Config{Name="LOOT_GOLD_DIFFERENCES", Value="5"}// gold = gold +- LOOT_GOLD_DIFFERENCES %
-            };
-
-            config.ForEach(c => context.Configs.Add(c));
             context.SaveChanges();
 
             var itemTypes = new List<ItemType>
