@@ -24,7 +24,7 @@ namespace Browser_RPG_Game.DAL
         public DbSet<CharacterImage> CharacterImages { get; set; }
         public DbSet<ProfileType> ProfileTypes { get; set; }
         public DbSet<Bulletin> Bulletins { get; set; }
-        public DbSet<Property> Properties { get; set; }
+        public DbSet<CharacterBuildings> CharacterBuildings { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Message> Messages { get; set; }
@@ -80,6 +80,22 @@ namespace Browser_RPG_Game.DAL
                 .HasRequired<Character>(m => m.Receiver)
                 .WithMany(c => c.ReceivedMessages)
                 .HasForeignKey(m => m.ReceiverID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Character>()
+                .HasRequired<CharacterBuildings>(c => c.Sawmill)
+                .WithMany(c => c.CharacterSawmill)
+                .HasForeignKey(c => c.SawmillID)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Character>()
+                .HasRequired<CharacterBuildings>(c => c.Brickyard)
+                .WithMany(c => c.CharacterBrickyard)
+                .HasForeignKey(c => c.BrickyardID)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Character>()
+                .HasRequired<CharacterBuildings>(c => c.Ironworks)
+                .WithMany(c => c.CharacterIronworks)
+                .HasForeignKey(c => c.IronworksID)
                 .WillCascadeOnDelete(false);
         }
     }

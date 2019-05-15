@@ -1,0 +1,42 @@
+﻿@model Browser_RPG_Game.Models.ItemLoot
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ItemLoot</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loot.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loot.ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DropChance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DropChance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

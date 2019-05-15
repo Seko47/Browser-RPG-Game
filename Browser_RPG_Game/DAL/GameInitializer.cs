@@ -15,6 +15,18 @@ namespace Browser_RPG_Game.DAL
         {
             base.Seed(context);
 
+            var roleAdmin = new RoleManager<IdentityRole>(
+                new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var userAdmin = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+            roleAdmin.Create(new IdentityRole("ADMIN"));
+            var user = new ApplicationUser { UserName = "admin@game.com" };
+            string password = "zaq1@WSX";
+
+            userAdmin.Create(user, password);
+            userAdmin.AddToRole(user.Id, "ADMIN");
+
             var config = new List<Config>
             {
                 new Config{Name="EXPERIENCE_MULTIPLIER", Value="1"},
@@ -24,18 +36,6 @@ namespace Browser_RPG_Game.DAL
             config.ForEach(c => context.Configs.Add(c));
             context.SaveChanges();
 
-            var roleAdmin = new RoleManager<IdentityRole>(
-                new RoleStore<IdentityRole>(new ApplicationDbContext()));
-            var userAdmin = new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(new ApplicationDbContext()));
-
-            roleAdmin.Create(new IdentityRole("Admin"));
-            var user = new ApplicationUser { UserName = "admin@game.com" };
-            string password = "admin";
-
-            userAdmin.Create(user, password);
-            userAdmin.AddToRole(user.Id, "Admin");
-
             var profileTypes = new List<ProfileType>
             {
                 new ProfileType{Name="admin"},
@@ -43,6 +43,40 @@ namespace Browser_RPG_Game.DAL
             };
 
             profileTypes.ForEach(p => context.ProfileTypes.Add(p));
+            context.SaveChanges();
+
+            var characterImages = new List<CharacterImage>
+            {
+                new CharacterImage { PathToImage = "http://emargo.pl/margonem/obrazki/npc/mez/tuz-zlodziej.gif" },
+                new CharacterImage { PathToImage = "https://www.margonem.pl/obrazki/other/png/outfit-wojownik.png" },
+                new CharacterImage { PathToImage = "https://www.margonem.pl/obrazki/other/png/outfit-tancerz.png" },
+                new CharacterImage { PathToImage = "https://www.margonem.pl/obrazki/other/png/outfit-lowca.png" },
+                new CharacterImage { PathToImage = "https://www.margonem.pl/obrazki/other/png/outfit-paladyn.png" },
+                new CharacterImage { PathToImage = "https://www.margonem.pl/obrazki/other/png/outfit-tropiciel.png" },
+            };
+
+            characterImages.ForEach(c => context.CharacterImages.Add(c));
+            context.SaveChanges();
+
+            var materials = new List<Material>
+            {
+                new Material{Name = "drewno", Value=5, PathToImage="https://help.plemiona.pl/images/8/88/Drewno.png"},
+                new Material{Name = "glina", Value=10, PathToImage="https://help.plemiona.pl/images/8/89/Glina.png"},
+                new Material{Name = "żelazo", Value=20, PathToImage="https://help.plemiona.pl/images/8/8b/Zelazo.png"}
+            };
+
+            materials.ForEach(m => context.Materials.Add(m));
+            context.SaveChanges();
+
+
+            var buildings = new List<Building>
+            {
+                new Building{Name="tartak", Material=materials[0], LevelMax=10, IncreasePerMinute=10, IncreasePerMinuteAfterEachUpgrade=5, Value=500, PathToImage="https://help.plemiona.pl/images/6/6d/Tartak10.png"},
+                new Building{Name="cegielnia", Material=materials[1], LevelMax=10, IncreasePerMinute=5, IncreasePerMinuteAfterEachUpgrade=3, Value=1500, PathToImage="https://help.plemiona.pl/images/4/4e/Glina20.png"},
+                new Building{Name="huta żelaza", Material=materials[2], LevelMax=10, IncreasePerMinute=3, IncreasePerMinuteAfterEachUpgrade=2, Value=3000, PathToImage="https://help.plemiona.pl/images/3/38/Huta10.png"}
+            };
+
+            buildings.ForEach(b => context.Buildings.Add(b));
             context.SaveChanges();
 
             Character profileAdmin = new Character
@@ -57,30 +91,38 @@ namespace Browser_RPG_Game.DAL
                 Dexterity = 1000,
                 Intelligence = 1000,
                 Luck = 1000,
-                CharacterImage = new CharacterImage { PathToImage = "http://emargo.pl/margonem/obrazki/npc/woj/apostata.gif" }
+                CharacterImage = characterImages[0],
+                Armor = null,
+                Boots = null,
+                Gloves = null,
+                Helmet = null,
+                Sawmill = new CharacterBuildings
+                {
+                    Building = buildings[0],
+                    LastUpdate = DateTime.Now,
+                    Level = 0,
+                    Storage = 0,
+                    StorageMax = 100
+                },
+                Brickyard = new CharacterBuildings
+                {
+                    Building = buildings[1],
+                    LastUpdate = DateTime.Now,
+                    Level = 0,
+                    Storage = 0,
+                    StorageMax = 100
+                },
+                Ironworks = new CharacterBuildings
+                {
+                    Building = buildings[2],
+                    LastUpdate = DateTime.Now,
+                    Level = 0,
+                    Storage = 0,
+                    StorageMax = 100
+                }
             };
 
             context.Characters.Add(profileAdmin);
-            context.SaveChanges();
-
-            var materials = new List<Material>
-            {
-                new Material{Name = "drewno", Value=5, PathToImage="https://help.plemiona.pl/images/8/88/Drewno.png"},
-                new Material{Name = "glina", Value=10, PathToImage="https://help.plemiona.pl/images/8/89/Glina.png"},
-                new Material{Name = "żelazo", Value=20, PathToImage="https://help.plemiona.pl/images/8/8b/Zelazo.png"}
-            };
-
-            materials.ForEach(m => context.Materials.Add(m));
-            context.SaveChanges();
-
-            var buildings = new List<Building>
-            {
-                new Building{Name="tartak", Material=materials[0], LevelMax=10, IncreasePerMinute=10, IncreasePerMinuteAfterEachUpgrade=5, Value=500, PathToImage="https://help.plemiona.pl/images/6/6d/Tartak10.png"},
-                new Building{Name="cegielnia", Material=materials[1], LevelMax=10, IncreasePerMinute=5, IncreasePerMinuteAfterEachUpgrade=3, Value=1500, PathToImage="https://help.plemiona.pl/images/4/4e/Glina20.png"},
-                new Building{Name="huta żelaza", Material=materials[2], LevelMax=10, IncreasePerMinute=3, IncreasePerMinuteAfterEachUpgrade=2, Value=3000, PathToImage="https://help.plemiona.pl/images/3/38/Huta10.png"}
-            };
-
-            buildings.ForEach(b => context.Buildings.Add(b));
             context.SaveChanges();
 
             var itemTypes = new List<ItemType>
@@ -96,6 +138,7 @@ namespace Browser_RPG_Game.DAL
 
             itemTypes.ForEach(i => context.ItemTypes.Add(i));
             context.SaveChanges();
+
 
             var items = new List<Item>
             {
@@ -225,6 +268,7 @@ namespace Browser_RPG_Game.DAL
             items.ForEach(i => context.Items.Add(i));
             context.SaveChanges();
 
+
             var locations = new List<Location>
             {
                 new Location{Name="Leśny Gąszcz" },
@@ -236,6 +280,7 @@ namespace Browser_RPG_Game.DAL
 
             locations.ForEach(l => context.Locations.Add(l));
             context.SaveChanges();
+
 
             var enemies = new List<Enemy>
             {
