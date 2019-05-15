@@ -158,9 +158,27 @@ namespace Browser_RPG_Game.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    Profile profile = new Profile { Login = model.Email };
                     GameContext db = new GameContext();
-                    db.Profiles.Add(profile);
+                    Character character = new Character
+                    {
+                        Login = model.Email,
+                        ProfileType = db.ProfileTypes.Single(p => p.Name == "user"),
+                        Name = model.CharacterName,
+                        Level = 1,
+                        Experience = 0,
+                        ExperienceMax = 40,
+                        Health = 10,
+                        HealthMax = 10,
+                        Strength = 1,
+                        Dexterity = 1,
+                        Intelligence = 1,
+                        Luck = 1,
+                        CharacterImage = db.CharacterImages.ElementAtOrDefault(0),
+                        Weapon = db.Items.Single(i => i.Name == "Uszczerbany miecz"),
+                        Shield = db.Items.Single(i => i.Name == "Żelazna tarcza")
+                    };
+
+                    db.Characters.Add(character);
                     db.SaveChanges();
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

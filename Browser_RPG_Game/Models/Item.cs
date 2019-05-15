@@ -14,6 +14,7 @@ namespace Browser_RPG_Game.Models
         public int Damage { get; set; }
         public int Defense { get; set; }
         public int Value { get; set; }
+        public string PathToImage { get; set; }
 
         public virtual ItemType ItemType { get; set; }
         public virtual ICollection<Character> CharactersArmors { get; set; }

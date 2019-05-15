@@ -12,5 +12,7 @@ namespace Browser_RPG_Game.Models
         public string Title { get; set; }
         public string Contents { get; set; }
         public DateTime Date { get; set; }
+
+        public virtual Character Character { get; set; }
     }
 }

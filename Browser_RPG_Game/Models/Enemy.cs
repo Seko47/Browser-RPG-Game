@@ -20,6 +20,7 @@ namespace Browser_RPG_Game.Models
         public int Defense { get; set; }
         public int LootID { get; set; }
         public int LocationID { get; set; }
+        public string PathToImage { get; set; }
 
         public virtual Loot Loot { get; set; }
         public virtual Location Location { get; set; }

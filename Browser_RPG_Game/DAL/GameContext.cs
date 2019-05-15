@@ -21,7 +21,7 @@ namespace Browser_RPG_Game.DAL
         public DbSet<ItemType> ItemTypes { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Loot> Loots { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<CharacterImage> CharacterImages { get; set; }
         public DbSet<ProfileType> ProfileTypes { get; set; }
         public DbSet<Bulletin> Bulletins { get; set; }
         public DbSet<Property> Properties { get; set; }

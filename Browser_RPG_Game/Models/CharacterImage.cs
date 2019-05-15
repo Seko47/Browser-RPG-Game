@@ -5,11 +5,11 @@ using System.Web;
 
 namespace Browser_RPG_Game.Models
 {
-    public class Material
+    public class CharacterImage
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public int Value { get; set; }
         public string PathToImage { get; set; }
+
+        public virtual ICollection<Character> Characters { get; set; }
     }
 }

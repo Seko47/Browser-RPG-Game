@@ -11,6 +11,8 @@ namespace Browser_RPG_Game.Models
         private int defense;
 
         public int ID { get; set; }
+        public string Login { get; set; }
+        public int ProfileTypeID { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public int Experience { get; set; }
@@ -27,6 +29,7 @@ namespace Browser_RPG_Game.Models
         public int? BootsID { get; set; }
         public int? WeaponID { get; set; }
         public int? ShieldID { get; set; }
+        public int CharacterImageID { get; set; }
 
         public int Damage
         {
@@ -39,6 +42,7 @@ namespace Browser_RPG_Game.Models
             private set { defense = value; }
         }
 
+        public virtual ProfileType ProfileType { get; set; }
         public virtual ICollection<Message> SendedMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
@@ -49,5 +53,6 @@ namespace Browser_RPG_Game.Models
         public virtual Item Boots { get; set; }
         public virtual Item Weapon { get; set; }
         public virtual Item Shield { get; set; }
+        public virtual CharacterImage CharacterImage { get; set; }
     }
 }
