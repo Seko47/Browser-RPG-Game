@@ -10,7 +10,7 @@ namespace Browser_RPG_Game.Models
     {
         public int ID { get; set; }
         [Required]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; }
         [Required]
         [Range(0, 100)]
