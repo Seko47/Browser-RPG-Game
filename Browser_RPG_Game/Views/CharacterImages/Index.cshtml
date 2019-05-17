@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            Image
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PathToImage)
         </th>
         <th></th>
@@ -19,6 +22,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.PathToImage)" alt="Character image" />
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.PathToImage)
         </td>
