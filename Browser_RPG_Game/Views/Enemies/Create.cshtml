@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Enemy</h4>
         <hr />
@@ -64,14 +64,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Intelligence, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Intelligence, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Intelligence, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Luck, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Luck, new { htmlAttributes = new { @class = "form-control" } })
@@ -96,15 +88,43 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LootID, "LootID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Experience, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LootID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LootID, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LocationID, "LocationID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Money, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Money, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Money, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ItemLoots, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style="height: 300px; overflow-y: scroll;">
+                <table class="table">
+                    @foreach (var item in ViewBag.ItemsID)
+                    {
+                        <tr>
+                            <td>
+                                <label><input name="ItemsID" type="checkbox" value="@item.ID" /> @item.Name </label>
+                            </td>
+                            <td>
+                                <input name="@("item"+item.ID)" type="number" value="0" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+                @Html.ValidationMessageFor(model => model.ItemLoots, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("LocationID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })

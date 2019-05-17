@@ -20,14 +20,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Loot.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Loot.ID)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -76,14 +68,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Intelligence)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Intelligence)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Luck)
         </dt>
 
@@ -108,13 +92,77 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Money)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Money)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemLoots)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Drop chance [%]
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ItemLoots)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@Html.DisplayFor(model => item.Item.PathToImage)" alt="Item image" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.DropChance)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location.Name)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.PathToImage)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.PathToImage)
         </dd>
-
+        <dd>
+            <img src="@Html.DisplayFor(model=>model.PathToImage)" alt="Enemy image" style="min-height: 70px" />
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
