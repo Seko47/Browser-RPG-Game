@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Browser_RPG_Game.DAL
 {
-    public class GameInitializer : DropCreateDatabaseIfModelChanges<GameContext>
+    public class GameInitializer : DropCreateDatabaseAlways<GameContext>
     {
         protected override void Seed(GameContext context)
         {
@@ -288,11 +288,8 @@ namespace Browser_RPG_Game.DAL
                 {
                     Name ="Mysz", Level=1, Damage=1, Defense=0, HealthMax=3, Health=3,
                     Luck =0, Strength=1, Dexterity=1,
-                    Location =locations[0],
-                    Loot =new Loot
-                    {
-                        Money =3, Experience=5
-                    },
+                    Location = locations[0],
+                    Money =3, Experience=5,
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/mysz.gif"
                 },
                 new Enemy
@@ -300,15 +297,12 @@ namespace Browser_RPG_Game.DAL
                     Name ="Pająk", Level=2, Damage=1, Defense=1, HealthMax=5, Health=5,
                     Luck =1, Strength=1, Dexterity=2,
                     Location =locations[0],
-                    Loot =new Loot
+                    Money =5, Experience=7,
+                    ItemLoots =new List<ItemLoot>
                     {
-                        Money =5, Experience=7,
-                        ItemLoots =new List<ItemLoot>
-                        {
-                            new ItemLoot {Item=items[94], DropChance=10},
-                            new ItemLoot {Item=items[95], DropChance=20},
-                            new ItemLoot {Item=items[96], DropChance=30}
-                        }
+                        new ItemLoot {Item=items[94], DropChance=10},
+                        new ItemLoot {Item=items[95], DropChance=20},
+                        new ItemLoot {Item=items[96], DropChance=30}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/pajak_z1.gif"
                 },
@@ -317,14 +311,11 @@ namespace Browser_RPG_Game.DAL
                     Name ="Ropucha", Level=3, Damage=3, Defense=2, HealthMax=8, Health=8,
                     Luck =1, Strength=2, Dexterity=2,
                     Location =locations[0],
-                    Loot =new Loot
+                    Money =8, Experience=10,
+                    ItemLoots =new List<ItemLoot>
                     {
-                        Money =8, Experience=10,
-                        ItemLoots =new List<ItemLoot>
-                        {
-                            new ItemLoot {Item=items[97], DropChance=15},
-                            new ItemLoot {Item=items[98], DropChance=50}
-                        }
+                        new ItemLoot {Item=items[97], DropChance=15},
+                        new ItemLoot {Item=items[98], DropChance=50}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/zaba01.gif"
                 },
@@ -333,10 +324,7 @@ namespace Browser_RPG_Game.DAL
                     Name ="Nocny pająk", Level=4, Damage=4, Defense=3, HealthMax=12, Health=12,
                     Luck =2, Strength=2, Dexterity=2,
                     Location =locations[0],
-                    Loot =new Loot
-                    {
-                        Money =10, Experience=14
-                    },
+                    Money =10, Experience=14,
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/pajak_nocny1.gif"
                 },
                 new Enemy
@@ -344,15 +332,12 @@ namespace Browser_RPG_Game.DAL
                     Name ="Szerszeń", Level=5, Damage=6, Defense=6, HealthMax=17, Health=17,
                     Luck =3, Strength=3, Dexterity=3,
                     Location =locations[0],
-                    Loot =new Loot
+                    Money =12, Experience=17,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =12, Experience=17,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[99], DropChance=30},
-                            new ItemLoot{Item=items[100], DropChance=70},
-                            new ItemLoot{Item=items[101], DropChance=50}
-                        }
+                        new ItemLoot{Item=items[99], DropChance=30},
+                        new ItemLoot{Item=items[100], DropChance=70},
+                        new ItemLoot{Item=items[101], DropChance=50}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/bestia152.gif"
                 },
@@ -361,13 +346,10 @@ namespace Browser_RPG_Game.DAL
                     Name ="Lis", Level=6, Damage=8, Defense=7, HealthMax=20, Health=20,
                     Luck =5, Strength=5, Dexterity=6,
                     Location =locations[0],
-                    Loot =new Loot
+                    Money =15, Experience=20,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =15, Experience=20,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[102], DropChance=45}
-                        }
+                        new ItemLoot{Item=items[102], DropChance=45}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/lis.gif"
                 },
@@ -376,13 +358,10 @@ namespace Browser_RPG_Game.DAL
                     Name ="Król szczurów", Level=7, Damage=9, Defense=9, HealthMax=25, Health=25,
                     Luck =6, Strength=7, Dexterity=6,
                     Location =locations[1],
-                    Loot =new Loot
+                    Money =20, Experience=25,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =20, Experience=25,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[103], DropChance=50}
-                        }
+                        new ItemLoot{Item=items[103], DropChance=50}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/szczur2.gif"
                 },
@@ -391,13 +370,10 @@ namespace Browser_RPG_Game.DAL
                     Name ="Gacek", Level=8, Damage=10, Defense=10, HealthMax=20, Health=20,
                     Luck =9, Strength=6, Dexterity=8,
                     Location =locations[1],
-                    Loot =new Loot
+                    Money =23, Experience=30,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =23, Experience=30,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[104], DropChance=80}
-                        }
+                        new ItemLoot{Item=items[104], DropChance=80}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/bestia86.gif"
                 },
@@ -406,10 +382,7 @@ namespace Browser_RPG_Game.DAL
                     Name ="Dziki pies", Level=9, Damage=12, Defense=10, HealthMax=35, Health=35,
                     Luck =5, Strength=8, Dexterity=5,
                     Location =locations[1],
-                    Loot =new Loot
-                    {
-                        Money =26, Experience=35
-                    },
+                    Money =26, Experience=35,
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/zwi/pies_czarny1.gif"
                 },
                 new Enemy
@@ -417,15 +390,12 @@ namespace Browser_RPG_Game.DAL
                     Name ="Czarna Wilczyca", Level=10, Damage=15, Defense=14, HealthMax=45, Health=45,
                     Luck =7, Strength=11, Dexterity=10,
                     Location =locations[1],
-                    Loot =new Loot
+                    Money =40, Experience=45,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =40, Experience=45,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[105], DropChance=10},
-                            new ItemLoot{Item=items[106], DropChance=25},
-                            new ItemLoot{Item=items[107], DropChance=80}
-                        }
+                        new ItemLoot{Item=items[105], DropChance=10},
+                        new ItemLoot{Item=items[106], DropChance=25},
+                        new ItemLoot{Item=items[107], DropChance=80}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/pot/st-wilczyca.gif"
                 },
@@ -434,16 +404,13 @@ namespace Browser_RPG_Game.DAL
                     Name ="Ork Łaknikąpiel", Level=11, Damage=17, Defense=17, HealthMax=50, Health=50,
                     Luck =4, Strength=15, Dexterity=10,
                     Location =locations[2],
-                    Loot =new Loot
+                    Money =70, Experience=50,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =70, Experience=50,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[0], DropChance=80},
-                            new ItemLoot{Item=items[4], DropChance=60},
-                            new ItemLoot{Item=items[8], DropChance=40},
-                            new ItemLoot{Item=items[11], DropChance=20}
-                        }
+                        new ItemLoot{Item=items[0], DropChance=80},
+                        new ItemLoot{Item=items[4], DropChance=60},
+                        new ItemLoot{Item=items[8], DropChance=40},
+                        new ItemLoot{Item=items[11], DropChance=20}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/hum/ork4.gif"
                 },
@@ -452,18 +419,15 @@ namespace Browser_RPG_Game.DAL
                     Name ="Karciany rycerz", Level=12, Damage=17, Defense=19, HealthMax=55, Health=55,
                     Luck =10, Strength=14, Dexterity=17,
                     Location =locations[2],
-                    Loot =new Loot
+                    Money =85, Experience=55,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =85, Experience=55,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[12], DropChance=30},
-                            new ItemLoot{Item=items[29], DropChance=30},
-                            new ItemLoot{Item=items[49], DropChance=50},
-                            new ItemLoot{Item=items[62], DropChance=25},
-                            new ItemLoot{Item=items[75], DropChance=30},
-                            new ItemLoot{Item=items[87], DropChance=20}
-                        }
+                        new ItemLoot{Item=items[12], DropChance=30},
+                        new ItemLoot{Item=items[29], DropChance=30},
+                        new ItemLoot{Item=items[49], DropChance=50},
+                        new ItemLoot{Item=items[62], DropChance=25},
+                        new ItemLoot{Item=items[75], DropChance=30},
+                        new ItemLoot{Item=items[87], DropChance=20}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/hum/redknight3.gif"
                 },
@@ -472,18 +436,15 @@ namespace Browser_RPG_Game.DAL
                     Name ="Bezgłowy jeździec", Level=14, Damage=19, Defense=21, HealthMax=65, Health=65,
                     Luck =3, Strength=18, Dexterity=10,
                     Location =locations[2],
-                    Loot =new Loot
+                    Money =100, Experience=65,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =100, Experience=65,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[13], DropChance=30},
-                            new ItemLoot{Item=items[11], DropChance=40},
-                            new ItemLoot{Item=items[30], DropChance=30},
-                            new ItemLoot{Item=items[63], DropChance=30},
-                            new ItemLoot{Item=items[76], DropChance=30},
-                            new ItemLoot{Item=items[88], DropChance=20}
-                        }
+                        new ItemLoot{Item=items[13], DropChance=30},
+                        new ItemLoot{Item=items[11], DropChance=40},
+                        new ItemLoot{Item=items[30], DropChance=30},
+                        new ItemLoot{Item=items[63], DropChance=30},
+                        new ItemLoot{Item=items[76], DropChance=30},
+                        new ItemLoot{Item=items[88], DropChance=20}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/hum/bezglowy_jezdziec.gif"
                 },
@@ -492,16 +453,13 @@ namespace Browser_RPG_Game.DAL
                     Name ="Paladyński Apostata", Level=15, Damage=21, Defense=20, HealthMax=75, Health=75,
                     Luck =13, Strength=20, Dexterity=20,
                     Location =locations[2],
-                    Loot =new Loot
+                    Money =150, Experience=75,
+                    ItemLoots = new List<ItemLoot>
                     {
-                        Money =150, Experience=75,
-                        ItemLoots = new List<ItemLoot>
-                        {
-                            new ItemLoot{Item=items[17], DropChance=20},
-                            new ItemLoot{Item=items[33], DropChance=40},
-                            new ItemLoot{Item=items[36], DropChance=15},
-                            new ItemLoot{Item=items[79], DropChance=10}
-                        }
+                        new ItemLoot{Item=items[17], DropChance=20},
+                        new ItemLoot{Item=items[33], DropChance=40},
+                        new ItemLoot{Item=items[36], DropChance=15},
+                        new ItemLoot{Item=items[79], DropChance=10}
                     },
                     PathToImage="http://emargo.pl/margonem/obrazki/npc/woj/apostata.gif"
                 }

@@ -12,12 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Location.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Loot.ID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -36,9 +30,6 @@
             @Html.DisplayNameFor(model => model.Dexterity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Intelligence)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Luck)
         </th>
         <th>
@@ -48,58 +39,67 @@
             @Html.DisplayNameFor(model => model.Defense)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Experience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Money)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PathToImage)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Loot.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Level)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Health)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HealthMax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Strength)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dexterity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Intelligence)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Luck)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Damage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Defense)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PathToImage)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Level)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Health)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HealthMax)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Strength)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Dexterity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Luck)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Damage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Defense)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Experience)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Money)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Location.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PathToImage)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </td>
+</tr>
 }
 
 </table>

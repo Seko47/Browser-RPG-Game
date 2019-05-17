@@ -173,7 +173,7 @@ namespace Browser_RPG_Game.Controllers
                         Dexterity = 1,
                         Intelligence = 1,
                         Luck = 1,
-                        CharacterImage = db.CharacterImages.ElementAtOrDefault(0),
+                        CharacterImage = db.CharacterImages.Single(c=>c.ID == 2),
                         Weapon = db.Items.Single(i => i.Name == "Uszczerbany miecz"),
                         Shield = db.Items.Single(i => i.Name == "Żelazna tarcza")
                     };

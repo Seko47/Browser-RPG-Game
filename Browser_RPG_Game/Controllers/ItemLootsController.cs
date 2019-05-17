@@ -18,7 +18,7 @@ namespace Browser_RPG_Game.Controllers
         // GET: ItemLoots
         public ActionResult Index()
         {
-            var itemLoots = db.ItemLoots.Include(i => i.Item).Include(i => i.Loot);
+            var itemLoots = db.ItemLoots.Include(i => i.Item);
             return View(itemLoots.ToList());
         }
 
@@ -41,7 +41,6 @@ namespace Browser_RPG_Game.Controllers
         public ActionResult Create()
         {
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name");
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID");
             return View();
         }
 
@@ -50,7 +49,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LootID,ItemID,DropChance")] ItemLoot itemLoot)
+        public ActionResult Create([Bind(Include = "ID,ItemID,DropChance")] ItemLoot itemLoot)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +59,6 @@ namespace Browser_RPG_Game.Controllers
             }
 
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name", itemLoot.ItemID);
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID", itemLoot.LootID);
             return View(itemLoot);
         }
 
@@ -77,7 +75,6 @@ namespace Browser_RPG_Game.Controllers
                 return HttpNotFound();
             }
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name", itemLoot.ItemID);
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID", itemLoot.LootID);
             return View(itemLoot);
         }
 
@@ -86,7 +83,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LootID,ItemID,DropChance")] ItemLoot itemLoot)
+        public ActionResult Edit([Bind(Include = "ID,ItemID,DropChance")] ItemLoot itemLoot)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +92,6 @@ namespace Browser_RPG_Game.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name", itemLoot.ItemID);
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID", itemLoot.LootID);
             return View(itemLoot);
         }
 

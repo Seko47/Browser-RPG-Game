@@ -40,17 +40,30 @@ namespace Browser_RPG_Game.Controllers
         // GET: Characters/Create
         public ActionResult Create()
         {
-            ViewBag.ArmorID = new SelectList(db.Items, "ID", "Name");
-            ViewBag.BootsID = new SelectList(db.Items, "ID", "Name");
+            Item blankItem = new Item { ID = -1, Name = "Brak" };
+            List<Item> armorsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            armorsItems.Insert(0, blankItem);
+            List<Item> bootsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            bootsItems.Insert(0, blankItem);
+            List<Item> glovesItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            glovesItems.Insert(0, blankItem);
+            List<Item> helmetsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            helmetsItems.Insert(0, blankItem);
+            List<Item> shieldsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            shieldsItems.Insert(0, blankItem);
+            List<Item> weaponsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            weaponsItems.Insert(0, blankItem);
+            ViewBag.ArmorID = new SelectList(armorsItems, "ID", "Name");
+            ViewBag.BootsID = new SelectList(bootsItems, "ID", "Name");
             ViewBag.BrickyardID = new SelectList(db.CharacterBuildings, "ID", "ID");
             ViewBag.CharacterImageID = new SelectList(db.CharacterImages, "ID", "PathToImage");
-            ViewBag.GlovesID = new SelectList(db.Items, "ID", "Name");
-            ViewBag.HelmetID = new SelectList(db.Items, "ID", "Name");
+            ViewBag.GlovesID = new SelectList(glovesItems, "ID", "Name");
+            ViewBag.HelmetID = new SelectList(helmetsItems, "ID", "Name");
             ViewBag.IronworksID = new SelectList(db.CharacterBuildings, "ID", "ID");
             ViewBag.ProfileTypeID = new SelectList(db.ProfileTypes, "ID", "Name");
             ViewBag.SawmillID = new SelectList(db.CharacterBuildings, "ID", "ID");
-            ViewBag.ShieldID = new SelectList(db.Items, "ID", "Name");
-            ViewBag.WeaponID = new SelectList(db.Items, "ID", "Name");
+            ViewBag.ShieldID = new SelectList(shieldsItems, "ID", "Name");
+            ViewBag.WeaponID = new SelectList(weaponsItems, "ID", "Name");
             return View();
         }
 

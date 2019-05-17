@@ -18,7 +18,7 @@ namespace Browser_RPG_Game.Controllers
         // GET: Enemies
         public ActionResult Index()
         {
-            var enemies = db.Enemies.Include(e => e.Location).Include(e => e.Loot);
+            var enemies = db.Enemies.Include(e => e.Location);
             return View(enemies.ToList());
         }
 
@@ -41,7 +41,7 @@ namespace Browser_RPG_Game.Controllers
         public ActionResult Create()
         {
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name");
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID");
+            ViewBag.ItemsID = db.Items.ToList();
             return View();
         }
 
@@ -50,17 +50,22 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Level,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,Damage,Defense,LootID,LocationID,PathToImage")] Enemy enemy)
+        public ActionResult Create([Bind(Include = "Name,Level,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,Damage,Defense,Experience,Money,LocationID,PathToImage")] Enemy enemy, int[] ItemsID)
         {
             if (ModelState.IsValid)
             {
+                enemy.ItemLoots = new List<ItemLoot>();
+                for (int i = 0; i < ItemsID.Count(); ++i)
+                {
+                    enemy.ItemLoots.Add(new ItemLoot { Item = db.Items.Find(ItemsID[i]), DropChance = Int32.Parse(Request["item" + ItemsID[i]]) });
+                }
+
                 db.Enemies.Add(enemy);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name", enemy.LocationID);
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID", enemy.LootID);
             return View(enemy);
         }
 
@@ -77,7 +82,7 @@ namespace Browser_RPG_Game.Controllers
                 return HttpNotFound();
             }
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name", enemy.LocationID);
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID", enemy.LootID);
+            ViewBag.ItemsID = db.Items.ToList();
             return View(enemy);
         }
 
@@ -86,16 +91,27 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Level,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,Damage,Defense,LootID,LocationID,PathToImage")] Enemy enemy)
+        public ActionResult Edit([Bind(Include = "ID,Name,Level,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,Damage,Defense,Experience,Money,LocationID,PathToImage")] Enemy enemy, int[] ItemsID)
         {
             if (ModelState.IsValid)
             {
+                List<ItemLoot> itemLoots = db.ItemLoots.Where(i => i.EnemyID == enemy.ID).ToList();
+                itemLoots.ForEach(i => db.ItemLoots.Remove(i));
+                db.SaveChanges();
+
+                enemy.ItemLoots = new List<ItemLoot>();
+                for (int i = 0; i < ItemsID.Count(); ++i)
+                {
+                    ItemLoot itemLoot = new ItemLoot { Item = db.Items.Find(ItemsID[i]), DropChance = Int32.Parse(Request["item" + ItemsID[i]]), Enemy = enemy };
+                    db.ItemLoots.Add(itemLoot);
+                    enemy.ItemLoots.Add(itemLoot);
+                }
+
                 db.Entry(enemy).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name", enemy.LocationID);
-            ViewBag.LootID = new SelectList(db.Loots, "ID", "ID", enemy.LootID);
             return View(enemy);
         }
 

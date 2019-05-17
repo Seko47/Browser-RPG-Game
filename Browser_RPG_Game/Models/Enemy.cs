@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,21 +9,48 @@ namespace Browser_RPG_Game.Models
     public class Enemy
     {
         public int ID { get; set; }
+        [Required]
+        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string Name { get; set; }
+        [Required]
+        [Range(0, 100)]
         public int Level { get; set; }
+        [Required]
+        [Range(1, 1000)]
         public int Health { get; set; }
+        [Required]
+        [Range(1, 1000)]
+        [Display(Name="Health max")]
         public int HealthMax { get; set; }
+        [Required]
+        [Range(0, 1000)]
         public int Strength { get; set; }
+        [Required]
+        [Range(0, 1000)]
         public int Dexterity { get; set; }
-        public int Intelligence { get; set; }
+        [Required]
+        [Range(0, 1000)]
         public int Luck { get; set; }
+        [Required]
+        [Range(0, 100)]
         public int Damage { get; set; }
+        [Required]
+        [Range(0, 100)]
         public int Defense { get; set; }
-        public int LootID { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Experience { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Money { get; set; }
+        [Display(Name="Location")]
         public int LocationID { get; set; }
+        [Required]
+        [Display(Name="Path to image")]
         public string PathToImage { get; set; }
 
-        public virtual Loot Loot { get; set; }
+        [Display(Name="Loot")]
+        public virtual ICollection<ItemLoot> ItemLoots { get; set; }
         public virtual Location Location { get; set; }
     }
 }
