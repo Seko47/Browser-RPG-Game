@@ -11,14 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Material.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Material.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -27,11 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PathToImage)
+            @Html.DisplayNameFor(model => model.Material)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PathToImage)
+            @Html.DisplayFor(model => model.Material.Name)
         </dd>
 
         <dt>
@@ -51,11 +43,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IncreasePerMinute)
+            @Html.DisplayNameFor(model => model.InitialIncreasePerMinute)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IncreasePerMinute)
+            @Html.DisplayFor(model => model.InitialIncreasePerMinute)
         </dd>
 
         <dt>
@@ -64,6 +56,17 @@
 
         <dd>
             @Html.DisplayFor(model => model.IncreasePerMinuteAfterEachUpgrade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathToImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathToImage)
+        </dd>
+        <dd>
+            <img src="@Html.DisplayFor(model => model.PathToImage)" alt="Building image" />
         </dd>
 
     </dl>

@@ -18,7 +18,7 @@
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaterialID, "MaterialID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MaterialID, "Material", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("MaterialID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaterialID, "", new { @class = "text-danger" })
@@ -58,10 +58,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IncreasePerMinute, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.InitialIncreasePerMinute, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IncreasePerMinute, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IncreasePerMinute, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.InitialIncreasePerMinute, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InitialIncreasePerMinute, "", new { @class = "text-danger" })
             </div>
         </div>
 

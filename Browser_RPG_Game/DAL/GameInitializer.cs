@@ -71,9 +71,9 @@ namespace Browser_RPG_Game.DAL
 
             var buildings = new List<Building>
             {
-                new Building{Name="tartak", Material=materials[0], LevelMax=10, IncreasePerMinute=10, IncreasePerMinuteAfterEachUpgrade=5, Value=500, PathToImage="https://help.plemiona.pl/images/6/6d/Tartak10.png"},
-                new Building{Name="cegielnia", Material=materials[1], LevelMax=10, IncreasePerMinute=5, IncreasePerMinuteAfterEachUpgrade=3, Value=1500, PathToImage="https://help.plemiona.pl/images/4/4e/Glina20.png"},
-                new Building{Name="huta żelaza", Material=materials[2], LevelMax=10, IncreasePerMinute=3, IncreasePerMinuteAfterEachUpgrade=2, Value=3000, PathToImage="https://help.plemiona.pl/images/3/38/Huta10.png"}
+                new Building{Name="tartak", Material=materials[0], LevelMax=10, InitialIncreasePerMinute=10, IncreasePerMinuteAfterEachUpgrade=5, Value=500, PathToImage="https://help.plemiona.pl/images/6/6d/Tartak10.png"},
+                new Building{Name="cegielnia", Material=materials[1], LevelMax=10, InitialIncreasePerMinute=5, IncreasePerMinuteAfterEachUpgrade=3, Value=1500, PathToImage="https://help.plemiona.pl/images/4/4e/Glina20.png"},
+                new Building{Name="huta żelaza", Material=materials[2], LevelMax=10, InitialIncreasePerMinute=3, IncreasePerMinuteAfterEachUpgrade=2, Value=3000, PathToImage="https://help.plemiona.pl/images/3/38/Huta10.png"}
             };
 
             buildings.ForEach(b => context.Buildings.Add(b));

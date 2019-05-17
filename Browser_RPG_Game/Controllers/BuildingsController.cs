@@ -49,7 +49,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,MaterialID,Name,PathToImage,LevelMax,Value,IncreasePerMinute,IncreasePerMinuteAfterEachUpgrade")] Building building)
+        public ActionResult Create([Bind(Include = "ID,MaterialID,Name,PathToImage,LevelMax,Value,InitialIncreasePerMinute,IncreasePerMinuteAfterEachUpgrade")] Building building)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,MaterialID,Name,PathToImage,LevelMax,Value,IncreasePerMinute,IncreasePerMinuteAfterEachUpgrade")] Building building)
+        public ActionResult Edit([Bind(Include = "ID,MaterialID,Name,PathToImage,LevelMax,Value,InitialIncreasePerMinute,IncreasePerMinuteAfterEachUpgrade")] Building building)
         {
             if (ModelState.IsValid)
             {
