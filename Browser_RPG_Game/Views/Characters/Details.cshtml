@@ -11,99 +11,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Armor.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Armor.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Boots.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Boots.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Brickyard.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Brickyard.ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacterImage.PathToImage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacterImage.PathToImage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gloves.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gloves.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Helmet.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Helmet.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ironworks.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ironworks.ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfileType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProfileType.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sawmill.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sawmill.ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Shield.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Shield.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weapon.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weapon.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Login)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileType.Name)
         </dd>
 
         <dt>
@@ -202,6 +122,357 @@
             @Html.DisplayFor(model => model.Defense)
         </dd>
 
+        <dt>
+            Equipment
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Helmet)
+        </dt>
+
+        @if (Model.Helmet != null)
+        {
+            <dd>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Helmet.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.Helmet.Name)</th>
+                            <th>Image</th>
+                            <th>@Html.DisplayNameFor(model => model.Helmet.Value)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.Helmet.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Helmet.Name)
+                            </td>
+                            <td>
+                                <img src="@Model.Helmet.PathToImage" alt="Helmet image" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Helmet.Value)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Brak
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Armor)
+        </dt>
+
+        @if (Model.Armor != null)
+        {
+            <dd>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Armor.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.Armor.Name)</th>
+                            <th>Image</th>
+                            <th>@Html.DisplayNameFor(model => model.Armor.Value)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.Armor.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Armor.Name)
+                            </td>
+                            <td>
+                                <img src="@Model.Armor.PathToImage" alt="Armor image" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Armor.Value)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Brak
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gloves)
+        </dt>
+
+        @if (Model.Gloves != null)
+        {
+            <dd>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Gloves.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.Gloves.Name)</th>
+                            <th>Image</th>
+                            <th>@Html.DisplayNameFor(model => model.Gloves.Value)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.Gloves.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Gloves.Name)
+                            </td>
+                            <td>
+                                <img src="@Model.Gloves.PathToImage" alt="Gloves image" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Gloves.Value)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Brak
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Boots)
+        </dt>
+
+        @if (Model.Boots != null)
+        {
+            <dd>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Boots.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.Boots.Name)</th>
+                            <th>Image</th>
+                            <th>@Html.DisplayNameFor(model => model.Boots.Value)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.Boots.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Boots.Name)
+                            </td>
+                            <td>
+                                <img src="@Model.Boots.PathToImage" alt="Boots image" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Boots.Value)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Brak
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weapon)
+        </dt>
+
+        @if (Model.Weapon != null)
+        {
+            <dd>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Weapon.ID)</th>
+                            <th>@Html.DisplayNameFor(model => model.Weapon.Name)</th>
+                            <th>Image</th>
+                            <th>@Html.DisplayNameFor(model => model.Weapon.Value)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => model.Weapon.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Weapon.Name)
+                            </td>
+                            <td>
+                                <img src="@Model.Weapon.PathToImage" alt="Weapon image" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Weapon.Value)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Brak
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shield)
+        </dt>
+
+        @if (Model.Shield != null)
+        {
+    <dd>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Shield.ID)</th>
+                    <th>@Html.DisplayNameFor(model => model.Shield.Name)</th>
+                    <th>Image</th>
+                    <th>@Html.DisplayNameFor(model => model.Shield.Value)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.Shield.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Shield.Name)
+                    </td>
+                    <td>
+                        <img src="@Model.Shield.PathToImage" alt="Shield image" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Shield.Value)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </dd>
+        }
+        else
+        {
+            <dd>
+                Brak
+            </dd>
+        }
+
+        <dt>
+            Buildings
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sawmill)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Sawmill.ID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Sawmill.Building.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Sawmill.Level)</th>
+                        <th>@Html.DisplayNameFor(model => model.Sawmill.Storage)</th>
+                        <th>@Html.DisplayNameFor(model => model.Sawmill.StorageMax)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Sawmill.ID)</td>
+                        <td>@Html.DisplayFor(model => model.Sawmill.Building.Name)</td>
+                        <td>@Html.DisplayFor(model => model.Sawmill.Level)</td>
+                        <td>@Html.DisplayFor(model => model.Sawmill.Storage)</td>
+                        <td>@Html.DisplayFor(model => model.Sawmill.StorageMax)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brickyard)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Brickyard.ID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Brickyard.Building.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Brickyard.Level)</th>
+                        <th>@Html.DisplayNameFor(model => model.Brickyard.Storage)</th>
+                        <th>@Html.DisplayNameFor(model => model.Brickyard.StorageMax)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Brickyard.ID)</td>
+                        <td>@Html.DisplayFor(model => model.Brickyard.Building.Name)</td>
+                        <td>@Html.DisplayFor(model => model.Brickyard.Level)</td>
+                        <td>@Html.DisplayFor(model => model.Brickyard.Storage)</td>
+                        <td>@Html.DisplayFor(model => model.Brickyard.StorageMax)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ironworks)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Ironworks.ID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Ironworks.Building.Name)</th>
+                        <th>@Html.DisplayNameFor(model => model.Ironworks.Level)</th>
+                        <th>@Html.DisplayNameFor(model => model.Ironworks.Storage)</th>
+                        <th>@Html.DisplayNameFor(model => model.Ironworks.StorageMax)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Ironworks.ID)</td>
+                        <td>@Html.DisplayFor(model => model.Ironworks.Building.Name)</td>
+                        <td>@Html.DisplayFor(model => model.Ironworks.Level)</td>
+                        <td>@Html.DisplayFor(model => model.Ironworks.Storage)</td>
+                        <td>@Html.DisplayFor(model => model.Ironworks.StorageMax)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacterImage.PathToImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacterImage.PathToImage)
+        </dd>
+        <dd>
+            <img src="@Html.DisplayFor(model => model.CharacterImage.PathToImage)" alt="Character image" />
+        </dd>
     </dl>
 </div>
 <p>

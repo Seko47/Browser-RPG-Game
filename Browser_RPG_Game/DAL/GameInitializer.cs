@@ -79,52 +79,6 @@ namespace Browser_RPG_Game.DAL
             buildings.ForEach(b => context.Buildings.Add(b));
             context.SaveChanges();
 
-            Character profileAdmin = new Character
-            {
-                Login = user.UserName,
-                ProfileType = profileTypes[0],
-                Name = "Admin",
-                Level = 100,
-                Health = 1000,
-                HealthMax = 1000,
-                Strength = 1000,
-                Dexterity = 1000,
-                Intelligence = 1000,
-                Luck = 1000,
-                CharacterImage = characterImages[0],
-                Armor = null,
-                Boots = null,
-                Gloves = null,
-                Helmet = null,
-                Sawmill = new CharacterBuildings
-                {
-                    Building = buildings[0],
-                    LastUpdate = DateTime.Now,
-                    Level = 0,
-                    Storage = 0,
-                    StorageMax = 100
-                },
-                Brickyard = new CharacterBuildings
-                {
-                    Building = buildings[1],
-                    LastUpdate = DateTime.Now,
-                    Level = 0,
-                    Storage = 0,
-                    StorageMax = 100
-                },
-                Ironworks = new CharacterBuildings
-                {
-                    Building = buildings[2],
-                    LastUpdate = DateTime.Now,
-                    Level = 0,
-                    Storage = 0,
-                    StorageMax = 100
-                }
-            };
-
-            context.Characters.Add(profileAdmin);
-            context.SaveChanges();
-
             var itemTypes = new List<ItemType>
             {
                 new ItemType{Name="weapon"},
@@ -268,6 +222,53 @@ namespace Browser_RPG_Game.DAL
             items.ForEach(i => context.Items.Add(i));
             context.SaveChanges();
 
+            Character profileAdmin = new Character
+            {
+                Login = user.UserName,
+                ProfileType = profileTypes[0],
+                Name = "Admin",
+                Level = 100,
+                Health = 1000,
+                HealthMax = 1000,
+                Strength = 1000,
+                Dexterity = 1000,
+                Intelligence = 1000,
+                Luck = 1000,
+                CharacterImage = characterImages[0],
+                Armor = items[68],
+                Boots = items[93],
+                Gloves = items[80],
+                Helmet = items[53],
+                Shield = items[40],
+                Weapon = items[20],
+                Sawmill = new CharacterBuildings
+                {
+                    Building = buildings[0],
+                    LastUpdate = DateTime.Now,
+                    Level = 0,
+                    Storage = 0,
+                    StorageMax = 100
+                },
+                Brickyard = new CharacterBuildings
+                {
+                    Building = buildings[1],
+                    LastUpdate = DateTime.Now,
+                    Level = 0,
+                    Storage = 0,
+                    StorageMax = 100
+                },
+                Ironworks = new CharacterBuildings
+                {
+                    Building = buildings[2],
+                    LastUpdate = DateTime.Now,
+                    Level = 0,
+                    Storage = 0,
+                    StorageMax = 100
+                }
+            };
+
+            context.Characters.Add(profileAdmin);
+            context.SaveChanges();
 
             var locations = new List<Location>
             {

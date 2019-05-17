@@ -76,6 +76,30 @@ namespace Browser_RPG_Game.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(character.HelmetID == -1)
+                {
+                    character.HelmetID = null;
+                }
+                if (character.ArmorID == -1)
+                {
+                    character.ArmorID = null;
+                }
+                if (character.GlovesID == -1)
+                {
+                    character.GlovesID = null;
+                }
+                if (character.BootsID == -1)
+                {
+                    character.BootsID = null;
+                }
+                if (character.WeaponID == -1)
+                {
+                    character.WeaponID = null;
+                }
+                if (character.ShieldID == -1)
+                {
+                    character.ShieldID = null;
+                }
                 db.Characters.Add(character);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -107,17 +131,32 @@ namespace Browser_RPG_Game.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArmorID = new SelectList(db.Items, "ID", "Name", character.ArmorID);
-            ViewBag.BootsID = new SelectList(db.Items, "ID", "Name", character.BootsID);
+
+            Item blankItem = new Item { ID = -1, Name = "Brak" };
+            List<Item> armorsItems = db.Items.Where(i => i.ItemType.Name == "armor").ToList();
+            armorsItems.Insert(0, blankItem);
+            List<Item> bootsItems = db.Items.Where(i => i.ItemType.Name == "boots").ToList();
+            bootsItems.Insert(0, blankItem);
+            List<Item> glovesItems = db.Items.Where(i => i.ItemType.Name == "gloves").ToList();
+            glovesItems.Insert(0, blankItem);
+            List<Item> helmetsItems = db.Items.Where(i => i.ItemType.Name == "helmet").ToList();
+            helmetsItems.Insert(0, blankItem);
+            List<Item> shieldsItems = db.Items.Where(i => i.ItemType.Name == "shield").ToList();
+            shieldsItems.Insert(0, blankItem);
+            List<Item> weaponsItems = db.Items.Where(i => i.ItemType.Name == "weapon").ToList();
+            weaponsItems.Insert(0, blankItem);
+
+            ViewBag.ArmorID = new SelectList(armorsItems, "ID", "Name", character.ArmorID);
+            ViewBag.BootsID = new SelectList(bootsItems, "ID", "Name", character.BootsID);
             ViewBag.BrickyardID = new SelectList(db.CharacterBuildings, "ID", "ID", character.BrickyardID);
             ViewBag.CharacterImageID = new SelectList(db.CharacterImages, "ID", "PathToImage", character.CharacterImageID);
-            ViewBag.GlovesID = new SelectList(db.Items, "ID", "Name", character.GlovesID);
-            ViewBag.HelmetID = new SelectList(db.Items, "ID", "Name", character.HelmetID);
+            ViewBag.GlovesID = new SelectList(glovesItems, "ID", "Name", character.GlovesID);
+            ViewBag.HelmetID = new SelectList(helmetsItems, "ID", "Name", character.HelmetID);
             ViewBag.IronworksID = new SelectList(db.CharacterBuildings, "ID", "ID", character.IronworksID);
             ViewBag.ProfileTypeID = new SelectList(db.ProfileTypes, "ID", "Name", character.ProfileTypeID);
             ViewBag.SawmillID = new SelectList(db.CharacterBuildings, "ID", "ID", character.SawmillID);
-            ViewBag.ShieldID = new SelectList(db.Items, "ID", "Name", character.ShieldID);
-            ViewBag.WeaponID = new SelectList(db.Items, "ID", "Name", character.WeaponID);
+            ViewBag.ShieldID = new SelectList(shieldsItems, "ID", "Name", character.ShieldID);
+            ViewBag.WeaponID = new SelectList(weaponsItems, "ID", "Name", character.WeaponID);
             return View(character);
         }
 
@@ -130,6 +169,31 @@ namespace Browser_RPG_Game.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (character.HelmetID == -1)
+                {
+                    character.HelmetID = null;
+                }
+                if (character.ArmorID == -1)
+                {
+                    character.ArmorID = null;
+                }
+                if (character.GlovesID == -1)
+                {
+                    character.GlovesID = null;
+                }
+                if (character.BootsID == -1)
+                {
+                    character.BootsID = null;
+                }
+                if (character.WeaponID == -1)
+                {
+                    character.WeaponID = null;
+                }
+                if (character.ShieldID == -1)
+                {
+                    character.ShieldID = null;
+                }
+
                 db.Entry(character).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
