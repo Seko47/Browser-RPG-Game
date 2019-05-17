@@ -127,13 +127,13 @@ namespace Browser_RPG_Game.DAL
 
             var itemTypes = new List<ItemType>
             {
-                new ItemType{Name="Broń"},
-                new ItemType{Name="Tarcza"},
-                new ItemType{Name="Hełm"},
-                new ItemType{Name="Zbroja"},
-                new ItemType{Name="Rękawice"},
-                new ItemType{Name="Buty"},
-                new ItemType{Name="Inne"}
+                new ItemType{Name="weapon"},
+                new ItemType{Name="shield"},
+                new ItemType{Name="helmet"},
+                new ItemType{Name="armor"},
+                new ItemType{Name="gloves"},
+                new ItemType{Name="boots"},
+                new ItemType{Name="other"}
             };
 
             itemTypes.ForEach(i => context.ItemTypes.Add(i));

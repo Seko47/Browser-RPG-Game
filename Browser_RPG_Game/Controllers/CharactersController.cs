@@ -41,17 +41,17 @@ namespace Browser_RPG_Game.Controllers
         public ActionResult Create()
         {
             Item blankItem = new Item { ID = -1, Name = "Brak" };
-            List<Item> armorsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            List<Item> armorsItems = db.Items.Where(i => i.ItemType.Name == "armor").ToList();
             armorsItems.Insert(0, blankItem);
-            List<Item> bootsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            List<Item> bootsItems = db.Items.Where(i => i.ItemType.Name == "boots").ToList();
             bootsItems.Insert(0, blankItem);
-            List<Item> glovesItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            List<Item> glovesItems = db.Items.Where(i => i.ItemType.Name == "gloves").ToList();
             glovesItems.Insert(0, blankItem);
-            List<Item> helmetsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            List<Item> helmetsItems = db.Items.Where(i => i.ItemType.Name == "helmet").ToList();
             helmetsItems.Insert(0, blankItem);
-            List<Item> shieldsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            List<Item> shieldsItems = db.Items.Where(i => i.ItemType.Name == "shield").ToList();
             shieldsItems.Insert(0, blankItem);
-            List<Item> weaponsItems = db.Items.Where(i => i.ItemType.Name == "Zbroja").ToList();
+            List<Item> weaponsItems = db.Items.Where(i => i.ItemType.Name == "weapon").ToList();
             weaponsItems.Insert(0, blankItem);
             ViewBag.ArmorID = new SelectList(armorsItems, "ID", "Name");
             ViewBag.BootsID = new SelectList(bootsItems, "ID", "Name");
