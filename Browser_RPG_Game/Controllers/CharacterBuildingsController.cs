@@ -53,6 +53,7 @@ namespace Browser_RPG_Game.Controllers
         {
             if (ModelState.IsValid)
             {
+                characterBuildings.LastUpdate = DateTime.Now;
                 db.CharacterBuildings.Add(characterBuildings);
                 db.SaveChanges();
                 return RedirectToAction("Index");
