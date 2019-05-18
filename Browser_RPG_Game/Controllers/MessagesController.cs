@@ -50,7 +50,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,SenderID,ReceiverID,Title,Description,Readed,SendDate")] Message message)
+        public ActionResult Create([Bind(Include = "ID,SenderID,ReceiverID,Title,Content,Readed")] Message message)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,SenderID,ReceiverID,Title,Description,Readed,SendDate")] Message message)
+        public ActionResult Edit([Bind(Include = "ID,SenderID,ReceiverID,Title,Content,Readed")] Message message)
         {
             if (ModelState.IsValid)
             {

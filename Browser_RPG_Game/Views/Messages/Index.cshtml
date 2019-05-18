@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Receiver.Login)
+            @Html.DisplayNameFor(model => model.Receiver)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sender.Login)
+            @Html.DisplayNameFor(model => model.Sender)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Content)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Readed)
@@ -44,7 +44,7 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.Content)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Readed)
