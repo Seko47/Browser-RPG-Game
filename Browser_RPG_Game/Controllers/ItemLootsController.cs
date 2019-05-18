@@ -18,7 +18,7 @@ namespace Browser_RPG_Game.Controllers
         // GET: ItemLoots
         public ActionResult Index()
         {
-            var itemLoots = db.ItemLoots.Include(i => i.Item);
+            var itemLoots = db.ItemLoots.Include(i => i.Enemy).Include(i => i.Item);
             return View(itemLoots.ToList());
         }
 
@@ -40,6 +40,7 @@ namespace Browser_RPG_Game.Controllers
         // GET: ItemLoots/Create
         public ActionResult Create()
         {
+            ViewBag.EnemyID = new SelectList(db.Enemies, "ID", "Name");
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name");
             return View();
         }
@@ -49,7 +50,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ItemID,DropChance")] ItemLoot itemLoot)
+        public ActionResult Create([Bind(Include = "ID,EnemyID,ItemID,DropChance")] ItemLoot itemLoot)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +59,7 @@ namespace Browser_RPG_Game.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.EnemyID = new SelectList(db.Enemies, "ID", "Name", itemLoot.EnemyID);
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name", itemLoot.ItemID);
             return View(itemLoot);
         }
@@ -74,6 +76,7 @@ namespace Browser_RPG_Game.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.EnemyID = new SelectList(db.Enemies, "ID", "Name", itemLoot.EnemyID);
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name", itemLoot.ItemID);
             return View(itemLoot);
         }
@@ -83,7 +86,7 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ItemID,DropChance")] ItemLoot itemLoot)
+        public ActionResult Edit([Bind(Include = "ID,EnemyID,ItemID,DropChance")] ItemLoot itemLoot)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +94,7 @@ namespace Browser_RPG_Game.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.EnemyID = new SelectList(db.Enemies, "ID", "Name", itemLoot.EnemyID);
             ViewBag.ItemID = new SelectList(db.Items, "ID", "Name", itemLoot.ItemID);
             return View(itemLoot);
         }
