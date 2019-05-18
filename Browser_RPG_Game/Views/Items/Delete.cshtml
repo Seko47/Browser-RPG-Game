@@ -12,14 +12,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ItemType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ItemType.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
@@ -58,6 +50,14 @@
         <dd>
             @Html.DisplayFor(model => model.Value)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemType.Name)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.PathToImage)
@@ -65,6 +65,9 @@
 
         <dd>
             @Html.DisplayFor(model => model.PathToImage)
+        </dd>
+        <dd>
+            <img src="@Html.DisplayFor(model => model.PathToImage)" alt="Item image" />
         </dd>
 
     </dl>
