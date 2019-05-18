@@ -25,6 +25,7 @@ namespace Browser_RPG_Game.Models
         [Display(Name="Path to image")]
         public string PathToImage { get; set; }
 
+        [Display(Name="Item type")]
         public virtual ItemType ItemType { get; set; }
         public virtual ICollection<Character> CharactersArmors { get; set; }
         public virtual ICollection<Character> CharactersHelmets { get; set; }

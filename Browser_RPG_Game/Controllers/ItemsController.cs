@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Browser_RPG_Game.DAL;
 using Browser_RPG_Game.Models;
+using PagedList;
 
 namespace Browser_RPG_Game.Controllers
 {
@@ -16,10 +17,78 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Items
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LevelSortParam = sortOrder == "Level" ? "level_desc" : "Level";
+            ViewBag.DamageSortParam = sortOrder == "Damage" ? "damage_desc" : "Damage";
+            ViewBag.DefenseSortParam = sortOrder == "Defense" ? "defense_desc" : "Defense";
+            ViewBag.ValueSortParam = sortOrder == "Value" ? "value_desc" : "Value";
+            ViewBag.ItemTypeSortParam = sortOrder == "ItemType" ? "itemtype_desc" : "ItemType";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var items = db.Items.Include(i => i.ItemType);
-            return View(items.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(i => i.Name.Contains(searchString) || i.ItemType.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    items = items.OrderByDescending(i => i.Name);
+                    break;
+                case "Level":
+                    items = items.OrderBy(i => i.Level);
+                    break;
+                case "level_desc":
+                    items = items.OrderByDescending(i => i.Level);
+                    break;
+                case "Damage":
+                    items = items.OrderBy(i => i.Damage);
+                    break;
+                case "damage_desc":
+                    items = items.OrderByDescending(i => i.Damage);
+                    break;
+                case "Defense":
+                    items = items.OrderBy(i => i.Defense);
+                    break;
+                case "defense_desc":
+                    items = items.OrderByDescending(i => i.Defense);
+                    break;
+                case "Value":
+                    items = items.OrderBy(i => i.Value);
+                    break;
+                case "value_desc":
+                    items = items.OrderByDescending(i => i.Value);
+                    break;
+                case "ItemType":
+                    items = items.OrderBy(i => i.ItemType.Name);
+                    break;
+                case "itemtype_desc":
+                    items = items.OrderByDescending(i => i.ItemType.Name);
+                    break;
+                default:
+                    items = items.OrderBy(i => i.Name);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(items.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Items/Details/5
