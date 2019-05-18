@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Browser_RPG_Game.DAL
 {
-    public class GameInitializer : DropCreateDatabaseAlways<GameContext>
+    public class GameInitializer : DropCreateDatabaseIfModelChanges<GameContext>
     {
         protected override void Seed(GameContext context)
         {
