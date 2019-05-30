@@ -50,7 +50,7 @@ namespace Browser_RPG_Game.Models
         public string PathToImage { get; set; }
 
         [Display(Name="Loot")]
-        public virtual ICollection<ItemLoot> ItemLoots { get; set; }
+        public virtual List<ItemLoot> ItemLoots { get; set; }
         public virtual Location Location { get; set; }
     }
 }

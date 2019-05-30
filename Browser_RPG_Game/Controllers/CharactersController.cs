@@ -76,7 +76,7 @@ namespace Browser_RPG_Game.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(character.HelmetID == -1)
+                if (character.HelmetID == -1)
                 {
                     character.HelmetID = null;
                 }
@@ -165,10 +165,12 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Login,ProfileTypeID,Name,Level,Experience,ExperienceMax,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,HelmetID,ArmorID,GlovesID,BootsID,WeaponID,ShieldID,CharacterImageID,SawmillID,BrickyardID,IronworksID,Damage,Defense")] Character character)
+        public ActionResult Edit(int id)
         {
+            Character character = db.Characters.Find(id);
             if (ModelState.IsValid)
             {
+                UpdateModel(character);
                 if (character.HelmetID == -1)
                 {
                     character.HelmetID = null;
@@ -194,7 +196,6 @@ namespace Browser_RPG_Game.Controllers
                     character.ShieldID = null;
                 }
 
-                db.Entry(character).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

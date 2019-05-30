@@ -79,11 +79,12 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,PathToImage")] CharacterImage characterImage)
+        public ActionResult Edit(int id)
         {
+            CharacterImage characterImage = db.CharacterImages.Find(id);
             if (ModelState.IsValid)
             {
-                db.Entry(characterImage).State = EntityState.Modified;
+                UpdateModel(characterImage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

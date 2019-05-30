@@ -79,11 +79,12 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Value")] Config config)
+        public ActionResult Edit(int id)
         {
+            Config config = db.Configs.Find(id);
             if (ModelState.IsValid)
             {
-                db.Entry(config).State = EntityState.Modified;
+                UpdateModel(config);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

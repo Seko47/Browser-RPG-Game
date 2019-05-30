@@ -84,11 +84,12 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,BuildingID,Level,Storage,StorageMax,LastUpdate")] CharacterBuildings characterBuildings)
+        public ActionResult Edit(int id)
         {
+            CharacterBuildings characterBuildings = db.CharacterBuildings.Find(id);
             if (ModelState.IsValid)
             {
-                db.Entry(characterBuildings).State = EntityState.Modified;
+                UpdateModel(characterBuildings);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

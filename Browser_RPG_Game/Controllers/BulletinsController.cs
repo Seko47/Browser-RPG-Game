@@ -84,12 +84,12 @@ namespace Browser_RPG_Game.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CharacterID,Title,Contents,Date")] Bulletin bulletin)
+        public ActionResult Edit(int id)
         {
+            Bulletin bulletin = db.Bulletins.Find(id);
             if (ModelState.IsValid)
             {
-                bulletin.Date = DateTime.Now;
-                db.Entry(bulletin).State = EntityState.Modified;
+                UpdateModel(bulletin);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
