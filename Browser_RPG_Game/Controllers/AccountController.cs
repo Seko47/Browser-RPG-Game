@@ -211,6 +211,8 @@ namespace Browser_RPG_Game.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    Utils.MailUtils.SendMail(model.Email, "Witaj w grze", "Od teraz możesz grać!");
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
