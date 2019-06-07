@@ -16,6 +16,7 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Bulletins
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
             var bulletins = db.Bulletins.Include(b => b.Character);
@@ -23,6 +24,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Bulletins/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Bulletins/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             ViewBag.CharacterID = new SelectList(db.Characters, "ID", "Login");
@@ -47,6 +50,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Bulletins/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,CharacterID,Title,Contents,Date")] Bulletin bulletin)
@@ -64,6 +68,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Bulletins/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +87,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Bulletins/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id)
@@ -98,6 +104,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Bulletins/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +120,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: Bulletins/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

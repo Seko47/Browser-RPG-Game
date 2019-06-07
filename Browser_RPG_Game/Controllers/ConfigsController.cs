@@ -16,12 +16,14 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Configs
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
             return View(db.Configs.ToList());
         }
 
         // GET: Configs/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Configs/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             return View();
@@ -45,6 +48,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Configs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Value")] Config config)
@@ -60,6 +64,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Configs/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,6 +82,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Configs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id)
@@ -92,6 +98,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Configs/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: Configs/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

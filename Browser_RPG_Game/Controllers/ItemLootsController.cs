@@ -16,6 +16,7 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: ItemLoots
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
             var itemLoots = db.ItemLoots.Include(i => i.Enemy).Include(i => i.Item);
@@ -23,6 +24,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: ItemLoots/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: ItemLoots/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             ViewBag.EnemyID = new SelectList(db.Enemies, "ID", "Name");
@@ -48,6 +51,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: ItemLoots/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,EnemyID,ItemID,DropChance")] ItemLoot itemLoot)
@@ -65,6 +69,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: ItemLoots/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +89,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: ItemLoots/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,EnemyID,ItemID,DropChance")] ItemLoot itemLoot)
@@ -100,6 +106,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: ItemLoots/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -115,6 +122,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: ItemLoots/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

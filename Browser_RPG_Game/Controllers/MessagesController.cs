@@ -16,6 +16,7 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Messages
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
             var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender);
@@ -23,6 +24,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Messages/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Messages/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             ViewBag.ReceiverID = new SelectList(db.Characters, "ID", "Login");
@@ -48,6 +51,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Messages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SenderID,ReceiverID,Title,Content,Readed")] Message message)
@@ -66,6 +70,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Messages/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,6 +90,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Messages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,SenderID,ReceiverID,Title,Content,Readed")] Message message)
@@ -102,6 +108,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Messages/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +124,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: Messages/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

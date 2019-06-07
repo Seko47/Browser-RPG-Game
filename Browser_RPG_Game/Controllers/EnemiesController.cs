@@ -16,6 +16,7 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Enemies
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
             var enemies = db.Enemies.Include(e => e.Location);
@@ -23,6 +24,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Enemies/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Enemies/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             ViewBag.LocationID = new SelectList(db.Locations, "ID", "Name");
@@ -48,6 +51,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Enemies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Level,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,Damage,Defense,Experience,Money,LocationID,PathToImage")] Enemy enemy, int[] ItemsID)
@@ -70,6 +74,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Enemies/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,6 +94,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Enemies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Level,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,Damage,Defense,Experience,Money,LocationID,PathToImage")] Enemy enemy, int[] ItemsID)
@@ -116,6 +122,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Enemies/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,6 +138,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: Enemies/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -17,6 +17,7 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Items
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -92,6 +93,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Items/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -107,6 +109,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Items/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             ViewBag.ItemTypeID = new SelectList(db.ItemTypes, "ID", "Name");
@@ -116,6 +119,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Items/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ItemTypeID,Name,Level,Damage,Defense,Value,PathToImage")] Item item)
@@ -132,6 +136,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Items/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -150,6 +155,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Items/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ItemTypeID,Name,Level,Damage,Defense,Value,PathToImage")] Item item)
@@ -165,6 +171,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -180,6 +187,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: Items/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

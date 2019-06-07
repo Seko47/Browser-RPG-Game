@@ -16,6 +16,7 @@ namespace Browser_RPG_Game.Controllers
         private GameContext db = new GameContext();
 
         // GET: Characters
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
             var characters = db.Characters.Include(c => c.Armor).Include(c => c.Boots).Include(c => c.Brickyard).Include(c => c.CharacterImage).Include(c => c.Gloves).Include(c => c.Helmet).Include(c => c.Ironworks).Include(c => c.ProfileType).Include(c => c.Sawmill).Include(c => c.Shield).Include(c => c.Weapon);
@@ -23,6 +24,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Characters/Details/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Characters/Create
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
             Item blankItem = new Item { ID = -1, Name = "Brak" };
@@ -70,6 +73,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Characters/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Login,ProfileTypeID,Name,Level,Experience,ExperienceMax,Health,HealthMax,Strength,Dexterity,Intelligence,Luck,HelmetID,ArmorID,GlovesID,BootsID,WeaponID,ShieldID,CharacterImageID,SawmillID,BrickyardID,IronworksID,Damage,Defense")] Character character)
@@ -120,6 +124,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Characters/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -163,6 +168,7 @@ namespace Browser_RPG_Game.Controllers
         // POST: Characters/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id)
@@ -214,6 +220,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // GET: Characters/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -229,6 +236,7 @@ namespace Browser_RPG_Game.Controllers
         }
 
         // POST: Characters/Delete/5
+        [Authorize(Roles = "ADMIN")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
