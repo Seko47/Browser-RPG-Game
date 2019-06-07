@@ -174,6 +174,30 @@ namespace Browser_RPG_Game.Controllers
                         Intelligence = 1,
                         Luck = 1,
                         CharacterImage = db.CharacterImages.Single(c=>c.ID == 2),
+                        Sawmill = new CharacterBuildings
+                        {
+                            Building = db.Buildings.Single(building => building.Name == "tartak"),
+                            LastUpdate = DateTime.Now,
+                            Level = 0,
+                            Storage = 0,
+                            StorageMax = 100
+                        },
+                        Brickyard = new CharacterBuildings
+                        {
+                            Building = db.Buildings.Single(building => building.Name == "cegielnia"),
+                            LastUpdate = DateTime.Now,
+                            Level = 0,
+                            Storage = 0,
+                            StorageMax = 100
+                        },
+                        Ironworks = new CharacterBuildings
+                        {
+                            Building = db.Buildings.Single(building => building.Name == "huta żelaza"),
+                            LastUpdate = DateTime.Now,
+                            Level = 0,
+                            Storage = 0,
+                            StorageMax = 100
+                        },
                         Weapon = db.Items.Single(i => i.Name == "Uszczerbany miecz"),
                         Shield = db.Items.Single(i => i.Name == "Żelazna tarcza")
                     };
