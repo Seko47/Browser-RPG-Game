@@ -49,6 +49,9 @@ namespace Browser_RPG_Game.Models
         [Required]
         [Range(0, 1000)]
         public int Luck { get; set; }
+        [Required]
+        [Range(0, int.MaxValue)]
+        public int Gold { get; set; }
         public int? HelmetID { get; set; }
         public int? ArmorID { get; set; }
         public int? GlovesID { get; set; }
@@ -88,7 +91,7 @@ namespace Browser_RPG_Game.Models
         public virtual CharacterBuildings Sawmill { get; set; }
         public virtual CharacterBuildings Brickyard { get; set; }
         public virtual CharacterBuildings Ironworks { get; set; }
-        [Display(Name="Profile type")]
+        [Display(Name = "Profile type")]
         public virtual ProfileType ProfileType { get; set; }
         public virtual ICollection<Message> SendedMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
