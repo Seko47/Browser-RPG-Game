@@ -75,7 +75,8 @@
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Dodaj linki do sklepu, karczmy itp itd", "About", "Home")</li>
+                        <li>@Html.ActionLink("Sklep", "Index", "Store")</li>
+                        <li>@Html.ActionLink("Dodaj linki do karczmy itp itd", "About", "Home")</li>
                     }
                     @if (Context.User.IsInRole("ADMIN"))
                     {

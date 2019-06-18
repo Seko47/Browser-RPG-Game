@@ -190,6 +190,7 @@
     <Compile Include="Controllers\MaterialsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\ProfileTypesController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="DAL\GameContext.cs" />
     <Compile Include="DAL\GameInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,6 +199,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Building.cs" />
     <Compile Include="Models\CharacterImage.cs" />
+    <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\CharacterBuildings.cs" />
     <Compile Include="Models\Bulletin.cs" />
@@ -343,6 +345,7 @@
     <Content Include="Views\ItemLoots\Details.cshtml" />
     <Content Include="Views\ItemLoots\Edit.cshtml" />
     <Content Include="Views\ItemLoots\Index.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

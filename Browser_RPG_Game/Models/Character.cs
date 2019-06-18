@@ -109,7 +109,6 @@ namespace Browser_RPG_Game.Models
 
         public void AddItemToEquipment(Item item)
         {
-
             if (HasItemInInventoryById(item.ID))
             {
                 ++Equipments.Single(e => e.Item.ID == item.ID).Quantity;

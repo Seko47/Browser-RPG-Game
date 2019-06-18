@@ -1,0 +1,239 @@
+﻿@model IEnumerable<Browser_RPG_Game.Models.Item>
+
+@{
+    ViewBag.Title = "Sklep";
+}
+
+<h2>Sklep</h2>
+
+<div class="row center-block">
+    <div class="col-sm-6">
+        <div class="card-deck" style="padding-right: 50px; height: 500px; overflow-y: auto; overflow-x: hidden">
+            @foreach (var item in Model.ToList())
+            {
+                <div class="dropdown col-sm-4">
+                    <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@item.PathToImage" alt="Item image" />
+
+                    @if (item.Defense > 0)
+                    {
+                        <div class="dropdown-content">
+                            @item.Name <br />
+                            Poziom: @item.Level<br />
+                            Obrona: @item.Defense<br />
+                            Wartość: @(item.Value * (2 - (ViewBag.Character.Intelligence / 1000)))
+                            @Html.ActionLink("Kup", "Buy", "Store", new { id = @item.ID }, null)
+                        </div>
+                    }
+                    else if (item.Damage > 0)
+                    {
+                        <div class="dropdown-content">
+                            @item.Name <br />
+                            Poziom: @item.Level<br />
+                            Obrażenia: @item.Damage<br />
+                            Wartość: @(item.Value * (2 - (ViewBag.Character.Intelligence / 1000)))
+                            @Html.ActionLink("Kup", "Buy", "Store", new { id = @item.ID }, null)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown-content">
+                            @item.Name <br />
+                            Wartość: @(item.Value * (2 - (ViewBag.Character.Intelligence / 1000)))
+                            @Html.ActionLink("Kup", "Buy", "Store", new { id = @item.ID }, null)
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <h2 class="text-center">Wyposażenie</h2>
+        </div>
+        <div class="row center-block">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                @if (ViewBag.Character.Helmet == null)
+                {
+                    <div>
+                        <img src="https://cdn4.iconfinder.com/data/icons/video-game-equipment.Items-concepts/128/armor-helmet-spartan-512.png" style="width: 40px; height: 40px" />
+                    </div>
+                }
+                else
+                {
+                    <div class="dropdown">
+                        <img src="@ViewBag.Character.Helmet.PathToImage" style="width: 60px; height: 60px" />
+
+                        <div class="dropdown-content">
+                            @ViewBag.Character.Helmet.Name <br />
+                            Poziom: @ViewBag.Character.Helmet.Level<br />
+                            Obrona: @ViewBag.Character.Helmet.Defense <br />
+                            Wartość: @(ViewBag.Character.Helmet.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="row center-block">
+            @if (ViewBag.Character.Weapon == null)
+            {
+                <div class="col-sm-4">
+                    <img src="https://image.flaticon.com/icons/png/512/95/95606.png" style="width: 40px; height: 40px" />
+                </div>
+            }
+            else
+            {
+                <div class="dropdown col-sm-4">
+                    <img src="@ViewBag.Character.Weapon.PathToImage" style="width: 60px; height: 60px" />
+
+                    <div class="dropdown-content">
+                        @ViewBag.Character.Weapon.Name <br />
+                        Poziom: @ViewBag.Character.Weapon.Level<br />
+                        Obrażenia: @ViewBag.Character.Weapon.Damage <br />
+                        Wartość: @(ViewBag.Character.Weapon.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                    </div>
+                </div>
+            }
+
+            @if (ViewBag.Character.Armor == null)
+            {
+                <div class="col-sm-4">
+                    <img src="https://cdn4.iconfinder.com/data/icons/video-game-equipment.Items-concepts/128/armor-vest-512.png" style="width: 40px; height: 40px" />
+                </div>
+            }
+            else
+            {
+                <div class="dropdown col-sm-4">
+                    <img src="@ViewBag.Character.Armor.PathToImage" style="width: 60px; height: 60px" />
+
+                    <div class="dropdown-content">
+                        @ViewBag.Character.Armor.Name <br />
+                        Poziom: @ViewBag.Character.Armor.Level<br />
+                        Obrona: @ViewBag.Character.Armor.Defense <br />
+                        Wartość: @(ViewBag.Character.Armor.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                    </div>
+                </div>
+            }
+
+            @if (ViewBag.Character.Shield == null)
+            {
+                <div class="col-sm-4">
+                    <img src="https://www.freeiconspng.com/uploads/shield-png-16.png" style="width: 40px; height: 40px" />
+                </div>
+            }
+            else
+            {
+                <div class="dropdown col-sm-4">
+                    <img src="@ViewBag.Character.Shield.PathToImage" style="width: 60px; height: 60px" />
+
+                    <div class="dropdown-content">
+                        @ViewBag.Character.Shield.Name <br />
+                        Poziom: @ViewBag.Character.Shield.Level<br />
+                        Obrona: @ViewBag.Character.Shield.Defense <br />
+                        Wartość: @(ViewBag.Character.Shield.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row center-block">
+            @if (ViewBag.Character.Gloves == null)
+            {
+                <div class="col-sm-4">
+                    <img src="https://1001freedownloads.s3.amazonaws.com/vector/thumb/111673/gauntlet.png" style="width: 40px; height: 40px" />
+                </div>
+            }
+            else
+            {
+                <div class="dropdown col-sm-4">
+                    <img src="@ViewBag.Character.Gloves.PathToImage" style="width: 60px; height: 60px" />
+
+                    <div class="dropdown-content">
+                        @ViewBag.Character.Gloves.Name <br />
+                        Poziom: @ViewBag.Character.Gloves.Level<br />
+                        Obrona: @ViewBag.Character.Gloves.Defense <br />
+                        Wartość: @(ViewBag.Character.Gloves.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                    </div>
+                </div>
+            }
+
+            @if (ViewBag.Character.Boots == null)
+            {
+                <div class="col-sm-4">
+                    <img src="https://cdn2.iconfinder.com/data/icons/rpg-fantasy-game-basic-ui/512/equipment_costume_armor_boot_foot_metal_knight_warrior_protection_leg_2-512.png" style="width: 40px; height: 40px" />
+                </div>
+            }
+            else
+            {
+                <div class="dropdown col-sm-4">
+                    <img src="@ViewBag.Character.Boots.PathToImage" style="width: 60px; height: 60px" />
+
+                    <div class="dropdown-content">
+                        @ViewBag.Character.Boots.Name <br />
+                        Poziom: @ViewBag.Character.Boots.Level<br />
+                        Obrona: @ViewBag.Character.Boots.Defense <br />
+                        Wartość: @(ViewBag.Character.Boots.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                    </div>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <h2 class="text-center">Ekwipunek</h2>
+                </div>
+                @if (@ViewBag.Character.Equipments.Count > 0)
+                {
+                    <div class="card-deck">
+                        @foreach (var equipment in @ViewBag.Character.Equipments)
+                        {
+                            for (int i = 0; i < equipment.Quantity; ++i)
+                            {
+                                <div class="dropdown col-sm-4">
+                                    <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@equipment.Item.PathToImage" alt="Item image" />
+
+                                    @if (equipment.Item.Defense > 0)
+                                    {
+                                        <div class="dropdown-content">
+                                            @equipment.Item.Name<br />
+                                            Poziom: @equipment.Item.Level<br />
+                                            Obrona: @equipment.Item.Defense<br />
+                                            Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            @Html.ActionLink("Sprzedaj", "Sell", "Store", new { id = @equipment.Item.ID }, null)
+                                        </div>
+                                    }
+                                    else if (equipment.Item.Damage > 0)
+                                    {
+                                        <div class="dropdown-content">
+                                            @equipment.Item.Name <br />
+                                            Poziom: @equipment.Item.Level<br />
+                                            Obrażenia: @equipment.Item.Damage<br />
+                                            Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            @Html.ActionLink("Sprzedaj", "Sell", "Store", new { id = @equipment.Item.ID }, null)
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="dropdown-content">
+                                            @equipment.Item.Name <br />
+                                            Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            @Html.ActionLink("Sprzedaj", "Sell", "Store", new { id = @equipment.Item.ID }, null)
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+                else
+                {
+                    <label class="center-block text-center">Brak przedmiotów</label>
+                }
+                <div class="row col-sm-12">
+                    <h5 class="text-center">Złoto: @ViewBag.Character.Gold <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" /></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
