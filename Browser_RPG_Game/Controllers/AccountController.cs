@@ -23,7 +23,7 @@ namespace Browser_RPG_Game.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +35,9 @@ namespace Browser_RPG_Game.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -121,7 +121,7 @@ namespace Browser_RPG_Game.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -156,7 +156,7 @@ namespace Browser_RPG_Game.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     GameContext db = new GameContext();
                     Character character = new Character
@@ -173,7 +173,9 @@ namespace Browser_RPG_Game.Controllers
                         Dexterity = 1,
                         Intelligence = 1,
                         Luck = 1,
-                        CharacterImage = db.CharacterImages.Single(c=>c.ID == 2),
+                        CharacterImage = db.CharacterImages.Single(c => c.ID == 2),
+                        Gold = 0,
+                        NextExpedition = DateTime.Now.Subtract(TimeSpan.FromDays(1)),
                         Sawmill = new CharacterBuildings
                         {
                             Building = db.Buildings.Single(building => building.Name == "tartak"),
