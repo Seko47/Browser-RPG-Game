@@ -71,7 +71,6 @@ namespace Browser_RPG_Game.Models
                 if (Weapon != null) dmg += Weapon.Damage;
                 return dmg;
             }
-            private set { damage = value; }
         }
         public int Defense
         {
@@ -85,7 +84,196 @@ namespace Browser_RPG_Game.Models
                 if (Shield != null) dfn += Shield.Defense;
                 return dfn;
             }
-            private set { defense = value; }
+        }
+
+        public Boolean HasItemById(int id)
+        {
+            return HasItemInInventoryById(id) || HasEquippedItemByID(id);
+        }
+
+        public Boolean HasItemInInventoryById(int id)
+        {
+            return Items.FirstOrDefault(i => i.ID == id) != null;
+        }
+
+        public Boolean HasEquippedItemByID(int id)
+        {
+            return HelmetID == id
+                || WeaponID == id
+                || ArmorID == id
+                || GlovesID == id
+                || BootsID == id
+                || ShieldID == id;
+        }
+
+        public Boolean TakeOffItem(int id)
+        {
+            if (HelmetID == id)
+            {
+                Items.Add(Helmet);
+                Helmet = null;
+
+                return true;
+            }
+            else if (WeaponID == id)
+            {
+                Items.Add(Weapon);
+                Weapon = null;
+
+                return true;
+            }
+            else if (ArmorID == id)
+            {
+                Items.Add(Armor);
+                Armor = null;
+
+                return true;
+            }
+            else if (GlovesID == id)
+            {
+                Items.Add(Gloves);
+                Gloves = null;
+
+                return true;
+            }
+            else if (BootsID == id)
+            {
+                Items.Add(Boots);
+                Boots = null;
+
+                return true;
+            }
+            else if (ShieldID == id)
+            {
+                Items.Add(Shield);
+                Shield = null;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public Boolean PutOnItem(int id)
+        {
+            Item item = Items.FirstOrDefault(i => i.ID == id);
+            if(item == null)
+            {
+                return false;
+            }
+
+            if(item.ItemType.Name == "weapon")
+            {
+                if(Weapon != null)
+                {
+                    TakeOffItem(Weapon.ID);
+                }
+
+                Weapon = item;
+
+                Items.Remove(item);
+
+                return true;
+            }
+            else if (item.ItemType.Name == "shield")
+            {
+                if (Shield != null)
+                {
+                    TakeOffItem(Shield.ID);
+                }
+
+                Shield = item;
+
+                Items.Remove(item);
+
+                return true;
+            }
+            else if (item.ItemType.Name == "helmet")
+            {
+                if (Helmet != null)
+                {
+                    TakeOffItem(Helmet.ID);
+                }
+
+                Helmet = item;
+
+                Items.Remove(item);
+
+                return true;
+            }
+            else if (item.ItemType.Name == "armor")
+            {
+                if (Armor != null)
+                {
+                    TakeOffItem(Armor.ID);
+                }
+
+                Armor = item;
+
+                Items.Remove(item);
+
+                return true;
+            }
+            else if (item.ItemType.Name == "gloves")
+            {
+                if (Gloves != null)
+                {
+                    TakeOffItem(Gloves.ID);
+                }
+
+                Gloves = item;
+
+                Items.Remove(item);
+
+                return true;
+            }
+            else if (item.ItemType.Name == "boots")
+            {
+                if (Boots != null)
+                {
+                    TakeOffItem(Boots.ID);
+                }
+
+                Boots = item;
+
+                Items.Remove(item);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public int StrengthCost
+        {
+            get
+            {
+                return (int)((Strength + Level) * 3.5);
+            }
+        }
+        
+        public int DexterityCost
+        {
+            get
+            {
+                return (int)((Dexterity + Level) * 2.9);
+            }
+        }
+        
+        public int IntelligenceCost
+        {
+            get
+            {
+                return (int)((Intelligence + Level) * 2.3);
+            }
+        }
+        
+        public int LuckCost
+        {
+            get
+            {
+                return (int)((Luck + Level) * 1.7);
+            }
         }
 
         public virtual CharacterBuildings Sawmill { get; set; }
@@ -105,3 +293,4 @@ namespace Browser_RPG_Game.Models
         public virtual CharacterImage CharacterImage { get; set; }
     }
 }
+ 

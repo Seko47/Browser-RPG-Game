@@ -56,13 +56,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Game", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (!Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Game", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Postać", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Dodaj linki do sklepu, karczmy itp itd", "About", "Home")</li>
+                    }
                     @if (Context.User.IsInRole("ADMIN"))
                     {
                         <li class="dropdown">
@@ -83,8 +97,8 @@
                                 @Html.ActionLink("Messages", "Index", "Messages")
                                 @Html.ActionLink("Profile types", "Index", "ProfileTypes")
                             </div>
-                    </li>
-                }
+                        </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
