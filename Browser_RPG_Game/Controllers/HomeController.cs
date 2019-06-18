@@ -123,9 +123,9 @@ namespace Browser_RPG_Game.Controllers
             {
                 character.Gold -= character.StrengthCost;
                 ++character.Strength;
-            }
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
@@ -141,9 +141,9 @@ namespace Browser_RPG_Game.Controllers
             {
                 character.Gold -= character.DexterityCost;
                 ++character.Dexterity;
-            }
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
@@ -159,9 +159,9 @@ namespace Browser_RPG_Game.Controllers
             {
                 character.Gold -= character.IntelligenceCost;
                 ++character.Intelligence;
-            }
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
@@ -177,9 +177,9 @@ namespace Browser_RPG_Game.Controllers
             {
                 character.Gold -= character.LuckCost;
                 ++character.Luck;
-            }
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
