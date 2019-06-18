@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Browser_RPG_Game.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -93,7 +94,7 @@ namespace Browser_RPG_Game.Models
 
         public Boolean HasItemInInventoryById(int id)
         {
-            return Items.FirstOrDefault(i => i.ID == id) != null;
+            return Equipments.FirstOrDefault(i => i.Item.ID == id) != null;
         }
 
         public Boolean HasEquippedItemByID(int id)
@@ -106,46 +107,85 @@ namespace Browser_RPG_Game.Models
                 || ShieldID == id;
         }
 
+        public void AddItemToEquipment(Item item)
+        {
+
+            if (HasItemInInventoryById(item.ID))
+            {
+                ++Equipments.Single(e => e.Item.ID == item.ID).Quantity;
+            }
+            else
+            {
+                Equipments.Add(new Equipment
+                {
+                    CharacterID = ID,
+                    Item = item,
+                    Quantity = 1
+                });
+            }
+        }
+
+        public Boolean RemoveItemFromEquipment(Item item)
+        {
+            if (!HasItemInInventoryById(item.ID))
+            {
+                return false;
+            }
+
+            if (Equipments.Single(e=>e.Item.ID == item.ID).Quantity > 1)
+            {
+                --Equipments.Single(e => e.Item.ID == item.ID).Quantity;
+            }
+            else
+            {
+                GameContext db = new GameContext();
+                db.Equipments.Remove(db.Equipments.Single(e => e.CharacterID == ID && e.ItemID == item.ID));
+                db.SaveChanges();
+            }
+
+            return true;
+        }
+
         public Boolean TakeOffItem(int id)
         {
             if (HelmetID == id)
             {
-                Items.Add(Helmet);
+                AddItemToEquipment(Helmet);
                 Helmet = null;
 
                 return true;
             }
             else if (WeaponID == id)
             {
-                Items.Add(Weapon);
+                AddItemToEquipment(Weapon);
                 Weapon = null;
 
                 return true;
             }
             else if (ArmorID == id)
             {
-                Items.Add(Armor);
+                AddItemToEquipment(Armor);
                 Armor = null;
 
                 return true;
             }
             else if (GlovesID == id)
             {
-                Items.Add(Gloves);
+                AddItemToEquipment(Gloves);
                 Gloves = null;
 
                 return true;
             }
             else if (BootsID == id)
             {
-                Items.Add(Boots);
+                AddItemToEquipment(Boots);
                 Boots = null;
 
                 return true;
             }
             else if (ShieldID == id)
             {
-                Items.Add(Shield);
+                AddItemToEquipment(Shield);
                 Shield = null;
 
                 return true;
@@ -156,22 +196,23 @@ namespace Browser_RPG_Game.Models
 
         public Boolean PutOnItem(int id)
         {
-            Item item = Items.FirstOrDefault(i => i.ID == id);
-            if(item == null)
+            Item item = Equipments.Where(i => i.Item.ID == id).Select(i=>i.Item).First();
+
+            if (item == null)
             {
                 return false;
             }
 
-            if(item.ItemType.Name == "weapon")
+            if (item.ItemType.Name == "weapon")
             {
-                if(Weapon != null)
+                if (Weapon != null)
                 {
                     TakeOffItem(Weapon.ID);
                 }
 
                 Weapon = item;
 
-                Items.Remove(item);
+                RemoveItemFromEquipment (item);
 
                 return true;
             }
@@ -184,7 +225,7 @@ namespace Browser_RPG_Game.Models
 
                 Shield = item;
 
-                Items.Remove(item);
+                RemoveItemFromEquipment(item);
 
                 return true;
             }
@@ -197,7 +238,7 @@ namespace Browser_RPG_Game.Models
 
                 Helmet = item;
 
-                Items.Remove(item);
+                RemoveItemFromEquipment(item);
 
                 return true;
             }
@@ -210,7 +251,7 @@ namespace Browser_RPG_Game.Models
 
                 Armor = item;
 
-                Items.Remove(item);
+                RemoveItemFromEquipment(item);
 
                 return true;
             }
@@ -223,7 +264,7 @@ namespace Browser_RPG_Game.Models
 
                 Gloves = item;
 
-                Items.Remove(item);
+                RemoveItemFromEquipment(item);
 
                 return true;
             }
@@ -236,7 +277,7 @@ namespace Browser_RPG_Game.Models
 
                 Boots = item;
 
-                Items.Remove(item);
+                RemoveItemFromEquipment(item);
 
                 return true;
             }
@@ -251,7 +292,7 @@ namespace Browser_RPG_Game.Models
                 return (int)((Strength + Level) * 3.5);
             }
         }
-        
+
         public int DexterityCost
         {
             get
@@ -259,7 +300,7 @@ namespace Browser_RPG_Game.Models
                 return (int)((Dexterity + Level) * 2.9);
             }
         }
-        
+
         public int IntelligenceCost
         {
             get
@@ -267,7 +308,7 @@ namespace Browser_RPG_Game.Models
                 return (int)((Intelligence + Level) * 2.3);
             }
         }
-        
+
         public int LuckCost
         {
             get
@@ -283,7 +324,7 @@ namespace Browser_RPG_Game.Models
         public virtual ProfileType ProfileType { get; set; }
         public virtual ICollection<Message> SendedMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<Equipment> Equipments { get; set; }
         public virtual Item Helmet { get; set; }
         public virtual Item Armor { get; set; }
         public virtual Item Gloves { get; set; }
@@ -293,4 +334,3 @@ namespace Browser_RPG_Game.Models
         public virtual CharacterImage CharacterImage { get; set; }
     }
 }
- 

@@ -27,6 +27,7 @@ namespace Browser_RPG_Game.DAL
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

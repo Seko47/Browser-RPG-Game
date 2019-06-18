@@ -210,7 +210,7 @@ else
                     @if (ViewBag.Character.Helmet == null)
                     {
                         <div>
-                            <img src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-helmet-spartan-512.png" style="width: 40px; height: 40px" />
+                            <img src="https://cdn4.iconfinder.com/data/icons/video-game-equipment.Items-concepts/128/armor-helmet-spartan-512.png" style="width: 40px; height: 40px" />
                         </div>
                     }
                     else
@@ -256,7 +256,7 @@ else
                 @if (ViewBag.Character.Armor == null)
                 {
                     <div class="col-sm-4">
-                        <img src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-vest-512.png" style="width: 40px; height: 40px" />
+                        <img src="https://cdn4.iconfinder.com/data/icons/video-game-equipment.Items-concepts/128/armor-vest-512.png" style="width: 40px; height: 40px" />
                     </div>
                 }
                 else
@@ -344,42 +344,45 @@ else
                     <div class="row">
                         <h2 class="text-center">Ekwipunek</h2>
                     </div>
-                    @if (@ViewBag.Character.Items.Count > 0)
+                    @if (@ViewBag.Character.Equipments.Count > 0)
                     {
                         <div class="card-deck">
-                            @foreach (var item in @ViewBag.Character.Items)
+                            @foreach (var equipment in @ViewBag.Character.Equipments)
                             {
-                                <div class="dropdown col-sm-4">
-                                    <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@item.PathToImage" alt="Item image" />
+                                for (int i = 0; i < equipment.Quantity; ++i)
+                                {
+                                    <div class="dropdown col-sm-4">
+                                        <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@equipment.Item.PathToImage" alt="Item image" />
 
-                                    @if (item.Defense > 0)
-                                    {
-                                        <div class="dropdown-content">
-                                            @item.Name <br />
-                                            Poziom: @item.Level<br />
-                                            Obrona: @item.Defense<br />
-                                            Wartość: @(item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
-                                            @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @item.ID }, null)
-                                        </div>
-                                    }
-                                    else if (item.Damage > 0)
-                                    {
-                                        <div class="dropdown-content">
-                                            @item.Name <br />
-                                            Poziom: @item.Level<br />
-                                            Obrażenia: @item.Damage<br />
-                                            Wartość: @(item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
-                                            @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @item.ID }, null)
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="dropdown-content">
-                                            @item.Name <br />
-                                            Wartość: @(item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
-                                        </div>
-                                    }
-                                </div>
+                                        @if (equipment.Item.Defense > 0)
+                                        {
+                                            <div class="dropdown-content">
+                                                @equipment.Item.Name <br />
+                                                Poziom: @equipment.Item.Level<br />
+                                                Obrona: @equipment.Item.Defense<br />
+                                                Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                                @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, null)
+                                            </div>
+                                        }
+                                        else if (equipment.Item.Damage > 0)
+                                        {
+                                            <div class="dropdown-content">
+                                                @equipment.Item.Name <br />
+                                                Poziom: @equipment.Item.Level<br />
+                                                Obrażenia: @equipment.Item.Damage<br />
+                                                Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                                @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, null)
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="dropdown-content">
+                                                @equipment.Item.Name <br />
+                                                Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            </div>
+                                        }
+                                    </div>
+                                }
                             }
                         </div>
                     }
