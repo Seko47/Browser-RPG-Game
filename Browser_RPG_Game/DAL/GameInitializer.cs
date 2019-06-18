@@ -30,7 +30,8 @@ namespace Browser_RPG_Game.DAL
             var config = new List<Config>
             {
                 new Config{Name="EXPERIENCE_MULTIPLIER", Value="1"},
-                new Config{Name="LOOT_GOLD_DIFFERENCES", Value="5"}// lootgold = lootgold +- LOOT_GOLD_DIFFERENCES %
+                new Config{Name="LOOT_GOLD_DIFFERENCES", Value="5"},// lootgold = lootgold +- LOOT_GOLD_DIFFERENCES %
+                new Config{Name="TIME_INTERVAL_BETWEEN_EXPEDITIONS", Value="10"} //in seconds
             };
 
             config.ForEach(c => context.Configs.Add(c));
@@ -235,6 +236,8 @@ namespace Browser_RPG_Game.DAL
                 Intelligence = 1000,
                 Luck = 1000,
                 CharacterImage = characterImages[0],
+                Gold = 0,
+                NextExpedition = DateTime.Now.Subtract(TimeSpan.FromDays(1)),
                 Armor = items[68],
                 Boots = items[93],
                 Gloves = items[80],

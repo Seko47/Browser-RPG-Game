@@ -53,6 +53,7 @@ namespace Browser_RPG_Game.Models
         [Required]
         [Range(0, int.MaxValue)]
         public int Gold { get; set; }
+        public DateTime NextExpedition { get; set; }
         public int? HelmetID { get; set; }
         public int? ArmorID { get; set; }
         public int? GlovesID { get; set; }
