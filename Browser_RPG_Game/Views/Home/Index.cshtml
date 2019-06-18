@@ -220,8 +220,9 @@ else
 
                             <div class="dropdown-content">
                                 @ViewBag.Character.Helmet.Name <br />
+                                Poziom: @ViewBag.Character.Helmet.Level<br />
                                 Obrona: @ViewBag.Character.Helmet.Defense <br />
-                                Wartość: @ViewBag.Character.Helmet.Value <br />
+                                Wartość: @(ViewBag.Character.Helmet.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
                                 @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.HelmetID }, null)
 
                             </div>
@@ -244,8 +245,9 @@ else
 
                         <div class="dropdown-content">
                             @ViewBag.Character.Weapon.Name <br />
+                            Poziom: @ViewBag.Character.Weapon.Level<br />
                             Obrażenia: @ViewBag.Character.Weapon.Damage <br />
-                            Wartość: @ViewBag.Character.Weapon.Value
+                            Wartość: @(ViewBag.Character.Weapon.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.WeaponID }, null)
                         </div>
                     </div>
@@ -264,8 +266,9 @@ else
 
                         <div class="dropdown-content">
                             @ViewBag.Character.Armor.Name <br />
+                            Poziom: @ViewBag.Character.Armor.Level<br />
                             Obrona: @ViewBag.Character.Armor.Defense <br />
-                            Wartość: @ViewBag.Character.Armor.Value
+                            Wartość: @(ViewBag.Character.Armor.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ArmorID }, null)
                         </div>
                     </div>
@@ -284,8 +287,9 @@ else
 
                         <div class="dropdown-content">
                             @ViewBag.Character.Shield.Name <br />
+                            Poziom: @ViewBag.Character.Shield.Level<br />
                             Obrona: @ViewBag.Character.Shield.Defense <br />
-                            Wartość: @ViewBag.Character.Shield.Value
+                            Wartość: @(ViewBag.Character.Shield.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ShieldID }, null)
                         </div>
                     </div>
@@ -305,8 +309,9 @@ else
 
                         <div class="dropdown-content">
                             @ViewBag.Character.Gloves.Name <br />
+                            Poziom: @ViewBag.Character.Gloves.Level<br />
                             Obrona: @ViewBag.Character.Gloves.Defense <br />
-                            Wartość: @ViewBag.Character.Gloves.Value
+                            Wartość: @(ViewBag.Character.Gloves.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.GlovesID }, null)
                         </div>
                     </div>
@@ -325,8 +330,9 @@ else
 
                         <div class="dropdown-content">
                             @ViewBag.Character.Boots.Name <br />
+                            Poziom: @ViewBag.Character.Boots.Level<br />
                             Obrona: @ViewBag.Character.Boots.Defense <br />
-                            Wartość: @ViewBag.Character.Boots.Value
+                            Wartość: @(ViewBag.Character.Boots.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.BootsID }, null)
                         </div>
                     </div>
@@ -350,8 +356,9 @@ else
                                     {
                                         <div class="dropdown-content">
                                             @item.Name <br />
+                                            Poziom: @item.Level<br />
                                             Obrona: @item.Defense<br />
-                                            Wartość: @item.Value
+                                            Wartość: @(item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
                                             @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @item.ID }, null)
                                         </div>
                                     }
@@ -359,8 +366,9 @@ else
                                     {
                                         <div class="dropdown-content">
                                             @item.Name <br />
+                                            Poziom: @item.Level<br />
                                             Obrażenia: @item.Damage<br />
-                                            Wartość: @item.Value
+                                            Wartość: @(item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
                                             @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @item.ID }, null)
                                         </div>
                                     }
@@ -368,7 +376,7 @@ else
                                     {
                                         <div class="dropdown-content">
                                             @item.Name <br />
-                                            Wartość: @item.Value
+                                            Wartość: @(item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
                                         </div>
                                     }
                                 </div>
