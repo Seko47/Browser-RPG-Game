@@ -1,0 +1,89 @@
+﻿@model List<Browser_RPG_Game.Models.Character>
+
+@{
+    ViewBag.Title = "Arena";
+}
+
+<h2>Arena</h2>
+
+@if (ViewBag.TimeToTheNextFight != null)
+{
+    <label class="alert alert-info text-center">Pozostały czas do następnej walki na arenie: @ViewBag.TimeToTheNextFight</label>
+}
+else
+{
+    <div class="row">
+        <h3 class="text-center">Wylosowani przeciwnicy</h3>
+
+        <div class="row text-center" style="padding-left: 100px; padding-right:100px">
+
+            @if (Model.ToList()[0] != null)
+            {
+                <div class="dropdown col-sm-4">
+                    <a href="Arena/Attack/@Model.ToList()[0].ID">
+                        <div class="row" style="height: 100px">
+                            <img src="@Model.ToList()[0].CharacterImage.PathToImage" style="height: 100px" />
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <p>@Model.ToList()[0].Name</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-content">
+                        Poziom: @Model.ToList()[0].Level
+                    </div>
+                </div>
+            }
+            else
+            {
+                <label class="alert alert-info text-center col-sm-4">Brak słabszych zawodników</label>
+            }
+
+            @if (Model.ToList()[1] != null)
+            {
+                <div class="dropdown col-sm-4">
+                    <a href="Arena/Attack/@Model.ToList()[1].ID">
+                        <div class="row" style="height: 100px">
+                            <img src="@Model.ToList()[1].CharacterImage.PathToImage" style="height: 100px" />
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <p>@Model.ToList()[1].Name</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-content">
+                        Poziom: @Model.ToList()[1].Level
+                    </div>
+                </div>
+            }
+            else
+            {
+                <label class="alert alert-info text-center col-sm-4">Brak zawodników na Twoim poziomie</label>
+            }
+
+            @if (Model.ToList()[2] != null)
+            {
+                <div class="dropdown col-sm-4">
+                    <a href="Arena/Attack/@Model.ToList()[2].ID">
+                        <div class="row" style="height: 100px">
+                            <img src="@Model.ToList()[2].CharacterImage.PathToImage" style="height: 100px" />
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <p>@Model.ToList()[2].Name</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-content">
+                        Poziom: @Model.ToList()[2].Level
+                    </div>
+                </div>
+            }
+            else
+            {
+                <label class="alert alert-info text-center col-sm-4">Brak silniejszych zawodników</label>
+            }
+
+        </div>
+    </div>
+    <br />
+}

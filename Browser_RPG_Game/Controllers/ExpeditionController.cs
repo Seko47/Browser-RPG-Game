@@ -79,10 +79,10 @@ namespace Browser_RPG_Game.Controllers
             int luckSum = character.Luck + enemy.Luck;
 
             int characterDoubleAttackChance = character.Luck * 100 / luckSum;
-            int enemyDoubleAttackChance = 100 - characterDoubleAttackChance;
+            int enemyDoubleAttackChance = enemy.Luck * 100 / luckSum;
 
             int characterDefenseChance = character.Dexterity * 100 / dexteritySum;
-            int enemyDefenseChance = 100 - characterDefenseChance;
+            int enemyDefenseChance = enemy.Dexterity * 100 / dexteritySum;
 
             int characterChanceToBreakEnemyDefense = character.Strength * 100 / strengthSum;
             int enemyChanceToBreakCharacterDefense = enemy.Strength * 100 / strengthSum;
@@ -98,163 +98,233 @@ namespace Browser_RPG_Game.Controllers
                 enemyDamage = 0;
             }
 
-            if (characterDamage != 0 || enemyDamage != 0)
+            //if (characterDamage != 0 || enemyDamage != 0)
+            //{
+            do
             {
-                do
+                Battle battle = new Battle
                 {
-                    Battle battle = new Battle
-                    {
-                        CharacterIsAttacker = true,
-                        CharacterHP = character.Health,
-                        EnemyHP = enemy.Health
-                    };
+                    CharacterIsAttacker = true,
+                    CharacterHP = character.Health,
+                    EnemyHP = enemy.Health,
+                    CriticalAttack = false
+                };
 
-                    //Pierwszy atakuje gracz
-                    //pierwszy atak
-                    //obliczenie szansy na obronę przeciwnika
-                    if (enemyDefenseChance < rand.Next(101))
-                    {
-                        battle.DefendedAttack = false;
-                        battle.BrokenDefense = false;
+                //Pierwszy atakuje gracz
+                //pierwszy atak
+                //obliczenie szansy na obronę przeciwnika
+                if (enemyDefenseChance < rand.Next(101))
+                {
+                    battle.DefendedAttack = false;
+                    battle.BrokenDefense = false;
 
+                    if (characterDamage > 0)
+                    {
                         battle.InflictedDamage = characterDamage;
-                        battle.EnemyHP = enemy.Hurt(characterDamage);
+                        battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
 
                         if (characterDoubleAttackChance >= rand.Next(101))
                         {
                             battle.DoubleAttack = true;
-                            battle.EnemyHP = enemy.Hurt(characterDamage);
+                            battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
                         }
                         else
                         {
                             battle.DoubleAttack = false;
                         }
                     }
-                    else
+                    else //Jeśli obrażenia == 0 ale pomoże szczęście to
                     {
-                        battle.DefendedAttack = true;
-
-                        if (characterChanceToBreakEnemyDefense >= rand.Next(101))
+                        if (characterDoubleAttackChance >= rand.Next(101))
                         {
-                            battle.BrokenDefense = true;
+                            battle.CriticalAttack = true;
+                            battle.InflictedDamage = character.Damage;
+                            battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
+                        }
+                        else
+                        {
+                            battle.InflictedDamage = characterDamage;
+                            battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
+                        }
+                    }
+                }
+                else
+                {
+                    battle.DefendedAttack = true;
 
-                            battle.InflictedDamage = characterDamage / 2;
-                            battle.EnemyHP = enemy.Hurt(characterDamage / 2);
+                    if (characterChanceToBreakEnemyDefense >= rand.Next(101))
+                    {
+                        battle.BrokenDefense = true;
+
+                        if (characterDamage > 0)
+                        {
+                            battle.InflictedDamage = (int)((double)characterDamage / (double)2);
+                            battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
 
                             if (characterDoubleAttackChance >= rand.Next(101))
                             {
                                 battle.DoubleAttack = true;
-                                battle.EnemyHP = enemy.Hurt(characterDamage / 2);
+                                battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
                             }
                             else
                             {
                                 battle.DoubleAttack = false;
                             }
                         }
-                        else
+                        else //Jeśli obrażenia == 0 ale pomoże szczęście to
                         {
-                            battle.BrokenDefense = false;
+                            if (characterDoubleAttackChance >= rand.Next(101))
+                            {
+                                battle.CriticalAttack = true;
+                                battle.InflictedDamage = (int)((double)character.Damage / (double)2);
+                                battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
+                            }
+                            else
+                            {
+                                battle.InflictedDamage = (int)((double)characterDamage / (double)2);
+                                battle.EnemyHP = enemy.Hurt(battle.InflictedDamage);
+                            }
                         }
-                    }
-
-                    if (!enemy.IsAlive())
-                    {
-                        battleReport.CharacterWin = true;
-
-                        character.WinBattle(battleReport.Loots, battleReport.Experience, battleReport.Gold);
-
-                        battleReport.Add(battle);
-
-                        break;
                     }
                     else
                     {
-                        battleReport.Add(battle);
-                    }
-
-                    //Drugi atakuje przeciwnik
-                    battle = new Battle
-                    {
-                        CharacterIsAttacker = false,
-                        CharacterHP = character.Health,
-                        EnemyHP = enemy.Health
-                    };
-
-                    //Drugi atakuje przeciwnik
-                    //pierwszy atak
-                    //obliczenie szansy na obronę gracza
-                    if (characterDefenseChance < rand.Next(101))
-                    {
-                        battle.DefendedAttack = false;
                         battle.BrokenDefense = false;
+                    }
+                }
 
+                if (!enemy.IsAlive())
+                {
+                    battleReport.CharacterWin = true;
+
+                    character.WinBattle(battleReport.Loots, battleReport.Experience, battleReport.Gold);
+
+                    battleReport.Add(battle);
+
+                    break;
+                }
+                else
+                {
+                    battleReport.Add(battle);
+                }
+
+                //Drugi atakuje przeciwnik
+                battle = new Battle
+                {
+                    CharacterIsAttacker = false,
+                    CharacterHP = character.Health,
+                    EnemyHP = enemy.Health,
+                    CriticalAttack = false
+                };
+
+                //Drugi atakuje przeciwnik
+                //pierwszy atak
+                //obliczenie szansy na obronę gracza
+                if (characterDefenseChance < rand.Next(101))
+                {
+                    battle.DefendedAttack = false;
+                    battle.BrokenDefense = false;
+
+                    if (enemyDamage > 0)
+                    {
                         battle.InflictedDamage = enemyDamage;
-                        battle.CharacterHP = character.Hurt(enemyDamage);
+                        battle.CharacterHP = character.Hurt(battle.InflictedDamage);
 
                         if (enemyDoubleAttackChance >= rand.Next(101))
                         {
                             battle.DoubleAttack = true;
-                            battle.CharacterHP = character.Hurt(enemyDamage);
+                            battle.CharacterHP = character.Hurt(battle.InflictedDamage);
                         }
                         else
                         {
                             battle.DoubleAttack = false;
                         }
                     }
-                    else
+                    else //Jeśli obrażenia == 0 ale pomoże szczęście to
                     {
-                        battle.DefendedAttack = true;
-
-                        if (enemyChanceToBreakCharacterDefense >= rand.Next(101))
+                        if (enemyDoubleAttackChance >= rand.Next(101))
                         {
-                            battle.BrokenDefense = true;
+                            battle.CriticalAttack = true;
+                            battle.InflictedDamage = enemy.Damage;
+                            battle.CharacterHP = character.Hurt(battle.InflictedDamage);
+                        }
+                        else
+                        {
+                            battle.InflictedDamage = enemyDamage;
+                            battle.CharacterHP = character.Hurt(battle.InflictedDamage);
+                        }
+                    }
+                }
+                else
+                {
+                    battle.DefendedAttack = true;
 
-                            battle.InflictedDamage = enemyDamage / 2;
-                            battle.CharacterHP = character.Hurt(enemyDamage / 2);
+                    if (enemyChanceToBreakCharacterDefense >= rand.Next(101))
+                    {
+                        battle.BrokenDefense = true;
+
+                        if (enemyDamage > 0)
+                        {
+                            battle.InflictedDamage = (int)((double)enemyDamage / (double)2);
+                            battle.CharacterHP = character.Hurt(battle.InflictedDamage);
 
                             if (enemyDoubleAttackChance >= rand.Next(101))
                             {
                                 battle.DoubleAttack = true;
-                                battle.CharacterHP = character.Hurt(enemyDamage / 2);
+                                battle.CharacterHP = character.Hurt(battle.InflictedDamage);
                             }
                             else
                             {
                                 battle.DoubleAttack = false;
                             }
                         }
-                        else
+                        else //Jeśli obrażenia == 0 ale pomoże szczęście to
                         {
-                            battle.BrokenDefense = false;
+                            if (enemyDoubleAttackChance >= rand.Next(101))
+                            {
+                                battle.CriticalAttack = true;
+                                battle.InflictedDamage = (int)((double)enemy.Damage / (double)2);
+                                battle.CharacterHP = character.Hurt(battle.InflictedDamage);
+                            }
+                            else
+                            {
+                                battle.InflictedDamage = (int)((double)enemyDamage / (double)2);
+                                battle.CharacterHP = character.Hurt(battle.InflictedDamage);
+                            }
                         }
-                    }
-
-                    if (!character.IsAlive())
-                    {
-                        battleReport.Experience = (int)((double)character.Experience * (double)((double)loserExperience / (double)100));
-                        if (battleReport.Experience < 0)
-                        {
-                            battleReport.Experience = 0;
-                        }
-                        battleReport.Gold = (int)((double)character.Gold * (double)((double)loserMoney / (double)100));
-                        if (battleReport.Gold < 0)
-                        {
-                            battleReport.Gold = 0;
-                        }
-
-                        battleReport.EnemyWin = true;
-                        character.LoseBattle(battleReport.Experience, battleReport.Gold);
-
-                        battleReport.Add(battle);
-
-                        break;
                     }
                     else
                     {
-                        battleReport.Add(battle);
+                        battle.BrokenDefense = false;
+                    }
+                }
+
+                if (!character.IsAlive())
+                {
+                    battleReport.Experience = (int)((double)character.Experience * (double)((double)loserExperience / (double)100));
+                    if (battleReport.Experience < 0)
+                    {
+                        battleReport.Experience = 0;
+                    }
+                    battleReport.Gold = (int)((double)character.Gold * (double)((double)loserMoney / (double)100));
+                    if (battleReport.Gold < 0)
+                    {
+                        battleReport.Gold = 0;
                     }
 
-                } while (character.IsAlive() && enemy.IsAlive());
-            }
+                    battleReport.EnemyWin = true;
+                    character.LoseBattle(battleReport.Experience, battleReport.Gold);
+
+                    battleReport.Add(battle);
+
+                    break;
+                }
+                else
+                {
+                    battleReport.Add(battle);
+                }
+
+            } while (character.IsAlive() && enemy.IsAlive());
+            //}
 
             character.Health = character.HealthMax;
             enemy.Health = enemy.HealthMax;

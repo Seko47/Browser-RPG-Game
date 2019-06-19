@@ -176,6 +176,7 @@ namespace Browser_RPG_Game.Controllers
                         CharacterImage = db.CharacterImages.Single(c => c.ID == 2),
                         Gold = 0,
                         NextExpedition = DateTime.Now.Subtract(TimeSpan.FromDays(1)),
+                        NextArenaFight = DateTime.Now.Subtract(TimeSpan.FromDays(1)),
                         Sawmill = new CharacterBuildings
                         {
                             Building = db.Buildings.Single(building => building.Name == "tartak"),

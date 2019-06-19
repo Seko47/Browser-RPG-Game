@@ -54,6 +54,7 @@ namespace Browser_RPG_Game.Models
         [Range(0, int.MaxValue)]
         public int Gold { get; set; }
         public DateTime NextExpedition { get; set; }
+        public DateTime NextArenaFight { get; set; }
         public int? HelmetID { get; set; }
         public int? ArmorID { get; set; }
         public int? GlovesID { get; set; }
@@ -71,6 +72,7 @@ namespace Browser_RPG_Game.Models
             {
                 int dmg = damage;
                 if (Weapon != null) dmg += Weapon.Damage;
+                dmg += Strength / 5;
                 return dmg;
             }
         }
@@ -79,6 +81,7 @@ namespace Browser_RPG_Game.Models
             get
             {
                 int dfn = defense;
+                dfn += Dexterity / 5;
                 if (Helmet != null) dfn += Helmet.Defense;
                 if (Armor != null) dfn += Armor.Defense;
                 if (Gloves != null) dfn += Gloves.Defense;
@@ -91,6 +94,11 @@ namespace Browser_RPG_Game.Models
         public bool IsAlive()
         {
             return Health > 0;
+        }
+
+        public bool IsArenaAvailable()
+        {
+            return NextArenaFight <= DateTime.Now;
         }
 
         public bool IsExpeditionAvailable()
@@ -169,7 +177,9 @@ namespace Browser_RPG_Game.Models
             {
                 ++Level;
                 Experience -= ExperienceMax;
-                ExperienceMax = Level * 100;
+                ExperienceMax = Level * 40;
+                HealthMax += 5;
+                Health = HealthMax;
             }
         }
 
@@ -178,7 +188,10 @@ namespace Browser_RPG_Game.Models
             LevelUp(experience);
             Gold += gold;
 
-            items.ForEach(i => AddItemToEquipment(i));
+            if (items != null)
+            {
+                items.ForEach(i => AddItemToEquipment(i));
+            }
         }
 
         public Boolean TakeOffItem(int id)

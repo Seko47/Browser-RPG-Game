@@ -11,6 +11,13 @@
         <div class="card-deck" style="padding-right: 50px; height: 500px; overflow-y: auto; overflow-x: hidden">
             @foreach (var item in Model.ToList())
             {
+                if (item.ItemTypeID != ViewBag.ActualItemType)
+                {
+                    <div class="row text-center col-sm-12">
+                        <label class="alert alert-info">@item.ItemType.Name</label>
+                    </div>
+                    ViewBag.ActualItemType = item.ItemTypeID;
+                }
                 <div class="dropdown col-sm-4">
                     <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@item.PathToImage" alt="Item image" />
 

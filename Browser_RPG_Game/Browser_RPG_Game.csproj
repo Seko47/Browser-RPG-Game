@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArenaController.cs" />
     <Compile Include="Models\BattleReport.cs" />
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\BulletinsController.cs" />
@@ -397,6 +398,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Expedition\Attack.cshtml" />
+    <Content Include="Views\Arena\Index.cshtml" />
+    <Content Include="Views\Arena\Attack.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

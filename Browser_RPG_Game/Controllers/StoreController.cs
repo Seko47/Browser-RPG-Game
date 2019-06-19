@@ -21,7 +21,7 @@ namespace Browser_RPG_Game.Controllers
             ViewBag.Character = character;
 
             List<Item> items = db.Items.Where(i => i.Level <= character.Level && i.ItemType.Name != "other").OrderBy(i => i.ItemTypeID).ToList();
-
+            ViewBag.ActualItemType = 0;
             return View(items);
         }
 

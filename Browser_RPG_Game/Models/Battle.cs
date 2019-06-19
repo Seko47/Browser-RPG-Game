@@ -14,5 +14,6 @@ namespace Browser_RPG_Game.Models
         public bool DoubleAttack { get; set; }
         public bool DefendedAttack { get; set; }
         public bool BrokenDefense { get; set; }
+        public bool CriticalAttack { get; set; }
     }
 }

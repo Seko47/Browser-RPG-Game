@@ -32,6 +32,7 @@ namespace Browser_RPG_Game.DAL
                 new Config{Name="EXPERIENCE_MULTIPLIER", Value="1"},
                 new Config{Name="LOOT_GOLD_DIFFERENCES", Value="5"},// lootgold = lootgold +- LOOT_GOLD_DIFFERENCES %
                 new Config{Name="TIME_INTERVAL_BETWEEN_EXPEDITIONS", Value="10"}, //in seconds
+                new Config{Name="TIME_INTERVAL_BETWEEN_ARENA", Value="20"}, //in seconds
                 new Config{Name="LOSER_EXPERIENCE", Value="20"}, // experience -= LOSER_EXPERIENCE %
                 new Config{Name="LOSER_MONEY", Value="20"} // gold -= LOSER_MONEY %
             };
@@ -240,6 +241,7 @@ namespace Browser_RPG_Game.DAL
                 CharacterImage = characterImages[0],
                 Gold = 0,
                 NextExpedition = DateTime.Now.Subtract(TimeSpan.FromDays(1)),
+                NextArenaFight = DateTime.Now.Subtract(TimeSpan.FromDays(1)),
                 Armor = items[68],
                 Boots = items[93],
                 Gloves = items[80],
