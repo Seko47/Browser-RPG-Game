@@ -234,6 +234,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\boots-placeholder.png" />
+    <Content Include="Images\breastplate-placeholder.png" />
+    <Content Include="Images\gloves-placeholder.png" />
+    <Content Include="Images\helmet-placeholder.png" />
+    <Content Include="Images\shield-placeholder.png" />
+    <Content Include="Images\weapon-placeholder.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -394,7 +400,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Obrazki\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
