@@ -45,7 +45,7 @@ namespace Browser_RPG_Game.Models
         [Range(0, 1000)]
         public int Dexterity { get; set; }
         [Required]
-        [Range(0, 1000)]
+        [Range(0, 100)]
         public int Intelligence { get; set; }
         [Required]
         [Range(0, 1000)]
@@ -86,6 +86,16 @@ namespace Browser_RPG_Game.Models
                 if (Shield != null) dfn += Shield.Defense;
                 return dfn;
             }
+        }
+
+        public bool IsAlive()
+        {
+            return Health > 0;
+        }
+
+        public bool IsExpeditionAvailable()
+        {
+            return NextExpedition <= DateTime.Now;
         }
 
         public Boolean HasItemById(int id)
@@ -132,18 +142,43 @@ namespace Browser_RPG_Game.Models
                 return false;
             }
 
-            if (Equipments.Single(e=>e.Item.ID == item.ID).Quantity > 1)
+            if (Equipments.Single(e => e.Item.ID == item.ID).Quantity > 1)
             {
                 --Equipments.Single(e => e.Item.ID == item.ID).Quantity;
             }
             else
             {
                 GameContext db = new GameContext();
-                db.Equipments.Remove(db.Equipments.Single(e => e.CharacterID == ID && e.ItemID == item.ID));
+
+                if (db.Equipments.Any(e => e.CharacterID == ID && e.ItemID == item.ID))
+                {
+                    db.Equipments.Remove(db.Equipments.Single(e => e.CharacterID == ID && e.ItemID == item.ID));
+                }
+
                 db.SaveChanges();
             }
 
             return true;
+        }
+
+        private void LevelUp(int experience)
+        {
+            Experience += experience;
+
+            while (Experience > ExperienceMax)
+            {
+                ++Level;
+                Experience -= ExperienceMax;
+                ExperienceMax = Level * 100;
+            }
+        }
+
+        public void WinBattle(List<Item> items, int experience, int gold)
+        {
+            LevelUp(experience);
+            Gold += gold;
+
+            items.ForEach(i => AddItemToEquipment(i));
         }
 
         public Boolean TakeOffItem(int id)
@@ -194,9 +229,21 @@ namespace Browser_RPG_Game.Models
             return false;
         }
 
+        public int Hurt(int enemyDamage)
+        {
+            int hp = Health - enemyDamage;
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+            Health = hp;
+
+            return Health;
+        }
+
         public Boolean PutOnItem(int id)
         {
-            Item item = Equipments.Where(i => i.Item.ID == id).Select(i=>i.Item).First();
+            Item item = Equipments.Where(i => i.Item.ID == id).Select(i => i.Item).First();
 
             if (item == null)
             {
@@ -212,7 +259,7 @@ namespace Browser_RPG_Game.Models
 
                 Weapon = item;
 
-                RemoveItemFromEquipment (item);
+                RemoveItemFromEquipment(item);
 
                 return true;
             }
@@ -285,6 +332,13 @@ namespace Browser_RPG_Game.Models
             return false;
         }
 
+        public void LoseBattle(int experience, int gold)
+        {
+            Experience -= experience;
+
+            Gold -= gold;
+        }
+
         public int StrengthCost
         {
             get
@@ -324,7 +378,7 @@ namespace Browser_RPG_Game.Models
         public virtual ProfileType ProfileType { get; set; }
         public virtual ICollection<Message> SendedMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
-        public virtual ICollection<Equipment> Equipments { get; set; }
+        public virtual List<Equipment> Equipments { get; set; }
         public virtual Item Helmet { get; set; }
         public virtual Item Armor { get; set; }
         public virtual Item Gloves { get; set; }

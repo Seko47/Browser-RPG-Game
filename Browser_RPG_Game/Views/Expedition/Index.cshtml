@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Browser_RPG_Game.Models.Location>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Wyprawa</h2>
+@if (ViewBag.TimeToTheNextExpedition != null)
+{
+    <label class="alert alert-info text-center">Pozostały czas do następnej wyprawy: @ViewBag.TimeToTheNextExpedition</label>
+}
+else
+{
+    foreach (var location in Model.ToList())
+    {
+        <div class="row">
+            <h3 class="text-center">@location.Name</h3>
+            <div class="row text-center" style="padding-left: 100px; padding-right:100px">
+                @foreach (var enemy in location.Enemies.Where(e => e.LocationID == location.ID).OrderBy(e => e.Level))
+                {
+                    <div class="dropdown col-sm-2">
+                        <a href="Expedition/Attack/@enemy.ID">
+                            <div class="row" style="height: 60px">
+                                <img src="@enemy.PathToImage" style="max-height: 100px; min-height: 35px" />
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <p>@enemy.Name</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-content">
+                            Poziom: @enemy.Level<br />
+                            Życie: @enemy.HealthMax<br />
+                            Siła: @enemy.Strength<br />
+                            Zręczność: @enemy.Dexterity<br />
+                            Szczęście: @enemy.Luck<br />
+                            Obrażenia: @enemy.Damage<br />
+                            Obrona: @enemy.Defense<br />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+    }
+}

@@ -20,7 +20,7 @@
                             @item.Name <br />
                             Poziom: @item.Level<br />
                             Obrona: @item.Defense<br />
-                            Wartość: @(item.Value * (2 - (ViewBag.Character.Intelligence / 1000)))
+                            Wartość: @((int)((double)item.Value * ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Kup", "Buy", "Store", new { id = @item.ID }, null)
                         </div>
                     }
@@ -30,7 +30,7 @@
                             @item.Name <br />
                             Poziom: @item.Level<br />
                             Obrażenia: @item.Damage<br />
-                            Wartość: @(item.Value * (2 - (ViewBag.Character.Intelligence / 1000)))
+                            Wartość: @((int)((double)item.Value * ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Kup", "Buy", "Store", new { id = @item.ID }, null)
                         </div>
                     }
@@ -38,7 +38,7 @@
                     {
                         <div class="dropdown-content">
                             @item.Name <br />
-                            Wartość: @(item.Value * (2 - (ViewBag.Character.Intelligence / 1000)))
+                            Wartość: @((int)((double)item.Value * ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Kup", "Buy", "Store", new { id = @item.ID }, null)
                         </div>
                     }
@@ -68,7 +68,7 @@
                             @ViewBag.Character.Helmet.Name <br />
                             Poziom: @ViewBag.Character.Helmet.Level<br />
                             Obrona: @ViewBag.Character.Helmet.Defense <br />
-                            Wartość: @(ViewBag.Character.Helmet.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                            Wartość: @((int)((double)ViewBag.Character.Helmet.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                         </div>
                     </div>
                 }
@@ -91,7 +91,7 @@
                         @ViewBag.Character.Weapon.Name <br />
                         Poziom: @ViewBag.Character.Weapon.Level<br />
                         Obrażenia: @ViewBag.Character.Weapon.Damage <br />
-                        Wartość: @(ViewBag.Character.Weapon.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                        Wartość: @((int)((double)ViewBag.Character.Weapon.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                     </div>
                 </div>
             }
@@ -111,7 +111,7 @@
                         @ViewBag.Character.Armor.Name <br />
                         Poziom: @ViewBag.Character.Armor.Level<br />
                         Obrona: @ViewBag.Character.Armor.Defense <br />
-                        Wartość: @(ViewBag.Character.Armor.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                        Wartość: @((int)((double)ViewBag.Character.Armor.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                     </div>
                 </div>
             }
@@ -131,7 +131,7 @@
                         @ViewBag.Character.Shield.Name <br />
                         Poziom: @ViewBag.Character.Shield.Level<br />
                         Obrona: @ViewBag.Character.Shield.Defense <br />
-                        Wartość: @(ViewBag.Character.Shield.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                        Wartość: @((int)((double)ViewBag.Character.Shield.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                     </div>
                 </div>
             }
@@ -152,7 +152,7 @@
                         @ViewBag.Character.Gloves.Name <br />
                         Poziom: @ViewBag.Character.Gloves.Level<br />
                         Obrona: @ViewBag.Character.Gloves.Defense <br />
-                        Wartość: @(ViewBag.Character.Gloves.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                        Wartość: @((int)((double)ViewBag.Character.Gloves.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                     </div>
                 </div>
             }
@@ -172,7 +172,7 @@
                         @ViewBag.Character.Boots.Name <br />
                         Poziom: @ViewBag.Character.Boots.Level<br />
                         Obrona: @ViewBag.Character.Boots.Defense <br />
-                        Wartość: @(ViewBag.Character.Boots.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                        Wartość: @((int)((double)ViewBag.Character.Boots.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                     </div>
                 </div>
             }
@@ -180,8 +180,12 @@
         <hr />
         <div class="row">
             <div class="col-sm-12">
-                <div class="row">
+                <div class="row text-center">
                     <h2 class="text-center">Ekwipunek</h2>
+                    @if (@ViewBag.Character.Equipments.Count > 0)
+                    {
+                        @Html.ActionLink("Sprzedaj wszystko", "SellAll", "Store", null, new { @class = "btn btn-default" })
+                    }
                 </div>
                 @if (@ViewBag.Character.Equipments.Count > 0)
                 {
@@ -199,7 +203,7 @@
                                             @equipment.Item.Name<br />
                                             Poziom: @equipment.Item.Level<br />
                                             Obrona: @equipment.Item.Defense<br />
-                                            Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                             @Html.ActionLink("Sprzedaj", "Sell", "Store", new { id = @equipment.Item.ID }, null)
                                         </div>
                                     }
@@ -209,7 +213,7 @@
                                             @equipment.Item.Name <br />
                                             Poziom: @equipment.Item.Level<br />
                                             Obrażenia: @equipment.Item.Damage<br />
-                                            Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                             @Html.ActionLink("Sprzedaj", "Sell", "Store", new { id = @equipment.Item.ID }, null)
                                         </div>
                                     }
@@ -217,7 +221,7 @@
                                     {
                                         <div class="dropdown-content">
                                             @equipment.Item.Name <br />
-                                            Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                            Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                             @Html.ActionLink("Sprzedaj", "Sell", "Store", new { id = @equipment.Item.ID }, null)
                                         </div>
                                     }

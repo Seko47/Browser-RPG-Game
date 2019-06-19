@@ -133,7 +133,7 @@ else
                 <div class="col-sm-2">
                     @ViewBag.Character.Intelligence
                 </div>
-                @if (ViewBag.Character.Intelligence < 1000)
+                @if (ViewBag.Character.Intelligence < 100)
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.IntelligenceCost)
                     {
@@ -222,7 +222,7 @@ else
                                 @ViewBag.Character.Helmet.Name <br />
                                 Poziom: @ViewBag.Character.Helmet.Level<br />
                                 Obrona: @ViewBag.Character.Helmet.Defense <br />
-                                Wartość: @(ViewBag.Character.Helmet.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                                Wartość: @((int)((double)ViewBag.Character.Helmet.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                 @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.HelmetID }, null)
 
                             </div>
@@ -247,7 +247,7 @@ else
                             @ViewBag.Character.Weapon.Name <br />
                             Poziom: @ViewBag.Character.Weapon.Level<br />
                             Obrażenia: @ViewBag.Character.Weapon.Damage <br />
-                            Wartość: @(ViewBag.Character.Weapon.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                            Wartość: @((int)((double)ViewBag.Character.Weapon.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.WeaponID }, null)
                         </div>
                     </div>
@@ -268,7 +268,7 @@ else
                             @ViewBag.Character.Armor.Name <br />
                             Poziom: @ViewBag.Character.Armor.Level<br />
                             Obrona: @ViewBag.Character.Armor.Defense <br />
-                            Wartość: @(ViewBag.Character.Armor.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                            Wartość: @((int)((double)ViewBag.Character.Armor.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ArmorID }, null)
                         </div>
                     </div>
@@ -289,7 +289,7 @@ else
                             @ViewBag.Character.Shield.Name <br />
                             Poziom: @ViewBag.Character.Shield.Level<br />
                             Obrona: @ViewBag.Character.Shield.Defense <br />
-                            Wartość: @(ViewBag.Character.Shield.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                            Wartość: @((int)((double)ViewBag.Character.Shield.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ShieldID }, null)
                         </div>
                     </div>
@@ -311,7 +311,7 @@ else
                             @ViewBag.Character.Gloves.Name <br />
                             Poziom: @ViewBag.Character.Gloves.Level<br />
                             Obrona: @ViewBag.Character.Gloves.Defense <br />
-                            Wartość: @(ViewBag.Character.Gloves.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                            Wartość: @((int)((double)ViewBag.Character.Gloves.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.GlovesID }, null)
                         </div>
                     </div>
@@ -332,7 +332,7 @@ else
                             @ViewBag.Character.Boots.Name <br />
                             Poziom: @ViewBag.Character.Boots.Level<br />
                             Obrona: @ViewBag.Character.Boots.Defense <br />
-                            Wartość: @(ViewBag.Character.Boots.Value / (2 - (ViewBag.Character.Intelligence / 1000))) <br />
+                            Wartość: @((int)((double)ViewBag.Character.Boots.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                             @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.BootsID }, null)
                         </div>
                     </div>
@@ -360,7 +360,7 @@ else
                                                 @equipment.Item.Name <br />
                                                 Poziom: @equipment.Item.Level<br />
                                                 Obrona: @equipment.Item.Defense<br />
-                                                Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                                Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                                 @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, null)
                                             </div>
                                         }
@@ -370,7 +370,7 @@ else
                                                 @equipment.Item.Name <br />
                                                 Poziom: @equipment.Item.Level<br />
                                                 Obrażenia: @equipment.Item.Damage<br />
-                                                Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                                Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                                 @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, null)
                                             </div>
                                         }
@@ -378,7 +378,7 @@ else
                                         {
                                             <div class="dropdown-content">
                                                 @equipment.Item.Name <br />
-                                                Wartość: @(equipment.Item.Value / (2 - (ViewBag.Character.Intelligence / 1000)))<br />
+                                                Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
                                             </div>
                                         }
                                     </div>

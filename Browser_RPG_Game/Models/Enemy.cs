@@ -16,11 +16,11 @@ namespace Browser_RPG_Game.Models
         [Range(0, 100)]
         public int Level { get; set; }
         [Required]
-        [Range(1, 1000)]
+        [Range(0, 1000)]
         public int Health { get; set; }
         [Required]
         [Range(1, 1000)]
-        [Display(Name="Health max")]
+        [Display(Name = "Health max")]
         public int HealthMax { get; set; }
         [Required]
         [Range(0, 1000)]
@@ -43,14 +43,31 @@ namespace Browser_RPG_Game.Models
         [Required]
         [Range(0, 1000)]
         public int Money { get; set; }
-        [Display(Name="Location")]
+        [Display(Name = "Location")]
         public int LocationID { get; set; }
         [Required]
-        [Display(Name="Path to image")]
+        [Display(Name = "Path to image")]
         public string PathToImage { get; set; }
 
-        [Display(Name="Loot")]
+        public bool IsAlive()
+        {
+            return Health > 0;
+        }
+
+        [Display(Name = "Loot")]
         public virtual List<ItemLoot> ItemLoots { get; set; }
         public virtual Location Location { get; set; }
+
+        public int Hurt(int characterDamage)
+        {
+            int hp = Health - characterDamage;
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+            Health = hp;
+
+            return Health;
+        }
     }
 }

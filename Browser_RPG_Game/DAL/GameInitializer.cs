@@ -31,7 +31,9 @@ namespace Browser_RPG_Game.DAL
             {
                 new Config{Name="EXPERIENCE_MULTIPLIER", Value="1"},
                 new Config{Name="LOOT_GOLD_DIFFERENCES", Value="5"},// lootgold = lootgold +- LOOT_GOLD_DIFFERENCES %
-                new Config{Name="TIME_INTERVAL_BETWEEN_EXPEDITIONS", Value="10"} //in seconds
+                new Config{Name="TIME_INTERVAL_BETWEEN_EXPEDITIONS", Value="10"}, //in seconds
+                new Config{Name="LOSER_EXPERIENCE", Value="20"}, // experience -= LOSER_EXPERIENCE %
+                new Config{Name="LOSER_MONEY", Value="20"} // gold -= LOSER_MONEY %
             };
 
             config.ForEach(c => context.Configs.Add(c));
@@ -212,7 +214,7 @@ namespace Browser_RPG_Game.DAL
                 new Item{Name="Głowa szerszenia", Value=110, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://emargo.pl/margonem/obrazki/itemy/sur/hornet_head.gif" },
 /*100*/         new Item{Name="Skrzydła szerszenia", Value=27, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://emargo.pl/margonem/obrazki/itemy/sur/hornet_wing.gif" },
                 new Item{Name="Żądło", Value=50, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://emargo.pl/margonem/obrazki/itemy/sur/sur23.gif" },
-                new Item{Name="Lisi ogon", Value=90, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://www.naszemargo.pl/g/i1910.gif" },
+                new Item{Name="Lisi ogon", Value=90, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="https://www.naszemargo.pl/g/i1910.gif" },
                 new Item{Name="Ogon szczura", Value=200, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://emargo.pl/margonem/obrazki/itemy/eve/ev-rattail.gif" },
                 new Item{Name="Mięso", Value=11, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://emargo.pl/margonem/obrazki/itemy/kon/sur30.gif" },
 /*105*/         new Item{Name="Skóra Czarnej Wilczycy", Value=500, ItemType=itemTypes[6], Level=0, Damage=0, Defense=0, PathToImage="http://emargo.pl/margonem/obrazki/itemy/sur/su30.gif" },
@@ -233,7 +235,7 @@ namespace Browser_RPG_Game.DAL
                 HealthMax = 1000,
                 Strength = 1000,
                 Dexterity = 1000,
-                Intelligence = 1000,
+                Intelligence = 100,
                 Luck = 1000,
                 CharacterImage = characterImages[0],
                 Gold = 0,

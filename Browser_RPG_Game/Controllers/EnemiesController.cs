@@ -20,7 +20,7 @@ namespace Browser_RPG_Game.Controllers
         public ActionResult Index()
         {
             var enemies = db.Enemies.Include(e => e.Location);
-            return View(enemies.ToList());
+            return View(enemies.OrderBy(e=>e.LocationID).ThenBy(e=>e.Level));
         }
 
         // GET: Enemies/Details/5
