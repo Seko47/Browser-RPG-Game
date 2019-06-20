@@ -22,6 +22,59 @@ namespace Browser_RPG_Game.Models
         [DataType(DataType.DateTime)]
         public DateTime LastUpdate { get; set; }
 
+        public void UpdateStorage()
+        {
+            if (Level > 0)
+            {
+                TimeSpan increaseTime = DateTime.Now - LastUpdate;
+                double timeInMinutes = increaseTime.TotalMinutes;
+
+                int quantity = (int)((Building.InitialIncreasePerMinute + (Building.IncreasePerMinuteAfterEachUpgrade * (Level - 1))) * timeInMinutes);
+
+                if (quantity > 0)
+                {
+                    Storage += quantity;
+                    if (Storage > StorageMax)
+                    {
+                        Storage = StorageMax;
+                    }
+
+                    LastUpdate = DateTime.Now;
+                }
+            }
+            else
+            {
+                LastUpdate = DateTime.Now;
+            }
+        }
+
+        public int UpdateCost()
+        {
+            return (Level + 1) * Building.Value;
+        }
+
+        public void Update()
+        {
+            UpdateStorage();
+            if (Level < Building.LevelMax)
+            {
+                ++Level;
+
+                StorageMax *= 2;
+            }
+        }
+
+        public int Sell()
+        {
+            UpdateStorage();
+
+            int gold = Storage * Building.Material.Value;
+
+            Storage = 0;
+
+            return gold;
+        }
+
         public virtual ICollection<Character> CharacterSawmill { get; set; }
         public virtual ICollection<Character> CharacterBrickyard { get; set; }
         public virtual ICollection<Character> CharacterIronworks { get; set; }
