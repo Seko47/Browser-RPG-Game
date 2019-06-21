@@ -31,7 +31,7 @@ namespace Browser_RPG_Game.Controllers
             }
 
             List<Character> weakerEnemies = db.Characters.Where(c => c.Level < character.Level - 1 && c.Level >= character.Level - 6 && c.ProfileType.Name != "admin" && c.NextArenaFight <= DateTime.Now).ToList();
-            List<Character> normalEnemies = db.Characters.Where(c => c.Level > character.Level - 1 && c.Level < character.Level + 1 && c.ID != character.ID && c.ProfileType.Name != "admin" && c.NextArenaFight <= DateTime.Now).ToList();
+            List<Character> normalEnemies = db.Characters.Where(c => c.Level >= character.Level - 1 && c.Level <= character.Level + 1 && c.ID != character.ID && c.ProfileType.Name != "admin" && c.NextArenaFight <= DateTime.Now).ToList();
             List<Character> strongerEnemies = db.Characters.Where(c => c.Level > character.Level + 1 && c.Level <= character.Level + 6 && c.ProfileType.Name != "admin" && c.NextArenaFight <= DateTime.Now).ToList();
 
             Character weakerEnemy = null;
