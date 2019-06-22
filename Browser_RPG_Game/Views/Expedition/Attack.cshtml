@@ -6,55 +6,54 @@
 
 <h2>Walka</h2>
 
-
 @if (!Model.CharacterWin && !Model.EnemyWin)
 {
-    <div class="row text-center">
-        <div class="alert alert-warning">
-            <h3 class="text-capitalize">Remis</h3>
-            <label>Walka była wyrównana do tego stopnia, że obaj padliście na ziemię z wycieńczenia.</label>
+    <div class="row m-auto">
+        <div class="alert alert-warning ml-auto mr-auto">
+            <h3 class="text-center">Remis</h3>
+            <label class="text-center">Walka była wyrównana do tego stopnia, że obaj padliście na ziemię z wycieńczenia.</label>
         </div>
     </div>
 }
 else if (Model.CharacterWin)
 {
-    <div class="row text-center">
-        <div class="alert alert-success">
-            <h3 class="text-capitalize">Wygrałeś</h3>
-            <label>
-                Zyskałeś @Model.Experience punktów doświadczenia!<br>Po przeszukaniu okolicznych terenów znalazłeś:<br>
-                @Model.Gold <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" /><br />
+    <div class="row m-auto">
+        <div class="alert alert-success ml-auto mr-auto">
+            <h3 class="text-center">Wygrałeś</h3>
+            <label class="text-center">
+                Zyskałeś @Model.Experience punktów doświadczenia!<br />Po przeszukaniu okolicznych terenów znalazłeś:<br>
+                @Model.Gold <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
                 @if (Model.Loots.Count > 0)
                 {
                     <div class="card-deck">
                         @foreach (var item in Model.Loots)
                         {
-                            <div class="dropdown col-sm-4">
+                            <div class="dropdown col-sm">
                                 <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@item.PathToImage" alt="Item image" />
 
                                 @if (item.Defense > 0)
                                 {
                                     <div class="dropdown-content">
-                                        @item.Name <br />
+                                        <b>@item.Name</b> <br />
                                         Poziom: @item.Level<br />
                                         Obrona: @item.Defense<br />
-                                        Wartość: @((int)((double)item.Value / ((double)2 - (double)((double)Model.Character.Intelligence / (double)100))))<br />
+                                        @((int)((double)item.Value / ((double)2 - (double)((double)Model.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
                                     </div>
                                 }
                                 else if (item.Damage > 0)
                                 {
                                     <div class="dropdown-content">
-                                        @item.Name <br />
+                                        <b>@item.Name</b> <br />
                                         Poziom: @item.Level<br />
                                         Obrażenia: @item.Damage<br />
-                                        Wartość: @((int)((double)item.Value / ((double)2 - (double)((double)Model.Character.Intelligence / (double)100))))<br />
+                                        @((int)((double)item.Value / ((double)2 - (double)((double)Model.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="dropdown-content">
-                                        @item.Name <br />
-                                        Wartość: @((int)((double)item.Value / ((double)2 - (double)((double)Model.Character.Intelligence / (double)100))))<br />
+                                        <b>@item.Name</b> <br />
+                                        @((int)((double)item.Value / ((double)2 - (double)((double)Model.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
                                     </div>
                                 }
                             </div>
@@ -67,171 +66,190 @@ else if (Model.CharacterWin)
 }
 else if (Model.EnemyWin)
 {
-    <div class="row text-center">
-        <div class="alert alert-danger">
-            <h3 class="text-capitalize">Przegrałeś</h3>
-            <label>
-                Byłeś ciężko ranny gdy odnalazł Cię patrol straży.<br>Sprowadzili medyka, który postawił Cię na nogi.<br>
-                Straciłeś:<br />
-                @Model.Gold <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" /><br />
-                @Model.Experience pkt. doś.<br />
+    <div class="row m-auto">
+        <div class="alert alert-danger ml-auto mr-auto">
+            <h3 class="text-center">Przegrałeś</h3>
+            <label class="text-center">
+                Byłeś ciężko ranny gdy odnalazł Cię patrol straży.<br>Sprowadzili medyka, który postawił Cię na nogi.<br /><br />
+                Straciłeś @Model.Experience punktów doświadczenia i @Model.Gold <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
             </label>
         </div>
     </div>
 }
 
 <div class="row">
-    <div class="col-sm-6">
-        <div class="row center-block">
-            <div class="row">
-                <h1 class="center-block text-center">@Model.Character.Name</h1>
-                <img class="center-block" src="@Model.Character.CharacterImage.PathToImage" height="100px" alt="Character image" />
+    <div class="col-sm-5 ml-auto mr-auto">
+        <div class="row m-auto" style="height: 100px">
+            <h1 class="m-auto text-center"><b>@Model.Character.Name</b></h1>
+        </div>
+        <hr />
+        <div class="row">
+            <img class="ml-auto mr-auto" src="@Model.Character.CharacterImage.PathToImage" height="100px" alt="Character image" />
+        </div>
+        <div class="row">
+            <div class="col-sm-8 mr-auto">
+                Poziom postaci
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Poziom postaci
-                </div>
-                <div class="col-sm-6">
-                    @Model.Character.Level
-                </div>
+            <div class="row col-sm-4 ml-auto text-right">
+                @Model.Character.Level
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Punkty zdrowia
-                </div>
-                <div class="col-sm-6">
-                    @if (Model.Battles.Count > 0)
-                    {
-                        <text>
-                            @Model.Battles.Min(b => b.CharacterHP) / @Model.Character.HealthMax
-                        </text>
-                    }
-                    else
-                    {
-                        <text>
-                            @Model.Character.Health / @Model.Character.HealthMax
-                        </text>
-                    }
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 mr-auto">
+                Doświadczenie
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-sm-6">
-                    Siła
-                </div>
-                <div class="col-sm-6">
-                    @Model.Character.Strength
-                </div>
+            <div class="row col-sm-4 ml-auto text-right">
+                @Model.Character.Experience / @Model.Character.ExperienceMax
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Zręczność
-                </div>
-                <div class="col-sm-6">
-                    @Model.Character.Dexterity
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 mr-auto">
+                Punkty zdrowia
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Szczęście
-                </div>
-                <div class="col-sm-6">
-                    @Model.Character.Luck
-                </div>
+            <div class="row col-sm-4 ml-auto text-right">
+                @if (Model.Battles.Count > 0)
+                {
+                    <text>
+                        @Model.Battles.Min(b => b.CharacterHP) / @Model.Character.HealthMax
+                    </text>
+                }
+                else
+                {
+                    <text>
+                        @Model.Character.Health / @Model.Character.HealthMax
+                    </text>
+                }
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-sm-6">
-                    Obrażenia
-                </div>
-                <div class="col-sm-6">
-                    @Model.Character.Damage
-                </div>
+        </div>
+        <hr />
+        <div class="row" title="Wpływa na szansę przełamania bloku przeciwnika i obrażenia">
+            <div class="col-sm-9">
+                Siła
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Obrona
-                </div>
-                <div class="col-sm-6">
-                    @Model.Character.Defense
-                </div>
+            <div class="col-sm-3">
+                @Model.Character.Strength
+            </div>
+        </div>
+        <div class="row" title="Wpływa na szansę zablokowania ciosu i obronę">
+            <div class="col-sm-9">
+                Zręczność
+            </div>
+            <div class="col-sm-3">
+                @Model.Character.Dexterity
+            </div>
+        </div>
+        <div class="row" title="Wpływa na szansę podwójnego ataku lub zadania obrażeń krytycznych">
+            <div class="col-sm-9">
+                Szczęście
+            </div>
+            <div class="col-sm-3">
+                @Model.Character.Luck
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-9">
+                Obrażenia
+            </div>
+            <div class="col-sm-3">
+                @Model.Character.Damage
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                Obrona
+            </div>
+            <div class="col-sm-3">
+                @Model.Character.Defense
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="row center-block">
-            <div class="row" style="height: 169.2px;">
-                <h1 class="center-block text-center">@Model.Enemy.Name</h1>
-                <img class="center-block" src="@Model.Enemy.PathToImage" style="max-height: 100px; min-height: 35px" alt="Enemy image" />
+
+    <div class="col-sm-5 ml-auto mr-auto">
+        <div class="row m-auto" style="height: 100px">
+            <h1 class="m-auto text-center"><b>@Model.Enemy.Name</b></h1>
+        </div>
+        <hr />
+        <div class="row" style="height:100px">
+            <div class="m-auto">
+                <img class="ml-auto mr-auto" src="@Model.Enemy.PathToImage" style="max-height: 100px; min-height: 30px" alt="Enemy image" />
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Poziom postaci
-                </div>
-                <div class="col-sm-6">
-                    @Model.Enemy.Level
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 mr-auto">
+                Poziom postaci
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Punkty zdrowia
-                </div>
-                <div class="col-sm-6">
-                    @if (Model.Battles.Count > 0)
-                    {
-                        <text>
-                            @Model.Battles.Min(b => b.EnemyHP) / @Model.Enemy.HealthMax
-                        </text>
-                    }
-                    else
-                    {
-                        <text>
-                            @Model.Enemy.Health / @Model.Enemy.HealthMax
-                        </text>
-                    }
-                </div>
+            <div class="row col-sm-4 ml-auto text-right">
+                @Model.Enemy.Level
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-sm-6">
-                    Siła
-                </div>
-                <div class="col-sm-6">
-                    @Model.Enemy.Strength
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 mr-auto">
+                Doświadczenie
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Zręczność
-                </div>
-                <div class="col-sm-6">
-                    @Model.Enemy.Dexterity
-                </div>
+            <div class="row col-sm-4 ml-auto text-right">
+                @Model.Enemy.Experience
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Szczęście
-                </div>
-                <div class="col-sm-6">
-                    @Model.Enemy.Luck
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 mr-auto">
+                Punkty zdrowia
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-sm-6">
-                    Obrażenia
-                </div>
-                <div class="col-sm-6">
-                    @Model.Enemy.Damage
-                </div>
+            <div class="row col-sm-4 ml-auto text-right">
+                @if (Model.Battles.Count > 0)
+                {
+                    <text>
+                        @Model.Battles.Min(b => b.EnemyHP) / @Model.Enemy.HealthMax
+                    </text>
+                }
+                else
+                {
+                    <text>
+                        @Model.Enemy.Health / @Model.Enemy.HealthMax
+                    </text>
+                }
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    Obrona
-                </div>
-                <div class="col-sm-6">
-                    @Model.Enemy.Defense
-                </div>
+        </div>
+        <hr />
+        <div class="row" title="Wpływa na szansę przełamania bloku przeciwnika i obrażenia">
+            <div class="col-sm-9">
+                Siła
+            </div>
+            <div class="col-sm-3">
+                @Model.Enemy.Strength
+            </div>
+        </div>
+        <div class="row" title="Wpływa na szansę zablokowania ciosu i obronę">
+            <div class="col-sm-9">
+                Zręczność
+            </div>
+            <div class="col-sm-3">
+                @Model.Enemy.Dexterity
+            </div>
+        </div>
+        <div class="row" title="Wpływa na szansę podwójnego ataku lub zadania obrażeń krytycznych">
+            <div class="col-sm-9">
+                Szczęście
+            </div>
+            <div class="col-sm-3">
+                @Model.Enemy.Luck
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-9">
+                Obrażenia
+            </div>
+            <div class="col-sm-3">
+                @Model.Enemy.Damage
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                Obrona
+            </div>
+            <div class="col-sm-3">
+                @Model.Enemy.Defense
             </div>
         </div>
     </div>
@@ -241,302 +259,233 @@ else if (Model.EnemyWin)
 {
     <br />
     <hr />
-    <h3>Raport z walki</h3>
+    <h3 class="text-center">Raport z walki</h3>
     <hr />
     foreach (var battle in Model.Battles)
     {
         if (battle.CharacterIsAttacker)
         {
-            <div class="row alert alert-success">
-                <h4>Atakuje @Model.Character.Name</h4>
-                @if (battle.CriticalAttack)
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Character.Name wykonał atak krytyczny</b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>otrzymał</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.InflictedDamage obrażeń</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.EnemyHP PŻ</label>
-                        </div>
-                    </div>
-                }
-                else if (battle.DefendedAttack && battle.BrokenDefense)
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Character.Name przełamał obronę</b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>otrzymał</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.InflictedDamage obrażeń</label>
-                        </div>
-                    </div>
-
-                    if (battle.DoubleAttack)
+            <div class="row">
+                <div class="col-sm-12 alert alert-success ml-auto mr-auto">
+                    <h4>Atakuje <b>@Model.Character.Name</b></h4>
+                    @if (battle.CriticalAttack)
                     {
-                        <div class="row">
-                            <p class="text-info text-center"><b>@Model.Character.Name wykonał szybko drugi atak</b></p>
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Character.Name wykonał atak krytyczny</b></p>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <label>@Model.Enemy.Name</label>
+                        <div class="row ml-auto mr-auto">
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p>@Model.Enemy.Name</p>
                             </div>
-                            <div class="col-sm-4">
-                                <label>otrzymał</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-center">otrzymał</p>
                             </div>
-                            <div class="col-sm-3">
-                                <label>@battle.InflictedDamage obrażeń</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-right">@battle.InflictedDamage obrażeń</p>
                             </div>
                         </div>
                     }
-
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.EnemyHP PŻ</label>
-                        </div>
-                    </div>
-                }
-                else if (battle.DefendedAttack)
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Enemy.Name obronił atak</b></p>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.EnemyHP PŻ</label>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Character.Name zaatakował</b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>otrzymał</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.InflictedDamage obrażeń</label>
-                        </div>
-                    </div>
-
-                    if (battle.DoubleAttack)
+                    else if (battle.DefendedAttack && battle.BrokenDefense)
                     {
-                        <div class="row">
-                            <p class="text-info text-center"><b>@Model.Character.Name wykonał szybko drugi atak</b></p>
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Character.Name przełamał obronę</b></p>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <label>@Model.Enemy.Name</label>
+                        <div class="row ml-auto mr-auto">
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p>@Model.Enemy.Name</p>
                             </div>
-                            <div class="col-sm-4">
-                                <label>otrzymał</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-center">otrzymał</p>
                             </div>
-                            <div class="col-sm-3">
-                                <label>@battle.InflictedDamage obrażeń</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-right">@battle.InflictedDamage obrażeń</p>
                             </div>
+                        </div>
+
+                        if (battle.DoubleAttack)
+                        {
+                            <div class="row ml-auto mr-auto">
+                                <p class="text-info ml-auto mr-auto text-center"><b>@Model.Character.Name wykonał szybko drugi atak</b></p>
+                            </div>
+                            <div class="row ml-auto mr-auto">
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p>@Model.Enemy.Name</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-center">otrzymał</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-right">@battle.InflictedDamage obrażeń</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (battle.DefendedAttack)
+                    {
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info text-center ml-auto mr-auto"><b>@Model.Enemy.Name obronił atak</b></p>
                         </div>
                     }
+                    else
+                    {
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Character.Name zaatakował</b></p>
+                        </div>
+                        <div class="row ml-auto mr-auto">
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p>@Model.Enemy.Name</p>
+                            </div>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-center">otrzymał</p>
+                            </div>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-right">@battle.InflictedDamage obrażeń</p>
+                            </div>
+                        </div>
 
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Enemy.Name</label>
+                        if (battle.DoubleAttack)
+                        {
+                            <div class="row ml-auto mr-auto">
+                                <p class="text-info ml-auto mr-auto text-center"><b>@Model.Character.Name wykonał szybko drugi atak</b></p>
+                            </div>
+                            <div class="row ml-auto mr-auto">
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p>@Model.Enemy.Name</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-center">otrzymał</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-right">@battle.InflictedDamage obrażeń</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="row ml-auto mr-auto">
+                        <div class="col-sm-4 ml-auto mr-auto">
+                            <p>@Model.Enemy.Name</p>
                         </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
+                        <div class="col-sm-4 ml-auto mr-auto">
+                            <p class="text-center">posiada</p>
                         </div>
-                        <div class="col-sm-3">
-                            <label>@battle.EnemyHP PŻ</label>
+                        <div class="col-sm-4 ml-auto mr-auto">
+                            <p class="text-right">@battle.EnemyHP PŻ</p>
                         </div>
                     </div>
-                }
+                </div>
             </div>
         }
         else
         {
-            <div class="row alert alert-danger">
-                <h4>Atakuje @Model.Enemy.Name</h4>
-                @if (battle.CriticalAttack)
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Enemy.Name wykonał atak krytyczny</b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>otrzymał</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.InflictedDamage obrażeń</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.CharacterHP PŻ</label>
-                        </div>
-                    </div>
-                }
-                else if (battle.DefendedAttack && battle.BrokenDefense)
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Enemy.Name przełamał obronę</b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>otrzymał</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.InflictedDamage obrażeń</label>
-                        </div>
-                    </div>
-
-                    if (battle.DoubleAttack)
+            <div class="row">
+                <div class="col-sm-12 alert alert-danger ml-auto mr-auto">
+                    <h4>Atakuje <b>@Model.Enemy.Name</b></h4>
+                    @if (battle.CriticalAttack)
                     {
-                        <div class="row">
-                            <p class="text-info text-center"><b>@Model.Enemy.Name wykonał szybko drugi atak</b></p>
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Enemy.Name wykonał atak krytyczny</b></p>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <label>@Model.Character.Name</label>
+                        <div class="row ml-auto mr-auto">
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p>@Model.Character.Name</p>
                             </div>
-                            <div class="col-sm-4">
-                                <label>otrzymał</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-center">otrzymał</p>
                             </div>
-                            <div class="col-sm-3">
-                                <label>@battle.InflictedDamage obrażeń</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-right">@battle.InflictedDamage obrażeń</p>
                             </div>
                         </div>
                     }
-
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.CharacterHP PŻ</label>
-                        </div>
-                    </div>
-                }
-                else if (battle.DefendedAttack)
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Character.Name obronił atak</b></p>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.CharacterHP PŻ</label>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="row">
-                        <p class="text-info text-center"><b>@Model.Enemy.Name zaatakował</b></p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <label>otrzymał</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label>@battle.InflictedDamage obrażeń</label>
-                        </div>
-                    </div>
-
-                    if (battle.DoubleAttack)
+                    else if (battle.DefendedAttack && battle.BrokenDefense)
                     {
-                        <div class="row">
-                            <p class="text-info text-center"><b>@Model.Enemy.Name wykonał szybko drugi atak</b></p>
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Enemy.Name przełamał obronę</b></p>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <label>@Model.Character.Name</label>
+                        <div class="row ml-auto mr-auto">
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p>@Model.Character.Name</p>
                             </div>
-                            <div class="col-sm-4">
-                                <label>otrzymał</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-center">otrzymał</p>
                             </div>
-                            <div class="col-sm-3">
-                                <label>@battle.InflictedDamage obrażeń</label>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-right">@battle.InflictedDamage obrażeń</p>
                             </div>
+                        </div>
+
+                        if (battle.DoubleAttack)
+                        {
+                            <div class="row ml-auto mr-auto">
+                                <p class="text-info ml-auto mr-auto text-center"><b>@Model.Enemy.Name wykonał szybko drugi atak</b></p>
+                            </div>
+                            <div class="row ml-auto mr-auto">
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p>@Model.Character.Name</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-center">otrzymał</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-right">@battle.InflictedDamage obrażeń</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (battle.DefendedAttack)
+                    {
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Character.Name obronił atak</b></p>
                         </div>
                     }
+                    else
+                    {
+                        <div class="row ml-auto mr-auto">
+                            <p class="text-info ml-auto mr-auto text-center"><b>@Model.Enemy.Name zaatakował</b></p>
+                        </div>
+                        <div class="row ml-auto mr-auto">
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p>@Model.Character.Name</p>
+                            </div>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-center">otrzymał</p>
+                            </div>
+                            <div class="col-sm-4 ml-auto mr-auto">
+                                <p class="text-right">@battle.InflictedDamage obrażeń</p>
+                            </div>
+                        </div>
 
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label>@Model.Character.Name</label>
+                        if (battle.DoubleAttack)
+                        {
+                            <div class="row ml-auto mr-auto">
+                                <p class="text-info ml-auto mr-auto text-center"><b>@Model.Enemy.Name wykonał szybko drugi atak</b></p>
+                            </div>
+                            <div class="row ml-auto mr-auto">
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p>@Model.Character.Name</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-center">otrzymał</p>
+                                </div>
+                                <div class="col-sm-4 ml-auto mr-auto">
+                                    <p class="text-right">@battle.InflictedDamage obrażeń</p>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div class="row ml-auto mr-auto">
+                        <div class="col-sm-4 ml-auto mr-auto">
+                            <p>@Model.Character.Name</p>
                         </div>
-                        <div class="col-sm-4">
-                            <label>posiada</label>
+                        <div class="col-sm-4 ml-auto mr-auto">
+                            <p class="text-center">posiada</p>
                         </div>
-                        <div class="col-sm-3">
-                            <label>@battle.CharacterHP PŻ</label>
+                        <div class="col-sm-4 ml-auto mr-auto">
+                            <p class="text-right">@battle.CharacterHP PŻ</p>
                         </div>
                     </div>
-                }
+                </div>
             </div>
         }
     }

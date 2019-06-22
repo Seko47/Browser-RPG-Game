@@ -8,31 +8,38 @@
 
 @if (ViewBag.TimeToTheNextFight != null)
 {
-    <label class="alert alert-info text-center">Pozostały czas do następnej walki na arenie: @ViewBag.TimeToTheNextFight</label>
+    <div class="row ml-auto mr-auto">
+        <label class="alert alert-info ml-auto mr-auto">Pozostały czas do następnej walki na arenie: @ViewBag.TimeToTheNextFight</label>
+    </div>
 }
 else
 {
-    <div class="row">
-        <h3 class="text-center">Wylosowani przeciwnicy</h3>
+    <div class="row ml-auto mr-auto">
+        <div class="row col-12">
+            <h3 class="ml-auto mr-auto">Wylosowani przeciwnicy</h3>
+        </div>
 
-        <div class="row text-center" style="padding-left: 100px; padding-right:100px">
-
+        <div class="row ml-auto mr-auto">
             @if (Model.ToList()[0] != null)
             {
-                <div class="dropdown col-sm-4">
-                    <a href="Arena/Attack/@Model.ToList()[0].ID">
-                        <div class="row" style="height: 100px">
-                            <img src="@Model.ToList()[0].CharacterImage.PathToImage" style="height: 100px" />
+                <a href="Arena/Attack/@Model.ToList()[0].ID" style="display: block">
+                    <div class="dropdown col-sm m-auto">
+                        <div class="row m-auto">
+                            <div class="m-auto">
+                                <img src="@Model.ToList()[0].CharacterImage.PathToImage" style="height: 100px" />
+                            </div>
                         </div>
                         <hr />
-                        <div class="row">
-                            <p>@Model.ToList()[0].Name</p>
+                        <div class="row m-auto">
+                            <p class="m-auto text-center">@Model.ToList()[0].Name</p>
                         </div>
-                    </a>
-                    <div class="dropdown-content">
-                        Poziom: @Model.ToList()[0].Level
+
+                        <div class="dropdown-content tooltip-left tooltip-top">
+                            <b>@Model.ToList()[0].Name</b> <br />
+                            Poziom: @Model.ToList()[0].Level
+                        </div>
                     </div>
-                </div>
+                </a>
             }
             else
             {
@@ -41,20 +48,24 @@ else
 
             @if (Model.ToList()[1] != null)
             {
-                <div class="dropdown col-sm-4">
-                    <a href="Arena/Attack/@Model.ToList()[1].ID">
-                        <div class="row" style="height: 100px">
-                            <img src="@Model.ToList()[1].CharacterImage.PathToImage" style="height: 100px" />
+                <a href="Arena/Attack/@Model.ToList()[1].ID" style="display: block">
+                    <div class="dropdown col-sm m-auto">
+                        <div class="row m-auto">
+                            <div class="m-auto">
+                                <img src="@Model.ToList()[1].CharacterImage.PathToImage" style="height: 100px" />
+                            </div>
                         </div>
                         <hr />
-                        <div class="row">
-                            <p>@Model.ToList()[1].Name</p>
+                        <div class="row m-auto">
+                            <p class="m-auto text-center">@Model.ToList()[1].Name</p>
                         </div>
-                    </a>
-                    <div class="dropdown-content">
-                        Poziom: @Model.ToList()[1].Level
+
+                        <div class="dropdown-content tooltip-left tooltip-top">
+                            <b>@Model.ToList()[1].Name</b> <br />
+                            Poziom: @Model.ToList()[1].Level
+                        </div>
                     </div>
-                </div>
+                </a>
             }
             else
             {
@@ -63,20 +74,24 @@ else
 
             @if (Model.ToList()[2] != null)
             {
-                <div class="dropdown col-sm-4">
-                    <a href="Arena/Attack/@Model.ToList()[2].ID">
-                        <div class="row" style="height: 100px">
-                            <img src="@Model.ToList()[2].CharacterImage.PathToImage" style="height: 100px" />
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <p>@Model.ToList()[2].Name</p>
-                        </div>
-                    </a>
-                    <div class="dropdown-content">
-                        Poziom: @Model.ToList()[2].Level
+        <a href="Arena/Attack/@Model.ToList()[2].ID" style="display: block">
+            <div class="dropdown col-sm m-auto">
+                <div class="row m-auto">
+                    <div class="m-auto">
+                        <img src="@Model.ToList()[2].CharacterImage.PathToImage" style="height: 100px" />
                     </div>
                 </div>
+                <hr />
+                <div class="row m-auto">
+                    <p class="m-auto text-center">@Model.ToList()[2].Name</p>
+                </div>
+
+                <div class="dropdown-content tooltip-left tooltip-top">
+                    <b>@Model.ToList()[2].Name</b> <br />
+                    Poziom: @Model.ToList()[2].Level
+                </div>
+            </div>
+        </a>
             }
             else
             {

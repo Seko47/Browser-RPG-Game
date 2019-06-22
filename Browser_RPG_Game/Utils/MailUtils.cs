@@ -25,7 +25,11 @@ namespace Browser_RPG_Game.Utils
                 EnableSsl = true
             };
 
-            smtpClient.Send(mailMessage);
+            try
+            {
+                smtpClient.Send(mailMessage);
+            }
+            catch { }
         }
     }
 }

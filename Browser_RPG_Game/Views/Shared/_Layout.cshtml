@@ -8,6 +8,40 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <style>
+    .dropdown:hover > .dropdown-content {
+        display: block;
+        position: absolute;
+        z-index: 100;
+        background-color: #EEEEEE;
+        border-radius: 15px;
+        width: 200px;
+        padding: 10px;
+        overflow: auto;
+    }
+
+    .dropdown-content.tooltip-left {
+        left: 0;
+    }
+
+    .dropdown-content.tooltip-right {
+        right: 0;
+    }
+
+    .dropdown-content.tooltip-top {
+        top: 0;
+    }
+
+    .dropdown-content.tooltip-bottom {
+        bottom: 0;
+    }
+
+    .dropdown-content {
+        display: none;
+    }
+
+    </style>
+
+    <!--<style>
 
         /* The container <div> - needed to position the dropdown content */
         .dropdown {
@@ -45,68 +79,67 @@
             display: block;
         }
     </style>
-
+        -->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    <div class="navbar navbar-dark fixed-top bg-dark navbar-expand-lg">
+        @if (!Request.IsAuthenticated)
+        {
+            @Html.ActionLink("Game", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        }
+        else
+        {
+            @Html.ActionLink("Postać", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        }
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="nav navbar-nav mr-auto">
+
                 @if (!Request.IsAuthenticated)
                 {
-                    @Html.ActionLink("Game", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
                 }
                 else
                 {
-                    @Html.ActionLink("Postać", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <li class="nav-item">@Html.ActionLink("Sklep", "Index", "Store", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Wyprawa", "Index", "Expedition", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Arena", "Index", "Arena", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Posiadłości", "Estate", "Buildings", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Wiadomości", "Index", "Messages", null, new { @class = "nav-link" })</li>
                 }
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                    @if (!Request.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Sklep", "Index", "Store")</li>
-                        <li>@Html.ActionLink("Wyprawa", "Index", "Expedition")</li>
-                        <li>@Html.ActionLink("Arena", "Index", "Arena")</li>
-                        <li>@Html.ActionLink("Posiadłości", "Estate", "Buildings")</li>
-                    }
-                    @if (Context.User.IsInRole("ADMIN"))
-                    {
-                        <li class="dropdown">
-                            <a href="#">Admin</a>
-                            <div class="dropdown-content">
-                                @Html.ActionLink("Configs", "Index", "Configs")
-                                @Html.ActionLink("Buildings", "Index", "Buildings")
-                                @Html.ActionLink("Materials", "Index", "Materials")
-                                @Html.ActionLink("News", "Index", "Bulletins")
-                                @Html.ActionLink("Character buildings", "Index", "CharacterBuildings")
-                                @Html.ActionLink("Character images", "Index", "CharacterImages")
-                                @Html.ActionLink("Characters", "Index", "Characters")
-                                @Html.ActionLink("Enemies", "Index", "Enemies")
-                                @Html.ActionLink("Item loots", "Index", "ItemLoots")
-                                @Html.ActionLink("Items", "Index", "Items")
-                                @Html.ActionLink("Item types", "Index", "ItemTypes")
-                                @Html.ActionLink("Locations", "Index", "Locations")
-                                @Html.ActionLink("Messages", "Index", "Messages")
-                                @Html.ActionLink("Profile types", "Index", "ProfileTypes")
-                            </div>
-                        </li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                @if (Context.User.IsInRole("ADMIN"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @Html.ActionLink("Configs", "Index", "Configs", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Buildings", "Index", "Buildings", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Materials", "Index", "Materials", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("News", "Index", "Bulletins", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Character buildings", "Index", "CharacterBuildings", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Character images", "Index", "CharacterImages", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Characters", "Index", "Characters", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Enemies", "Index", "Enemies", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Item loots", "Index", "ItemLoots", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Items", "Index", "Items", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Item types", "Index", "ItemTypes", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Locations", "Index", "Locations", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Messages", "Index", "Messages", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Profile types", "Index", "ProfileTypes", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
+    <br />
     <div class="container body-content">
         @RenderBody()
         <hr />

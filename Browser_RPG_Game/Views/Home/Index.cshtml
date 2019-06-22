@@ -34,44 +34,46 @@
 }
 else
 {
-    <div class="row center-block">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+    <div class="row ml-auto mr-auto">
+        <div class="col-sm-5 ml-auto mr-auto">
             <div class="row">
-                <h1 class="center-block text-center">@ViewBag.Character.Name</h1>
-                <img class="center-block" src="@ViewBag.Character.CharacterImage.PathToImage" height="100px" alt="Character image" />
+                <h1 class="ml-auto mr-auto"><b>@ViewBag.Character.Name</b></h1>
             </div>
-            <div class="row text-center">
-                @Html.ActionLink("<<<", "PreviouseAvatar", "Home", null, new { @class = "btn btn-default", @title = "Poprzedni awatar" })
-                @Html.ActionLink(">>>", "NextAvatar", "Home", null, new { @class = "btn btn-default", @title = "Następny awatar" })
+            <hr />
+            <div class="row">
+                <img class="ml-auto mr-auto" src="@ViewBag.Character.CharacterImage.PathToImage" height="100px" alt="Character image" />
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                @Html.ActionLink("<<<", "PreviouseAvatar", "Home", null, new { @class = "btn btn-secondary ml-auto mr-1", @title = "Poprzedni awatar" })
+                @Html.ActionLink(">>>", "NextAvatar", "Home", null, new { @class = "btn btn-secondary mr-auto ml-1", @title = "Następny awatar" })
+            </div>
+            <div class="row">
+                <div class="col-sm-8 mr-auto">
                     Poziom postaci
                 </div>
-                <div class="col-sm-6">
+                <div class="row col-sm-4 ml-auto text-right">
                     @ViewBag.Character.Level
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-8 mr-auto">
                     Doświadczenie
                 </div>
-                <div class="col-sm-6">
+                <div class="row col-sm-4 ml-auto text-right">
                     @ViewBag.Character.Experience / @ViewBag.Character.ExperienceMax
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-7 mr-auto">
                     Punkty zdrowia
                 </div>
-                <div class="col-sm-6">
+                <div class="row col-sm-5 ml-auto text-right">
                     @ViewBag.Character.Health / @ViewBag.Character.HealthMax
                 </div>
             </div>
             <hr />
             <div class="row" title="Wpływa na szansę przełamania bloku przeciwnika i obrażenia">
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     Siła
                 </div>
                 <div class="col-sm-2">
@@ -81,25 +83,24 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.StrengthCost)
                     {
-                        <div class="col-sm-2" title="Za mało złota">
-
+                        <div class="col-sm-4" title="Za mało złota">
                             <a href="#" class="btn btn-danger">
-                                @ViewBag.Character.StrengthCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.StrengthCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height: 15px;" />
                             </a>
                         </div>
                     }
                     else
                     {
-                        <div class="col-sm-2" title="Ulepsz siłę">
+                        <div class="col-sm-4" title="Ulepsz siłę">
                             <a href="/Home/IncreaseStrength" class="btn btn-success">
-                                @ViewBag.Character.StrengthCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.StrengthCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
                 }
             </div>
             <div class="row" title="Wpływa na szansę zablokowania ciosu i obronę">
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     Zręczność
                 </div>
                 <div class="col-sm-2">
@@ -109,25 +110,25 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.DexterityCost)
                     {
-                        <div class="col-sm-2" title="Za mało złota">
+                        <div class="col-sm-4" title="Za mało złota">
 
                             <a href="#" class="btn btn-danger">
-                                @ViewBag.Character.DexterityCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.DexterityCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
                     else
                     {
-                        <div class="col-sm-2" title="Ulepsz zręczność">
+                        <div class="col-sm-4" title="Ulepsz zręczność">
                             <a href="/Home/IncreaseDexterity" class="btn btn-success">
-                                @ViewBag.Character.DexterityCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.DexterityCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
                 }
             </div>
             <div class="row" title="Wpływa na ceny w sklepie">
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     Inteligencja
                 </div>
                 <div class="col-sm-2">
@@ -137,25 +138,25 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.IntelligenceCost)
                     {
-                        <div class="col-sm-2" title="Za mało złota">
+                        <div class="col-sm-4" title="Za mało złota">
 
                             <a href="#" class="btn btn-danger">
-                                @ViewBag.Character.IntelligenceCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.IntelligenceCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
                     else
                     {
-                        <div class="col-sm-2" title="Ulepsz inteligencję">
+                        <div class="col-sm-4" title="Ulepsz inteligencję">
                             <a href="/Home/IncreaseIntelligence" class="btn btn-success">
-                                @ViewBag.Character.IntelligenceCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.IntelligenceCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
                 }
             </div>
             <div class="row" title="Wpływa na szansę podwójnego ataku lub zadania obrażeń krytycznych">
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     Szczęście
                 </div>
                 <div class="col-sm-2">
@@ -165,18 +166,18 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.LuckCost)
                     {
-                        <div class="col-sm-2" title="Za mało złota">
+                        <div class="col-sm-4" title="Za mało złota">
 
                             <a href="#" class="btn btn-danger">
-                                @ViewBag.Character.LuckCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.LuckCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
                     else
                     {
-                        <div class="col-sm-2" title="Ulepsz szczęście">
+                        <div class="col-sm-4" title="Ulepsz szczęście">
                             <a href="/Home/IncreaseLuck" class="btn btn-success">
-                                @ViewBag.Character.LuckCost <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                                @ViewBag.Character.LuckCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
                         </div>
                     }
@@ -200,149 +201,145 @@ else
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="row">
-                <h2 class="text-center">Wyposażenie</h2>
+        <div class="col-sm-4 ml-auto mr-auto">
+            <div class="row ml-auto mr-auto">
+                <h1 class="ml-auto mr-auto">Wyposażenie</h1>
             </div>
-            <div class="row center-block">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
+            <hr />
+            <div class="row ml-auto mr-auto">
+                <div class="col-sm-4 ml-auto mr-auto">
                     @if (ViewBag.Character.Helmet == null)
                     {
-                        <div>
-                            <img src="~/Images/helmet-placeholder.png" style="width: 60px; height: 60px" />
-                        </div>
+                        <img src="~/Images/helmet-placeholder.png" style="width: 60px; height: 60px" />
                     }
                     else
                     {
                         <div class="dropdown">
                             <img src="@ViewBag.Character.Helmet.PathToImage" style="width: 60px; height: 60px" />
 
-                            <div class="dropdown-content">
-                                @ViewBag.Character.Helmet.Name <br />
+                            <div class="dropdown-content tooltip-right">
+                                <b>@ViewBag.Character.Helmet.Name</b> <br />
                                 Poziom: @ViewBag.Character.Helmet.Level<br />
                                 Obrona: @ViewBag.Character.Helmet.Defense <br />
-                                Wartość: @((int)((double)ViewBag.Character.Helmet.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.HelmetID }, null)
-
+                                Wartość: @((int)((double)ViewBag.Character.Helmet.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.HelmetID }, new { @class = "btn btn-warning" })
                             </div>
                         </div>
                     }
                 </div>
-                <div class="col-sm-4"></div>
             </div>
-            <div class="row center-block">
-                @if (ViewBag.Character.Weapon == null)
-                {
-                    <div class="col-sm-4">
+            <div class="row ml-auto mr-auto">
+                <div class="col-sm ml-auto mr-auto">
+                    @if (ViewBag.Character.Weapon == null)
+                    {
                         <img src="~/Images/weapon-placeholder.png" style="width: 60px; height: 60px" />
-                    </div>
-                }
-                else
-                {
-                    <div class="dropdown col-sm-4">
-                        <img src="@ViewBag.Character.Weapon.PathToImage" style="width: 60px; height: 60px" />
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <img src="@ViewBag.Character.Weapon.PathToImage" style="width: 60px; height: 60px" />
 
-                        <div class="dropdown-content">
-                            @ViewBag.Character.Weapon.Name <br />
-                            Poziom: @ViewBag.Character.Weapon.Level<br />
-                            Obrażenia: @ViewBag.Character.Weapon.Damage <br />
-                            Wartość: @((int)((double)ViewBag.Character.Weapon.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                            @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.WeaponID }, null)
+                            <div class="dropdown-content tooltip-right">
+                                <b>@ViewBag.Character.Weapon.Name</b> <br />
+                                Poziom: @ViewBag.Character.Weapon.Level<br />
+                                Obrażenia: @ViewBag.Character.Weapon.Damage <br />
+                                Wartość: @((int)((double)ViewBag.Character.Weapon.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.WeaponID }, new { @class = "btn btn-warning" })
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
 
-                @if (ViewBag.Character.Armor == null)
-                {
-                    <div class="col-sm-4">
+                <div class="col-sm ml-auto mr-auto">
+                    @if (ViewBag.Character.Armor == null)
+                    {
                         <img src="~/Images/breastplate-placeholder.png" style="width: 60px; height: 60px" />
-                    </div>
-                }
-                else
-                {
-                    <div class="dropdown col-sm-4">
-                        <img src="@ViewBag.Character.Armor.PathToImage" style="width: 60px; height: 60px" />
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <img src="@ViewBag.Character.Armor.PathToImage" style="width: 60px; height: 60px" />
 
-                        <div class="dropdown-content">
-                            @ViewBag.Character.Armor.Name <br />
-                            Poziom: @ViewBag.Character.Armor.Level<br />
-                            Obrona: @ViewBag.Character.Armor.Defense <br />
-                            Wartość: @((int)((double)ViewBag.Character.Armor.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                            @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ArmorID }, null)
+                            <div class="dropdown-content tooltip-right">
+                                <b>@ViewBag.Character.Armor.Name</b> <br />
+                                Poziom: @ViewBag.Character.Armor.Level<br />
+                                Obrona: @ViewBag.Character.Armor.Defense <br />
+                                Wartość: @((int)((double)ViewBag.Character.Armor.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ArmorID }, new { @class = "btn btn-warning" })
+                            </div>
                         </div>
-                    </div>
-                }
-
-                @if (ViewBag.Character.Shield == null)
-                {
-                    <div class="col-sm-4">
+                    }
+                </div>
+                <div class="col-sm ml-auto mr-auto">
+                    @if (ViewBag.Character.Shield == null)
+                    {
                         <img src="~/Images/shield-placeholder.png" style="width: 60px; height: 60px" />
-                    </div>
-                }
-                else
-                {
-                    <div class="dropdown col-sm-4">
-                        <img src="@ViewBag.Character.Shield.PathToImage" style="width: 60px; height: 60px" />
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <img src="@ViewBag.Character.Shield.PathToImage" style="width: 60px; height: 60px" />
 
-                        <div class="dropdown-content">
-                            @ViewBag.Character.Shield.Name <br />
-                            Poziom: @ViewBag.Character.Shield.Level<br />
-                            Obrona: @ViewBag.Character.Shield.Defense <br />
-                            Wartość: @((int)((double)ViewBag.Character.Shield.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                            @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ShieldID }, null)
+                            <div class="dropdown-content tooltip-right">
+                                <b>@ViewBag.Character.Shield.Name</b> <br />
+                                Poziom: @ViewBag.Character.Shield.Level<br />
+                                Obrona: @ViewBag.Character.Shield.Defense <br />
+                                Wartość: @((int)((double)ViewBag.Character.Shield.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.ShieldID }, new { @class = "btn btn-warning" })
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-            <div class="row center-block">
-                @if (ViewBag.Character.Gloves == null)
-                {
-                    <div class="col-sm-4">
+            <div class="row ml-auto mr-auto">
+                <div class="col-sm ml-auto mr-auto">
+                    @if (ViewBag.Character.Gloves == null)
+                    {
                         <img src="~/Images/gloves-placeholder.png" style="width: 60px; height: 60px" />
-                    </div>
-                }
-                else
-                {
-                    <div class="dropdown col-sm-4">
-                        <img src="@ViewBag.Character.Gloves.PathToImage" style="width: 60px; height: 60px" />
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <img src="@ViewBag.Character.Gloves.PathToImage" style="width: 60px; height: 60px" />
 
-                        <div class="dropdown-content">
-                            @ViewBag.Character.Gloves.Name <br />
-                            Poziom: @ViewBag.Character.Gloves.Level<br />
-                            Obrona: @ViewBag.Character.Gloves.Defense <br />
-                            Wartość: @((int)((double)ViewBag.Character.Gloves.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                            @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.GlovesID }, null)
+                            <div class="dropdown-content tooltip-right">
+                                <b>@ViewBag.Character.Gloves.Name</b> <br />
+                                Poziom: @ViewBag.Character.Gloves.Level<br />
+                                Obrona: @ViewBag.Character.Gloves.Defense <br />
+                                Wartość: @((int)((double)ViewBag.Character.Gloves.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.GlovesID }, new { @class = "btn btn-warning" })
+                            </div>
                         </div>
-                    </div>
-                }
-
-                @if (ViewBag.Character.Boots == null)
-                {
-                    <div class="col-sm-4">
+                    }
+                </div>
+                <div class="col-sm ml-auto mr-auto">
+                    @if (ViewBag.Character.Boots == null)
+                    {
                         <img src="~/Images/boots-placeholder.png" style="width: 60px; height: 60px" />
-                    </div>
-                }
-                else
-                {
-                    <div class="dropdown col-sm-4">
-                        <img src="@ViewBag.Character.Boots.PathToImage" style="width: 60px; height: 60px" />
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <img src="@ViewBag.Character.Boots.PathToImage" style="width: 60px; height: 60px" />
 
-                        <div class="dropdown-content">
-                            @ViewBag.Character.Boots.Name <br />
-                            Poziom: @ViewBag.Character.Boots.Level<br />
-                            Obrona: @ViewBag.Character.Boots.Defense <br />
-                            Wartość: @((int)((double)ViewBag.Character.Boots.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                            @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.BootsID }, null)
+                            <div class="dropdown-content tooltip-right">
+                                <b>@ViewBag.Character.Boots.Name</b> <br />
+                                Poziom: @ViewBag.Character.Boots.Level<br />
+                                Obrona: @ViewBag.Character.Boots.Defense <br />
+                                Wartość: @((int)((double)ViewBag.Character.Boots.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                @Html.ActionLink("Zdejmij", "TakeOffTheItem", "Home", new { id = @ViewBag.Character.BootsID }, new { @class = "btn btn-warning" })
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
+                <div class="col-sm ml-auto mr-auto">
+                </div>
             </div>
             <hr />
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="row">
-                        <h2 class="text-center">Ekwipunek</h2>
+                    <div class="row ml-auto mr-auto">
+                        <h1 class="ml-auto mr-auto">Ekwipunek</h1>
                     </div>
                     @if (@ViewBag.Character.Equipments.Count > 0)
                     {
@@ -354,33 +351,29 @@ else
                                     <div class="dropdown col-sm-4">
                                         <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@equipment.Item.PathToImage" alt="Item image" />
 
-                                        @if (equipment.Item.Defense > 0)
-                                        {
-                                            <div class="dropdown-content">
-                                                @equipment.Item.Name <br />
-                                                Poziom: @equipment.Item.Level<br />
-                                                Obrona: @equipment.Item.Defense<br />
-                                                Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                                                @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, null)
-                                            </div>
-                                        }
-                                        else if (equipment.Item.Damage > 0)
-                                        {
-                                            <div class="dropdown-content">
-                                                @equipment.Item.Name <br />
-                                                Poziom: @equipment.Item.Level<br />
-                                                Obrażenia: @equipment.Item.Damage<br />
-                                                Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                                                @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, null)
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="dropdown-content">
-                                                @equipment.Item.Name <br />
-                                                Wartość: @((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100))))<br />
-                                            </div>
-                                        }
+                                        <div class="dropdown-content tooltip-bottom tooltip-right">
+                                            @if (equipment.Item.Defense > 0)
+                                            {
+                                                <b>@equipment.Item.Name</b> <br />
+                                                <text>Poziom: </text>@equipment.Item.Level<br />
+                                                <text>Obrona: </text>@equipment.Item.Defense<br />
+                                                <text>Wartość: </text>@((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                                @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, new { @class = "btn btn-primary" })
+                                            }
+                                            else if (equipment.Item.Damage > 0)
+                                            {
+                                                <b>@equipment.Item.Name</b> <br />
+                                                <text>Poziom: </text>@equipment.Item.Level<br />
+                                                <text>Obrażenia: </text>@equipment.Item.Damage<br />
+                                                <text>Wartość: </text>@((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                                @Html.ActionLink("Załóż", "PutOnTheItem", "Home", new { id = @equipment.Item.ID }, new { @class = "btn btn-primary" })
+                                            }
+                                            else
+                                            {
+                                                <b>@equipment.Item.Name</b> <br />
+                                                <text>Wartość: </text>@((int)((double)equipment.Item.Value / ((double)2 - (double)((double)ViewBag.Character.Intelligence / (double)100)))) <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /><br />
+                                            }
+                                        </div>
                                     </div>
                                 }
                             }
@@ -388,10 +381,12 @@ else
                     }
                     else
                     {
-                        <label class="center-block text-center">Brak przedmiotów</label>
+                        <div class="row ml-auto mr-auto">
+                            <label class="ml-auto mr-auto">Brak przedmiotów</label>
+                        </div>
                     }
                     <div class="row col-sm-12">
-                        <h5 class="text-center">Złoto: @ViewBag.Character.Gold <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" /></h5>
+                        <h5 class="ml-auto mr-auto">Złoto: @ViewBag.Character.Gold <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /></h5>
                     </div>
                 </div>
             </div>

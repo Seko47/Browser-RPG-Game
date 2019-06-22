@@ -6,140 +6,143 @@
 
 <h2>Posiadłości</h2>
 
-<div class="row text-center">
-    <div class="row alert alert-info">
-        <div class="col-sm-4" title="@Model.Sawmill.Building.Material.Name.ToUpperFirst()">
-            <div class="row">
+<div class="row alert alert-info m-auto">
+    <div class="col-sm ml-auto" title="@Model.Sawmill.Building.Material.Name.ToUpperFirst()">
+        <div class="row m-auto align-items-center">
+            <div class="col-sm">
                 <img src="@Model.Sawmill.Building.Material.PathToImage" alt="@Model.Sawmill.Building.Material.Name image" />
                 @Model.Sawmill.Storage / @Model.Sawmill.StorageMax
             </div>
-            @if (Model.Sawmill.Storage > 0)
-            {
-                <div class="row">
-                    @Html.ActionLink("Sprzedaj", "Sell", "Buildings", new { id = Model.SawmillID }, new { @class = "btn btn-success" })
-                </div>
-            }
         </div>
-        <div class="col-sm-4" title="@Model.Brickyard.Building.Material.Name">
-            <div class="row">
+        @if (Model.Sawmill.Storage > 0)
+        {
+            <div class="row m-auto">
+                @Html.ActionLink("Sprzedaj", "Sell", "Buildings", new { id = Model.SawmillID }, new { @class = "btn btn-success" })
+            </div>
+        }
+    </div>
+    <div class="col-sm ml-auto mr-auto" title="@Model.Brickyard.Building.Material.Name">
+        <div class="row m-auto align-items-center">
+            <div class="col-sm text-center">
                 <img src="@Model.Brickyard.Building.Material.PathToImage" alt="@Model.Brickyard.Building.Material.Name image" />
                 @Model.Brickyard.Storage / @Model.Brickyard.StorageMax
             </div>
-            @if (Model.Brickyard.Storage > 0)
-            {
-                <div class="row">
-                    @Html.ActionLink("Sprzedaj", "Sell", "Buildings", new { id = Model.BrickyardID }, new { @class = "btn btn-success" })
-                </div>
-            }
         </div>
-        <div class="col-sm-4" title="@Model.Ironworks.Building.Material.Name">
-            <div class="row">
+        @if (Model.Brickyard.Storage > 0)
+        {
+            <div class="row m-auto">
+                @Html.ActionLink("Sprzedaj", "Sell", "Buildings", new { id = Model.BrickyardID }, new { @class = "btn btn-success" })
+            </div>
+        }
+    </div>
+    <div class="col-sm mr-auto" title="@Model.Ironworks.Building.Material.Name">
+        <div class="row m-auto align-items-center">
+            <div class="col-sm text-right">
                 <img src="@Model.Ironworks.Building.Material.PathToImage" alt="@Model.Ironworks.Building.Material.Name image" />
                 @Model.Ironworks.Storage / @Model.Ironworks.StorageMax
             </div>
-            @if (Model.Ironworks.Storage > 0)
-            {
-                <div class="row">
-                    @Html.ActionLink("Sprzedaj", "Sell", "Buildings", new { id = Model.IronworksID }, new { @class = "btn btn-success" })
-                </div>
-            }
         </div>
+        @if (Model.Ironworks.Storage > 0)
+        {
+            <div class="row m-auto">
+                @Html.ActionLink("Sprzedaj", "Sell", "Buildings", new { id = Model.IronworksID }, new { @class = "btn btn-success" })
+            </div>
+        }
     </div>
-    <hr />
-    <div class="row">
-        <h5 class="text-center">Złoto: @Model.Gold <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" /></h5>
+</div>
+<hr />
+<div class="row ml-auto mr-auto mt-1">
+    <h5 class="ml-auto mr-auto text-center">Złoto: @Model.Gold <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" /></h5>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-3">
+        <img src="@Model.Sawmill.Building.PathToImage" alt="@Model.Sawmill.Building.Name image" />
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="@Model.Sawmill.Building.PathToImage" alt="@Model.Sawmill.Building.Name image" />
-        </div>
-        <div class="col-sm-3">
-            <h4>@Model.Sawmill.Building.Name.ToUpperFirst()</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4>@Model.Sawmill.Level / @Model.Sawmill.Building.LevelMax</h4>
-        </div>
-        <div class="col-sm-3">
-            @if (Model.Gold < Model.Sawmill.UpdateCost())
-            {
-                <div class="col-sm-2" title="Za mało złota">
+    <div class="col-sm-3">
+        <h4 class="text-center">@Model.Sawmill.Building.Name.ToUpperFirst()</h4>
+    </div>
+    <div class="col-sm-3">
+        <h4 class="text-center">@Model.Sawmill.Level / @Model.Sawmill.Building.LevelMax</h4>
+    </div>
+    <div class="col-sm-3">
+        @if (Model.Gold < Model.Sawmill.UpdateCost())
+        {
+            <div class="col-sm-2 ml-auto mr-auto" title="Za mało złota">
+                <a href="#" class="btn btn-danger">
+                    @Model.Sawmill.UpdateCost() <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-2 ml-auto mr-auto" title="Ulepsz @Model.Sawmill.Building.Name">
+                <a href="/Buildings/Update/@Model.Sawmill.ID" class="btn btn-success">
+                    @Model.Sawmill.UpdateCost() <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-3">
+        <img src="@Model.Brickyard.Building.PathToImage" alt="@Model.Brickyard.Building.Name image" />
+    </div>
+    <div class="col-sm-3">
+        <h4 class="text-center">@Model.Brickyard.Building.Name.ToUpperFirst()</h4>
+    </div>
+    <div class="col-sm-3">
+        <h4 class="text-center">@Model.Brickyard.Level / @Model.Brickyard.Building.LevelMax</h4>
+    </div>
+    <div class="col-sm-3">
+        @if (Model.Gold < Model.Brickyard.UpdateCost())
+        {
+            <div class="col-sm-2 ml-auto mr-auto" title="Za mało złota">
 
-                    <a href="#" class="btn btn-danger">
-                        @Model.Sawmill.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
-                    </a>
-                </div>
-            }
-            else
-            {
-                <div class="col-sm-2" title="Ulepsz @Model.Sawmill.Building.Name">
-                    <a href="/Buildings/Update/@Model.Sawmill.ID" class="btn btn-success">
-                        @Model.Sawmill.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
-                    </a>
-                </div>
-            }
-        </div>
+                <a href="#" class="btn btn-danger">
+                    @Model.Brickyard.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-2 ml-auto mr-auto" title="Ulepsz @Model.Brickyard.Building.Name">
+                <a href="/Buildings/Update/@Model.Brickyard.ID" class="btn btn-success">
+                    @Model.Brickyard.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                </a>
+            </div>
+        }
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="@Model.Brickyard.Building.PathToImage" alt="@Model.Brickyard.Building.Name image" />
-        </div>
-        <div class="col-sm-3">
-            <h4>@Model.Brickyard.Building.Name.ToUpperFirst()</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4>@Model.Brickyard.Level / @Model.Brickyard.Building.LevelMax</h4>
-        </div>
-        <div class="col-sm-3">
-            @if (Model.Gold < Model.Brickyard.UpdateCost())
-            {
-                <div class="col-sm-2" title="Za mało złota">
-
-                    <a href="#" class="btn btn-danger">
-                        @Model.Brickyard.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
-                    </a>
-                </div>
-            }
-            else
-            {
-                <div class="col-sm-2" title="Ulepsz @Model.Brickyard.Building.Name">
-                    <a href="/Buildings/Update/@Model.Brickyard.ID" class="btn btn-success">
-                        @Model.Brickyard.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
-                    </a>
-                </div>
-            }
-        </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-3">
+        <img src="@Model.Ironworks.Building.PathToImage" alt="@Model.Ironworks.Building.Name image" />
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="@Model.Ironworks.Building.PathToImage" alt="@Model.Ironworks.Building.Name image" />
-        </div>
-        <div class="col-sm-3">
-            <h4>@Model.Ironworks.Building.Name.ToUpperFirst()</h4>
-        </div>
-        <div class="col-sm-3">
-            <h4>@Model.Ironworks.Level / @Model.Ironworks.Building.LevelMax</h4>
-        </div>
-        <div class="col-sm-3">
-            @if (Model.Gold < Model.Ironworks.UpdateCost())
-            {
-                <div class="col-sm-2" title="Za mało złota">
+    <div class="col-sm-3">
+        <h4 class="text-center">@Model.Ironworks.Building.Name.ToUpperFirst()</h4>
+    </div>
+    <div class="col-sm-3">
+        <h4 class="text-center">@Model.Ironworks.Level / @Model.Ironworks.Building.LevelMax</h4>
+    </div>
+    <div class="col-sm-3">
+        @if (Model.Gold < Model.Ironworks.UpdateCost())
+        {
+            <div class="col-sm-2 ml-auto mr-auto" title="Za mało złota">
 
-                    <a href="#" class="btn btn-danger">
-                        @Model.Ironworks.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
-                    </a>
-                </div>
-            }
-            else
-            {
-                <div class="col-sm-2" title="Ulepsz @Model.Ironworks.Building.Name">
-                    <a href="/Buildings/Update/@Model.Ironworks.ID" class="btn btn-success">
-                        @Model.Ironworks.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
-                    </a>
-                </div>
-            }
-        </div>
+                <a href="#" class="btn btn-danger">
+                    @Model.Ironworks.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-2 ml-auto mr-auto" title="Ulepsz @Model.Ironworks.Building.Name">
+                <a href="/Buildings/Update/@Model.Ironworks.ID" class="btn btn-success">
+                    @Model.Ironworks.UpdateCost() <img src="http://pluspng.com/img-png/coin-hd-png-gold-coins-png-image-559.png" alt="Gold coins image" style="height:15px;" />
+                </a>
+            </div>
+        }
     </div>
 </div>

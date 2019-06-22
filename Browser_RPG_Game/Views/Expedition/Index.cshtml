@@ -7,37 +7,45 @@
 <h2>Wyprawa</h2>
 @if (ViewBag.TimeToTheNextExpedition != null)
 {
-    <label class="alert alert-info text-center">Pozostały czas do następnej wyprawy: @ViewBag.TimeToTheNextExpedition</label>
+    <div class="row ml-auto mr-auto">
+        <label class="alert alert-info ml-auto mr-auto">Pozostały czas do następnej wyprawy: @ViewBag.TimeToTheNextExpedition</label>
+    </div>
 }
 else
 {
     foreach (var location in Model.ToList())
     {
         <div class="row">
-            <h3 class="text-center">@location.Name</h3>
-            <div class="row text-center" style="padding-left: 100px; padding-right:100px">
+            <div class="row col-12 ml-auto mr-auto">
+                <h3 class="ml-auto mr-auto">@location.Name</h3>
+            </div>
+            <div class="row ml-auto mr-auto pl-1 pr-2">
                 @foreach (var enemy in location.Enemies.Where(e => e.LocationID == location.ID).OrderBy(e => e.Level))
                 {
-                    <div class="dropdown col-sm-2">
-                        <a href="Expedition/Attack/@enemy.ID">
+                    <a href="Expedition/Attack/@enemy.ID" style="display:block">
+                        <div class="dropdown col-sm">
                             <div class="row" style="height: 60px">
-                                <img src="@enemy.PathToImage" style="max-height: 100px; min-height: 35px" />
+                                <div class="m-auto">
+                                    <img src="@enemy.PathToImage" style="max-height: 100px; min-height: 30px" />
+                                </div>
                             </div>
                             <hr />
-                            <div class="row">
-                                <p>@enemy.Name</p>
+                            <div class="row m-auto">
+                                <p class="m-auto">@enemy.Name</p>
                             </div>
-                        </a>
-                        <div class="dropdown-content">
-                            Poziom: @enemy.Level<br />
-                            Życie: @enemy.HealthMax<br />
-                            Siła: @enemy.Strength<br />
-                            Zręczność: @enemy.Dexterity<br />
-                            Szczęście: @enemy.Luck<br />
-                            Obrażenia: @enemy.Damage<br />
-                            Obrona: @enemy.Defense<br />
+
+                            <div class="dropdown-content tooltip-left tooltip-top">
+                                <b>@enemy.Name</b> <br />
+                                Poziom: @enemy.Level<br />
+                                Życie: @enemy.HealthMax<br />
+                                Siła: @enemy.Strength<br />
+                                Zręczność: @enemy.Dexterity<br />
+                                Szczęście: @enemy.Luck<br />
+                                Obrażenia: @enemy.Damage<br />
+                                Obrona: @enemy.Defense<br />
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 }
             </div>
         </div>

@@ -239,6 +239,7 @@
     <Content Include="Images\boots-placeholder.png" />
     <Content Include="Images\breastplate-placeholder.png" />
     <Content Include="Images\gloves-placeholder.png" />
+    <Content Include="Images\gold-coin.png" />
     <Content Include="Images\helmet-placeholder.png" />
     <Content Include="Images\shield-placeholder.png" />
     <Content Include="Images\weapon-placeholder.png" />
