@@ -1,5 +1,6 @@
 ﻿using Browser_RPG_Game.DAL;
 using Browser_RPG_Game.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,22 @@ namespace Browser_RPG_Game.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             if (Request.IsAuthenticated)
             {
                 GameContext db = new GameContext();
                 Character character = db.Characters.Single(p => p.Login == User.Identity.Name);
                 ViewBag.Character = character;
+            }
+            else
+            {
+                GameContext db = new GameContext();
+
+                int pageSize = 5;
+                int pageNumber = (page ?? 1);
+
+                return View(db.Bulletins.OrderByDescending(b => b.Date).ToPagedList(pageNumber, pageSize));
             }
 
             return View();
