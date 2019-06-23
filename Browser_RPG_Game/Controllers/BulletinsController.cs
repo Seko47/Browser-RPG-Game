@@ -19,7 +19,7 @@ namespace Browser_RPG_Game.Controllers
         [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
-            var bulletins = db.Bulletins.Include(b => b.Character);
+            var bulletins = db.Bulletins.Include(b => b.Character).OrderByDescending(b => b.Date);
             return View(bulletins.ToList());
         }
 
@@ -43,7 +43,6 @@ namespace Browser_RPG_Game.Controllers
         [Authorize(Roles = "ADMIN")]
         public ActionResult Create()
         {
-            ViewBag.CharacterID = new SelectList(db.Characters, "ID", "Login");
             return View();
         }
 
@@ -53,10 +52,12 @@ namespace Browser_RPG_Game.Controllers
         [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CharacterID,Title,Contents,Date")] Bulletin bulletin)
+        public ActionResult Create(Bulletin bulletin)
         {
             if (ModelState.IsValid)
             {
+                bulletin.Character = db.Characters.Single(c => c.Login == User.Identity.Name);
+                bulletin.CharacterID = bulletin.Character.ID;
                 bulletin.Date = DateTime.Now;
                 db.Bulletins.Add(bulletin);
                 db.SaveChanges();
