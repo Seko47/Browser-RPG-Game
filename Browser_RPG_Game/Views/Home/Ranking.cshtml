@@ -1,0 +1,132 @@
+﻿@model PagedList.IPagedList<Browser_RPG_Game.Models.Character>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Ranking";
+}
+
+<h2>Ranking</h2>
+
+<div class="row col-12">
+    <div class="row col-12">
+        <div class="col-sm-4">
+            <b>Nazwa gracza</b>
+        </div>
+        <div class="col-sm-4 text-center">
+            <b>Poziom</b>
+        </div>
+        <div class="col-sm-4 text-right">
+            <b>Doświadczenie</b>
+        </div>
+    </div>
+
+    @foreach (var item in Model.ToList())
+    {
+        <hr />
+        <div class="row col-12 dropdown">
+            <div class="col-sm-4">
+                @Html.DisplayFor(modelItem => item.Name)
+            </div>
+            <div class="col-sm-4 text-center">
+                @Html.DisplayFor(modelItem => item.Level)
+            </div>
+            <div class="col-sm-4 text-right">
+                @Html.DisplayFor(modelItem => item.Experience)
+            </div>
+
+            <div class="dropdown-content tooltip-top" style="overflow: hidden">
+                <div class="ml-auto mr-auto">
+                    <div class="row m-auto">
+                        <p class="m-auto text-center"><b>@item.Name</b></p>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <img class="ml-auto mr-auto" src="@item.CharacterImage.PathToImage" height="60px" alt="Character image" />
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Poziom
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Level
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Doświadczenie
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Experience
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            HP
+                        </div>
+                        <div class="col-sm-4">
+                            @item.HealthMax
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Siła
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Strength
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Zręczność
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Dexterity
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Inteligencja
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Intelligence
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Szczęście
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Luck
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Obrażenia
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Damage
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            Obrona
+                        </div>
+                        <div class="col-sm-4">
+                            @item.Defense
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<br />
+<div class="row col-12">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+</div>
+<div class="row col-12">
+    @Html.PagedListPager(Model, page => Url.Action("Ranking", new { page }))
+</div>

@@ -403,6 +403,7 @@
     <Content Include="Views\Arena\Index.cshtml" />
     <Content Include="Views\Arena\Attack.cshtml" />
     <Content Include="Views\Buildings\Estate.cshtml" />
+    <Content Include="Views\Home\Ranking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

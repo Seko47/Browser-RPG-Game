@@ -32,6 +32,16 @@ namespace Browser_RPG_Game.Controllers
             return View();
         }
 
+        public ActionResult Ranking(int? page)
+        {
+            GameContext db = new GameContext();
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(db.Characters.Where(c => c.ProfileType.Name != "admin").OrderByDescending(c => c.Level).ThenByDescending(c => c.Experience).ToPagedList(pageNumber, pageSize));
+        }
+
         [Authorize]
         public ActionResult NextAvatar()
         {
