@@ -1,63 +1,116 @@
-﻿@model IEnumerable<Browser_RPG_Game.Models.Message>
+﻿@model Tuple<PagedList.IPagedList<Browser_RPG_Game.Models.Message>, PagedList.IPagedList<Browser_RPG_Game.Models.Message>>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Messages Index";
 }
 
-    <h2>Messages</h2>
+<h2>Wiadomości</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nowa wiadomość", "Create", "Messages", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Receiver)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Readed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SendDate)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Receiver.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sender.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Readed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SendDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+<div class="row">
+    <div class="row col-12">
+        <h4 class="text-center ml-auto mr-auto">Odebrane</h4>
+    </div>
 
-</table>
+    <div class="row col-12 ml-auto mr-auto">
+        <div class="col-sm-3 ml-auto mr-auto text-center">
+            <b>Nadawca</b>
+        </div>
+        <div class="col-sm-5 ml-auto mr-auto text-center">
+            <b>Temat</b>
+        </div>
+        <div class="col-sm-3 ml-auto mr-auto text-center">
+            <b>Data</b>
+        </div>
+        <div class="col-sm-1 ml-auto mr-auto text-right">
+            <b>Odczytana</b>
+        </div>
+    </div>
+    <hr />
+    @foreach (var message in Model.Item1)
+    {
+        <a href="/Messages/Details/@message.ID" class="col-12 btn btn-secondary">
+            <div class="row col-12 ml-auto mr-auto">
+                <div class="col-sm-3 ml-auto mr-auto">
+                    @message.Sender.Name
+                </div>
+                <div class="col-sm-5 ml-auto mr-auto text-center">
+                    @message.Title
+                </div>
+                <div class="col-sm-3 ml-auto mr-auto text-center">
+                    @message.SendDate
+                </div>
+                <div class="col-sm-1 ml-auto mr-auto text-right">
+                    @if (message.Readed)
+                    {
+                        <input type="checkbox" disabled="disabled" checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" disabled="disabled" />
+                    }
+                </div>
+            </div>
+        </a>
+    }
+
+</div>
+Page @(Model.Item1.PageCount < Model.Item1.PageNumber ? 0 : Model.Item1.PageNumber) of @Model.Item1.PageCount
+
+@Html.PagedListPager(Model.Item1, page => Url.Action("Index", new { receivedPage = page, sendedPage = ViewBag.SendedPage }))
+<br />
+<div class="row">
+    <div class="row col-12">
+        <h4 class="text-center ml-auto mr-auto">Wysłane</h4>
+    </div>
+
+    <div class="row col-12 ml-auto mr-auto">
+        <div class="col-sm-3 ml-auto mr-auto text-center">
+            <b>Odbiorca</b>
+        </div>
+        <div class="col-sm-5 ml-auto mr-auto text-center">
+            <b>Temat</b>
+        </div>
+        <div class="col-sm-3 ml-auto mr-auto text-center">
+            <b>Data</b>
+        </div>
+        <div class="col-sm-1 ml-auto mr-auto text-right">
+            <b>Odczytana</b>
+        </div>
+    </div>
+    <hr />
+    @foreach (var message in Model.Item2)
+    {
+        <a href="/Messages/Details/@message.ID" class="col-12 btn btn-secondary">
+            <div class="row col-12 ml-auto mr-auto">
+                <div class="col-sm-3 ml-auto mr-auto">
+                    @message.Receiver.Name
+                </div>
+                <div class="col-sm-5 ml-auto mr-auto text-center">
+                    @message.Title
+                </div>
+                <div class="col-sm-3 ml-auto mr-auto text-center">
+                    @message.SendDate
+                </div>
+                <div class="col-sm-1 ml-auto mr-auto text-right">
+                    @if (message.Readed)
+                    {
+                        <input type="checkbox" disabled="disabled" checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" disabled="disabled" />
+                    }
+                </div>
+            </div>
+        </a>
+    }
+</div>
+Page @(Model.Item2.PageCount < Model.Item2.PageNumber ? 0 : Model.Item2.PageNumber) of @Model.Item2.PageCount
+
+@Html.PagedListPager(Model.Item2, page => Url.Action("Index", new { sendedPage = page, receivedPage = ViewBag.ReceivedPage }))

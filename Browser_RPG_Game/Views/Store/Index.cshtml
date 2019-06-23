@@ -245,11 +245,12 @@
                 <div class="row ml-auto mr-auto">
                     <h1 class="ml-auto mr-auto">Ekwipunek</h1>
                 </div>
-                <div class="row ml-auto mr-auto">
-                    @Html.ActionLink("Sprzedaj wszystko", "SellAll", "Store", null, new { @class = "btn btn-warning ml-auto mr-auto" })
-                </div>
                 @if (@ViewBag.Character.Equipments.Count > 0)
                 {
+                    <div class="row ml-auto mr-auto">
+                        @Html.ActionLink("Sprzedaj wszystko", "SellAll", "Store", null, new { @class = "btn btn-warning ml-auto mr-auto" })
+                    </div>
+
                     <div class="card-deck">
                         @foreach (var equipment in @ViewBag.Character.Equipments)
                         {
