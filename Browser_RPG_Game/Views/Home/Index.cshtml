@@ -8,13 +8,16 @@
 
 @if (!Request.IsAuthenticated)
 {
+    <div class="row">
+        <img src="~/Images/logo_transparent.png" class="ml-auto mr-auto" alt="Logo image" style="height: 200px" />
+    </div>
     if (Model.Count() > 0)
     {
         foreach (var news in Model)
         {
             <div class="jumbotron">
                 <div class="row">
-                    <h1 class="m-auto col-sm-6">@news.Title</h1>
+                    <h2 class="m-auto col-sm-6">@news.Title</h2>
                     <p class="m-auto col-sm-6 text-right">@news.Date</p>
                 </div>
                 <p class="lead">@news.Contents</p>
