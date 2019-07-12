@@ -13,8 +13,8 @@
             {
                 if (item.ItemTypeID != ViewBag.ActualItemType)
                 {
-                    <div class="row ml-auto mr-auto col-sm-12">
-                        <label class="alert alert-info ml-auto mr-auto">
+                    <div class="row ml-auto mr-auto col-12 mt-3" style="border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black;border-top-left-radius: 25px;border-top-right-radius: 25px; background: url('https://www.textures.com/system/gallery/photos/Wood/Fine%20Wood/121471/WoodFine0058_30_270.jpg');">
+                        <h3 class="text-white col-12 m-auto text-center" style="border-top-left-radius: 25px;border-top-right-radius: 25px; font-family: Algerian;">
                             @if (item.ItemType.Name == "weapon")
                             {
                                 <text>Bronie</text>
@@ -43,12 +43,12 @@
                             {
                                 @item.ItemType.Name
                             }
-                        </label>
+                        </h3>
                     </div>
                     ViewBag.ActualItemType = item.ItemTypeID;
                 }
-                <div class="dropdown col">
-                    <img class="card-img-top ml-auto mr-auto" style="width: 60px;" src="@item.PathToImage" alt="Item image" />
+                <div class="dropdown col" style="border-left: 1px solid black;border-bottom: 5px solid black;border-right: 1px solid black;border-top: 1px solid black; background: url('https://www.textures.com/system/gallery/photos/Wood/Fine%20Wood/121471/WoodFine0058_30_270.jpg');">
+                    <img class="card-img-top m-auto" style="width: 60px;" src="@item.PathToImage" alt="Item image" />
 
                     <div class="dropdown-content tooltip-bottom tooltip-left">
                         @if (item.Defense > 0)

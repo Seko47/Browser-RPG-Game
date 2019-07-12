@@ -89,7 +89,7 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.StrengthCost)
                     {
-                        <div class="col-sm-4" title="Za mało złota">
+                        <div class="col-sm-4 mb-1" title="Za mało złota">
                             <a href="#" class="btn btn-danger">
                                 @ViewBag.Character.StrengthCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height: 15px;" />
                             </a>
@@ -97,7 +97,7 @@ else
                     }
                     else
                     {
-                        <div class="col-sm-4" title="Ulepsz siłę">
+                        <div class="col-sm-4 mb-1" title="Ulepsz siłę">
                             <a href="/Home/IncreaseStrength" class="btn btn-success">
                                 @ViewBag.Character.StrengthCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
@@ -116,7 +116,7 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.DexterityCost)
                     {
-                        <div class="col-sm-4" title="Za mało złota">
+                        <div class="col-sm-4 mb-1" title="Za mało złota">
 
                             <a href="#" class="btn btn-danger">
                                 @ViewBag.Character.DexterityCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
@@ -125,7 +125,7 @@ else
                     }
                     else
                     {
-                        <div class="col-sm-4" title="Ulepsz zręczność">
+                        <div class="col-sm-4 mb-1" title="Ulepsz zręczność">
                             <a href="/Home/IncreaseDexterity" class="btn btn-success">
                                 @ViewBag.Character.DexterityCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
@@ -144,7 +144,7 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.IntelligenceCost)
                     {
-                        <div class="col-sm-4" title="Za mało złota">
+                        <div class="col-sm-4 mb-1" title="Za mało złota">
 
                             <a href="#" class="btn btn-danger">
                                 @ViewBag.Character.IntelligenceCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
@@ -153,7 +153,7 @@ else
                     }
                     else
                     {
-                        <div class="col-sm-4" title="Ulepsz inteligencję">
+                        <div class="col-sm-4 mb-1" title="Ulepsz inteligencję">
                             <a href="/Home/IncreaseIntelligence" class="btn btn-success">
                                 @ViewBag.Character.IntelligenceCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
@@ -172,7 +172,7 @@ else
                 {
                     if (ViewBag.Character.Gold < ViewBag.Character.LuckCost)
                     {
-                        <div class="col-sm-4" title="Za mało złota">
+                        <div class="col-sm-4 mb-1" title="Za mało złota">
 
                             <a href="#" class="btn btn-danger">
                                 @ViewBag.Character.LuckCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
@@ -181,7 +181,7 @@ else
                     }
                     else
                     {
-                        <div class="col-sm-4" title="Ulepsz szczęście">
+                        <div class="col-sm-4 mb-1" title="Ulepsz szczęście">
                             <a href="/Home/IncreaseLuck" class="btn btn-success">
                                 @ViewBag.Character.LuckCost <img src="~/Images/gold-coin.png" alt="Gold coins image" style="height:15px;" />
                             </a>
