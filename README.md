@@ -19,3 +19,8 @@ To create this application I used .NET Framework. The architecture used is MVC.
 - Displaying the ranking of players by level of experience
 - Administrator panel to add/delete news from the home page and to manage the game
 - Validation of forms on the client and server side
+
+### Admin account: ###
+Username: admin@game.com
+
+Password: zaq1@WSX
