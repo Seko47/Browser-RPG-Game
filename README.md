@@ -1,11 +1,11 @@
 # Browser-RPG-Game
 
-### 1. Description: ###
+### Description: ###
 A game in the genre of RPG addressed to web browsers. Players play the roles of ancient warriors fighting for fame and wealth in a fantastic world full of mythical monsters.
 
 To create this application I used .NET Framework. The architecture used is MVC.
 
-### 1. Functional requirements: ###
+### Functional requirements: ###
 - Registration of new accounts
 - Logging in and out of your account
 - Viewing and changing a player's image
